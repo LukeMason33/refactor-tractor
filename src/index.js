@@ -12,14 +12,6 @@ console.log('This is the JavaScript entry file - your code begins here.');
 
 //API methods
 
-// fetch("http://localhost:3001/api/v1/ingredients")
-// .then(response => response.json())
-// .then(data => console.log(data))
-//
-// fetch("http://localhost:3001/api/v1/users")
-// .then(response => response.json())
-// .then(data => console.log(data))
-//
-// fetch("http://localhost:3001/api/v1/recipes")
-// .then(response => response.json())
-// .then(data => console.log(data))
+import ingredientsAPIData from './fecth.js';
+
+console.log(ingredientsAPIData);
