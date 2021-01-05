@@ -296,7 +296,7 @@ function showAllRecipes() {
 // CREATE AND USE PANTRY
 function findPantryInfo() {
   user.pantry.forEach(item => {
-    let itemInfo = ingredientsData.find(ingredient => {
+    let itemInfo = ingredientData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
     let originalIngredient = pantryInfo.find(ingredient => {
@@ -350,3 +350,9 @@ function findRecipesWithCheckedIngredients(selected) {
     }
   })
 }
+
+// const test = fetch("http://localhost:3001/api/v1/users")
+//               .then(response => response.json())
+//               .then(data => console.log(data));
+//
+// console.log(test);
