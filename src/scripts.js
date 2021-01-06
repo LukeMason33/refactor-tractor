@@ -1,6 +1,8 @@
 import users from './data/users-data';
 import recipeData from  './data/recipe-data';
-import ingredientData from './data/ingredient-data';
+import ingredientsData from './data/ingredient-data';
+//API DATA
+import fetchedData from './fetch.js';
 
 import './css/base.scss';
 import './css/styles.scss';
