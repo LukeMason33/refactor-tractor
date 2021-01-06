@@ -1,9 +1,16 @@
-import users from './data/users-data';
+// import users from './data/users-data';
 import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
 
 //API DATA
 import fetchedData from './fetch.js';
+
+let generateUserAPI = () => {
+  fetchedData.usersAPIData()
+    .then(users => {
+      generateUser(users);
+    })
+  }
 
 
 import './css/base.scss';
@@ -36,7 +43,7 @@ let user;
 
 window.addEventListener("load", createCards);
 window.addEventListener("load", findTags);
-window.addEventListener("load", generateUser);
+window.addEventListener("load", generateUserAPI);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
@@ -47,8 +54,8 @@ showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("keyup", liveSearch);
 
 // GENERATE A USER ON LOAD
-function generateUser() {
-  user = new User(users[Math.floor(Math.random() * users.length)]);
+function generateUser(usersData) {
+  user = new User(usersData[Math.floor(Math.random() * usersData.length)]);
   let firstName = user.name.split(" ")[0];
   let welcomeMsg = `
     <div class="welcome-msg">
@@ -266,7 +273,7 @@ function liveSearch(event) {
 function searchRecipes() {
   showAllRecipes();
   let searchedItems = [];
-  recipeData.filter(recipe => { 
+  recipeData.filter(recipe => {
     recipe.ingredients.filter(ing => {
       if (ing.name.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
         searchedItems.push(recipe)
