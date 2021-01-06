@@ -125,20 +125,28 @@ function filterRecipes(filtered) {
 // FAVORITE RECIPE FUNCTIONALITY
 function addToMyRecipes() {
   if (event.target.className === "card-apple-icon") {
-    let cardId = parseInt(event.target.closest(".recipe-card").id)
-    if (!user.favoriteRecipes.includes(cardId)) {
-      event.target.src = "../images/apple-logo.png";
-      user.saveRecipe(cardId);
-    } else {
-      event.target.src = "../images/apple-logo-outline.png";
-      user.removeRecipe(cardId);
-    }
-  } else if (event.target.id === "exit-recipe-btn") {
+    domUpdates.favoriteRecipe(user, event);
+  }
+  // if (event.target.className === "card-apple-icon") {
+  //   let cardId = parseInt(event.target.closest(".recipe-card").id)
+  //   if (!user.favoriteRecipes.includes(cardId)) {
+  //     event.target.src = "../images/apple-logo.png";
+  //     user.saveRecipe(cardId);
+  //   } else {
+  //     event.target.src = "../images/apple-logo-outline.png";
+  //     user.removeRecipe(cardId);
+  //   }
+  // }
+  else if (event.target.id === "exit-recipe-btn") {
     exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
 }
+
+// function addToFavorites() {
+//   domUpdates.favoriteRecipe(user, event);
+// }
 
 function isDescendant(parent, child) {
   let node = child;
@@ -170,7 +178,7 @@ function openRecipeInfo(event) {
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);
-  fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
+  domUpdates.insertRecipeInfo(fullRecipeInfo);
 }
 
 // function generateRecipeTitle(recipe, ingredients) {

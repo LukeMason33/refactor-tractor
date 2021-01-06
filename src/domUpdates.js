@@ -42,8 +42,6 @@ let domUpdates = {
     });
   },
 
-  // FAVORITE RECIPE FUNCTIONALITY
-
   // CREATE RECIPE INSTRUCTIONS
   generateRecipeTitle(recipe, ingredients) {
     let recipeTitle = `
@@ -76,6 +74,10 @@ let domUpdates = {
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
   },
 
+  insertRecipeInfo(fullRecipeInfo) {
+    fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
+  },
+
   // TOGGLE DISPLAYS
   showMyRecipesBanner() {
     document.querySelector(".welcome-msg").style.display = "none";
@@ -97,6 +99,18 @@ let domUpdates = {
     } else {
       menuDropdown.style.display = "none";
     }
+  },
+
+  // FAVORITE RECIPE FUNCTIONALITY
+  favoriteRecipe(user, event) {
+      let cardId = parseInt(event.target.closest(".recipe-card").id)
+      if (!user.favoriteRecipes.includes(cardId)) {
+        event.target.src = "../images/apple-logo.png";
+        user.saveRecipe(cardId);
+      } else {
+        event.target.src = "../images/apple-logo-outline.png";
+        user.removeRecipe(cardId);
+      }
   },
 
   // CREATE AND USE PANTRY
