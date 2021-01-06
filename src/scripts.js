@@ -1,6 +1,6 @@
-import users from './data/users-data';
+import usersData from './data/users-data';
 import recipeData from  './data/recipe-data';
-import ingredientData from './data/ingredient-data';
+import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';

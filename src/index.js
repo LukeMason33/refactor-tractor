@@ -12,6 +12,6 @@ console.log('This is the JavaScript entry file - your code begins here.');
 
 //API methods
 
-import ingredientsAPIData from './fecth.js';
+import fetchedData from './fetch.js';
 
-console.log(ingredientsAPIData);
+fetchedData.ingredientsAPIData().then(a => console.log(a));
