@@ -1,6 +1,7 @@
 import usersData from './data/users-data';
 import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
+import fetchedData from './fetch.js';
 
 import './css/base.scss';
 import './css/styles.scss';
