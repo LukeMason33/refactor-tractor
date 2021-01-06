@@ -40,7 +40,7 @@ pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
-searchForm.addEventListener("submit", pressEnterSearch);
+searchForm.addEventListener("keyup", liveSearch);
 
 // GENERATE A USER ON LOAD
 function generateUser() {
@@ -254,7 +254,7 @@ function showWelcomeBanner() {
 }
 
 // SEARCH RECIPES
-function pressEnterSearch(event) {
+function liveSearch(event) {
   event.preventDefault();
   searchRecipes();
 }
