@@ -1,6 +1,6 @@
 import users from './data/users-data';
 import recipeData from  './data/recipe-data';
-import ingredientData from './data/ingredient-data';
+import ingredientsData from './data/ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -261,17 +261,25 @@ function pressEnterSearch(event) {
 
 function searchRecipes() {
   showAllRecipes();
-  let searchedRecipes = recipeData.filter(recipe => {
-    return recipe.name.toLowerCase().includes(searchInput.value.toLowerCase());
+  let searchedItems = [];
+  recipeData.filter(recipe => { 
+    recipe.ingredients.filter(ing => {
+      if (ing.name.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
+        searchedItems.push(recipe)
+      }
+    })
+    if (recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
+      searchedItems.push(recipe)
+    };
   });
-  filterNonSearched(createRecipeObject(searchedRecipes));
+  filterNonSearched(createRecipeObject(searchedItems));
 }
 
 function filterNonSearched(filtered) {
   let found = recipes.filter(recipe => {
     let ids = filtered.map(f => f.id);
     return !ids.includes(recipe.id)
-  })
+  });
   hideUnselectedRecipes(found);
 }
 
