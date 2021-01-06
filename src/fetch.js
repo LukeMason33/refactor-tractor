@@ -1,15 +1,15 @@
 let fetchedData = {
-  ingredientsAPIData: fetch("http://localhost:3001/api/v1/ingredients")
-                        .then(response => response.json())
-                        .then(data => data),
+  ingredientsAPIData: () => {return fetch("http://localhost:3001/api/v1/ingredients")
+                        .then(response => response.json());
+                      },
 
   usersAPIData: () => {return fetch("http://localhost:3001/api/v1/users")
-                  .then(response => response.json())
+                  .then(response => response.json());
                 },
 
-  recipesAPIData: fetch("http://localhost:3001/api/v1/recipes")
-                    .then(response => response.json())
-                    .then(data => data)
+  recipesAPIData: () => {return fetch("http://localhost:3001/api/v1/recipes")
+                    .then(response => response.json());
+                  },
 
 };
 
