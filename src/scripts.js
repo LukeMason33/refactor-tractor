@@ -76,17 +76,17 @@ function findTags() {
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let capitalizedTag = capitalize(tag);
-    let tagHtml = domUpdates.listRecipeTagsOnDom(tag, capitalizedTag);
+    // let capitalizedTag = capitalize(tag);
+    let tagHtml = domUpdates.listRecipeTagsOnDom(tag);
     tagList.insertAdjacentHTML("beforeend", tagHtml);
   });
 }
 
-function capitalize(words) {
-  return words.split(" ").map(word => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
-  }).join(" ");
-}
+// function capitalize(words) {
+//   return words.split(" ").map(word => {
+//     return word.charAt(0).toUpperCase() + word.slice(1);
+//   }).join(" ");
+// }
 
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
@@ -167,7 +167,7 @@ function openRecipeInfo(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-  domUpdates.generateRecipeTitle(recipe, generateIngredients(recipe));
+  domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);
   fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
@@ -186,11 +186,11 @@ function openRecipeInfo(event) {
 //   document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
 // }
 
-function generateIngredients(recipe) {
-  return recipe && recipe.ingredients.map(i => {
-    return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
-  }).join(", ");
-}
+// function generateIngredients(recipe) {
+//   return recipe && recipe.ingredients.map(i => {
+//     return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
+//   }).join(", ");
+// }
 
 // function generateInstructions(recipe) {
 //   let instructionsList = "";

@@ -10,8 +10,7 @@ let domUpdates = {
     let welcomeMsg = `<div class="welcome-msg">
         <h1>Welcome ${firstName}!</h1>
       </div>`;
-      document.querySelector(".banner-image").insertAdjacentHTML("afterbegin", welcomeMsg);
-      // Ask Travis about chaining here to insert html on not declared querySelector
+    document.querySelector(".banner-image").insertAdjacentHTML("afterbegin", welcomeMsg);
   },
 
   // RECIPE CARDS
@@ -27,13 +26,13 @@ let domUpdates = {
         <h4>${recipeInfo.tags[0]}</h4>
         <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
       </div>`
-      main.insertAdjacentHTML("beforeend", cardHtml);
+    main.insertAdjacentHTML("beforeend", cardHtml);
   },
 
   // FILTER BY RECIPE TAGS
-  listRecipeTagsOnDom(tag, capitalizedTag) {
+  listRecipeTagsOnDom(tag) {
     return `<li><input type="checkbox" class="checked-tag" id="${tag}">
-      <label for="${tag}">${capitalizedTag}</label></li>`;
+      <label for="${tag}">${capitalize(tag)}</label></li>`;
   },
 
   hideUnselectedRecipes(foundRecipes) {
@@ -57,6 +56,12 @@ let domUpdates = {
 
   addRecipeImage(recipe) {
     document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
+  },
+
+  generateIngredients(recipe) {
+    return recipe && recipe.ingredients.map(i => {
+      return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
+    }).join(", ");
   },
 
   generateInstructions(recipe) {
@@ -105,6 +110,12 @@ let domUpdates = {
   },
 
 };
+
+function capitalize(words) {
+  return words.split(" ").map(word => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(" ");
+}
 
 pantryBtn.addEventListener("click", domUpdates.toggleMenu);
 
