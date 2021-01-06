@@ -4,6 +4,7 @@ import ingredientData from './data/ingredient-data';
 
 import './css/base.scss';
 import './css/styles.scss';
+import domUpdates from './domUpdates.js';
 
 import User from './user';
 import Recipe from './recipe';
@@ -41,12 +42,7 @@ searchForm.addEventListener("submit", pressEnterSearch);
 function generateUser() {
   user = new User(users[Math.floor(Math.random() * users.length)]);
   let firstName = user.name.split(" ")[0];
-  let welcomeMsg = `
-    <div class="welcome-msg">
-      <h1>Welcome ${firstName}!</h1>
-    </div>`;
-  document.querySelector(".banner-image").insertAdjacentHTML("afterbegin",
-    welcomeMsg);
+  domUpdates.greetUserOnLoad(firstName);
   findPantryInfo();
 }
 
@@ -59,25 +55,10 @@ function createCards() {
     if (recipeInfo.name.length > 40) {
       shortRecipeName = recipeInfo.name.substring(0, 40) + "...";
     }
-    addToDom(recipeInfo, shortRecipeName)
+    domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
   });
 }
 
-function addToDom(recipeInfo, shortRecipeName) {
-  let cardHtml = `
-    <div class="recipe-card" id=${recipeInfo.id}>
-      <h3 maxlength="40">${shortRecipeName}</h3>
-      <div class="card-photo-container">
-        <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
-        <div class="text">
-          <div>Click for Instructions</div>
-        </div>
-      </div>
-      <h4>${recipeInfo.tags[0]}</h4>
-      <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
-    </div>`
-  main.insertAdjacentHTML("beforeend", cardHtml);
-}
 
 // FILTER BY RECIPE TAGS
 function findTags() {
@@ -95,8 +76,8 @@ function findTags() {
 
 function listTags(allTags) {
   allTags.forEach(tag => {
-    let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
-      <label for="${tag}">${capitalize(tag)}</label></li>`;
+    let capitalizedTag = capitalize(tag);
+    let tagHtml = domUpdates.listRecipeTagsOnDom(tag, capitalizedTag);
     tagList.insertAdjacentHTML("beforeend", tagHtml);
   });
 }
@@ -138,14 +119,7 @@ function filterRecipes(filtered) {
   let foundRecipes = recipes.filter(recipe => {
     return !filtered.includes(recipe);
   });
-  hideUnselectedRecipes(foundRecipes)
-}
-
-function hideUnselectedRecipes(foundRecipes) {
-  foundRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "none";
-  });
+  domUpdates.hideUnselectedRecipes(foundRecipes)
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
@@ -267,7 +241,7 @@ function filterNonSearched(filtered) {
     let ids = filtered.map(f => f.id);
     return !ids.includes(recipe.id)
   })
-  hideUnselectedRecipes(found);
+  domUpdates.hideUnselectedRecipes(found);
 }
 
 function createRecipeObject(recipes) {
