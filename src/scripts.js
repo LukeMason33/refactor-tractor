@@ -1,6 +1,7 @@
-import usersData from './data/users-data';
+import users from './data/users-data';
 import recipeData from  './data/recipe-data';
 import ingredientsData from './data/ingredient-data';
+//API DATA
 import fetchedData from './fetch.js';
 
 import './css/base.scss';
@@ -297,7 +298,7 @@ function showAllRecipes() {
 // CREATE AND USE PANTRY
 function findPantryInfo() {
   user.pantry.forEach(item => {
-    let itemInfo = ingredientData.find(ingredient => {
+    let itemInfo = ingredientsData.find(ingredient => {
       return ingredient.id === item.ingredient;
     });
     let originalIngredient = pantryInfo.find(ingredient => {
@@ -351,9 +352,3 @@ function findRecipesWithCheckedIngredients(selected) {
     }
   })
 }
-
-// const test = fetch("http://localhost:3001/api/v1/users")
-//               .then(response => response.json())
-//               .then(data => console.log(data));
-//
-// console.log(test);
