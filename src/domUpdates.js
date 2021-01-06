@@ -1,4 +1,5 @@
 let main = document.querySelector("main");
+let pantryBtn = document.querySelector(".my-pantry-btn");
 
 let domUpdates = {
 
@@ -42,9 +43,31 @@ let domUpdates = {
 
   //
 
+  // TOGGLE DISPLAYS
+  showMyRecipesBanner() {
+    document.querySelector(".welcome-msg").style.display = "none";
+    document.querySelector(".my-recipes-banner").style.display = "block";
+  },
 
+  showWelcomeBanner() {
+    document.querySelector(".welcome-msg").style.display = "flex";
+    document.querySelector(".my-recipes-banner").style.display = "none";
+  },
+
+  // SEARCH RECIPES
+  toggleMenu() {
+    var menuDropdown = document.querySelector(".drop-menu");
+    menuOpen = !menuOpen;
+    if (menuOpen) {
+      menuDropdown.style.display = "block";
+    } else {
+      menuDropdown.style.display = "none";
+    }
+  },
 
 
 };
+
+pantryBtn.addEventListener("click", domUpdates.toggleMenu);
 
 export default domUpdates;

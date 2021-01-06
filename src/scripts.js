@@ -14,7 +14,7 @@ let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let menuOpen = false;
-let pantryBtn = document.querySelector(".my-pantry-btn");
+// let pantryBtn = document.querySelector(".my-pantry-btn");
 let pantryInfo = [];
 let recipes = [];
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
@@ -32,7 +32,7 @@ window.addEventListener("load", generateUser);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
-pantryBtn.addEventListener("click", toggleMenu);
+// pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", searchRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
@@ -159,7 +159,7 @@ function showSavedRecipes() {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "none";
   });
-  showMyRecipesBanner();
+  domUpdates.showMyRecipesBanner();
 }
 
 // CREATE RECIPE INSTRUCTIONS
@@ -211,17 +211,6 @@ function exitRecipe() {
   document.getElementById("overlay").remove();
 }
 
-// TOGGLE DISPLAYS
-function showMyRecipesBanner() {
-  document.querySelector(".welcome-msg").style.display = "none";
-  document.querySelector(".my-recipes-banner").style.display = "block";
-}
-
-function showWelcomeBanner() {
-  document.querySelector(".welcome-msg").style.display = "flex";
-  document.querySelector(".my-recipes-banner").style.display = "none";
-}
-
 // SEARCH RECIPES
 function pressEnterSearch(event) {
   event.preventDefault();
@@ -249,22 +238,22 @@ function createRecipeObject(recipes) {
   return recipes
 }
 
-function toggleMenu() {
-  var menuDropdown = document.querySelector(".drop-menu");
-  menuOpen = !menuOpen;
-  if (menuOpen) {
-    menuDropdown.style.display = "block";
-  } else {
-    menuDropdown.style.display = "none";
-  }
-}
+// function toggleMenu() {
+//   var menuDropdown = document.querySelector(".drop-menu");
+//   menuOpen = !menuOpen;
+//   if (menuOpen) {
+//     menuDropdown.style.display = "block";
+//   } else {
+//     menuDropdown.style.display = "none";
+//   }
+// }
 
 function showAllRecipes() {
   recipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "block";
   });
-  showWelcomeBanner();
+  domUpdates.showWelcomeBanner();
 }
 
 // CREATE AND USE PANTRY
