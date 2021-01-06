@@ -12,6 +12,13 @@ let generateUserAPI = () => {
     })
   }
 
+let generateRecipeAPI = () => {
+    fetchedData.recipesAPIData()
+      .then(recipes => {
+        createCards(recipes)
+      })
+  }
+
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -41,7 +48,7 @@ let tagList = document.querySelector(".tag-list");
 let user;
 
 
-window.addEventListener("load", createCards);
+window.addEventListener("load", generateRecipeAPI);
 window.addEventListener("load", findTags);
 window.addEventListener("load", generateUserAPI);
 allRecipesBtn.addEventListener("click", showAllRecipes);
@@ -67,7 +74,7 @@ function generateUser(usersData) {
 }
 
 // CREATE RECIPE CARDS
-function createCards() {
+function createCards(recipeData) {
   recipeData.forEach(recipe => {
     let recipeInfo = new Recipe(recipe);
     let shortRecipeName = recipeInfo.name;
