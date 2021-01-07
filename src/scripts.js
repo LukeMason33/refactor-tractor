@@ -1,24 +1,47 @@
 // import users from './data/users-data';
-import recipeData from  './data/recipe-data';
-import ingredientsData from './data/ingredient-data';
+// import recipeData from  './data/recipe-data';
+// import ingredientsData from './data/ingredient-data';
 
 //API DATA
 import fetchedData from './fetch.js';
 
-let generateUserAPI = () => {
-  fetchedData.usersAPIData()
-    .then(users => {
-      generateUser(users);
+let usersData;
+let recipeData;
+let ingredientsData;
+
+function fetchAllData() {
+  Promise.all([fetchedData.usersAPIData(), fetchedData.recipesAPIData(), fetchedData.ingredientsAPIData()])
+    .then(data => {
+      usersData = data[0];
+      recipeData = data[1];
+      ingredientsData = data[2];
+      generateUser(usersData);
+      createCards(recipeData);
+      findTags(recipeData);
     })
-  }
+}
 
-let generateRecipeAPI = () => {
-    fetchedData.recipesAPIData()
-      .then(recipes => {
-        createCards(recipes)
-      })
-  }
-
+// let generateUserAPI = () => {
+//   fetchedData.usersAPIData()
+//     .then(users => {
+//       generateUser(users);
+//     })
+//   }
+//
+// let generateRecipeAPI = () => {
+//     fetchedData.recipesAPIData()
+//       .then(recipes => {
+//         createCards(recipes)
+//         findTags(recipes)
+//       })
+//   }
+//
+// let generateIngredientsAPI = () => {
+//   fetchedData.ingredientsAPIData()
+//     .then(ingredients => {
+//       test = ingredients;
+//     })
+// }
 
 import './css/base.scss';
 import './css/styles.scss';
@@ -48,9 +71,9 @@ let tagList = document.querySelector(".tag-list");
 let user;
 
 
-window.addEventListener("load", generateRecipeAPI);
-window.addEventListener("load", findTags);
-window.addEventListener("load", generateUserAPI);
+window.addEventListener("load", fetchAllData);
+// window.addEventListener("load", findTags);
+// window.addEventListener("load", generateUserAPI);
 allRecipesBtn.addEventListener("click", showAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
@@ -103,7 +126,7 @@ function addToDom(recipeInfo, shortRecipeName) {
 }
 
 // FILTER BY RECIPE TAGS
-function findTags() {
+function findTags(recipeData) {
   let tags = [];
   recipeData.forEach(recipe => {
     recipe.tags.forEach(tag => {
@@ -279,17 +302,20 @@ function liveSearch(event) {
 
 function searchRecipes() {
   showAllRecipes();
+  debugger;
+  console.log(recipeData);
   let searchedItems = [];
   recipeData.filter(recipe => {
     recipe.ingredients.filter(ing => {
-      if (ing.name.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
+      console.log(ing);
+      if (ing.name.includes(searchInput.value)) {
         searchedItems.push(recipe)
       }
     })
     if (recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
       searchedItems.push(recipe)
     };
-  });
+  })
   filterNonSearched(createRecipeObject(searchedItems));
 }
 
@@ -300,7 +326,7 @@ function filterNonSearched(filtered) {
   });
   hideUnselectedRecipes(found);
 }
-
+/////////DO WE NEED THIS FUNCTION??////////
 function createRecipeObject(recipes) {
   recipes = recipes.map(recipe => new Recipe(recipe));
   return recipes
