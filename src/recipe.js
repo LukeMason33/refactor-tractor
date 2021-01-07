@@ -6,10 +6,23 @@ class Recipe {
     this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
   }
+
   calculateIngredientsCost() {
     // return this.ingredients.map(i => {
     //   ingredientData.find(ingredient => ingredient === i);
     // });
+  }
+
+  generateIngredientsNameById(dataSet) {
+    let ingredientsByName = [];
+    this.ingredients.forEach(ingredient => {
+      dataSet.forEach(data => {
+        if (ingredient.id === data.id) {
+          ingredientsByName.push(data.name);
+        }
+      })
+    })
+    return ingredientsByName;
   }
 }
 
