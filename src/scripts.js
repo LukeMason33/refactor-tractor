@@ -2,79 +2,44 @@
 // import recipeData from  './data/recipe-data';
 // import ingredientsData from './data/ingredient-data';
 
-//API DATA
-import fetchedData from './fetch.js';
-
-let usersData;
-let recipeData;
-let ingredientsData;
-
-function fetchAllData() {
-  Promise.all([fetchedData.usersAPIData(), fetchedData.recipesAPIData(), fetchedData.ingredientsAPIData()])
-    .then(data => {
-      usersData = data[0];
-      recipeData = data[1];
-      ingredientsData = data[2];
-      generateUser(usersData);
-      createCards(recipeData);
-      findTags(recipeData);
-    })
-}
-
-// let generateUserAPI = () => {
-//   fetchedData.usersAPIData()
-//     .then(users => {
-//       generateUser(users);
-//     })
-//   }
-//
-// let generateRecipeAPI = () => {
-//     fetchedData.recipesAPIData()
-//       .then(recipes => {
-//         createCards(recipes)
-//         findTags(recipes)
-//       })
-//   }
-//
-// let generateIngredientsAPI = () => {
-//   fetchedData.ingredientsAPIData()
-//     .then(ingredients => {
-//       test = ingredients;
-//     })
-// }
-
+//CSS FILES
 import './css/base.scss';
 import './css/styles.scss';
-
+//API DATA
+import fetchedData from './fetch.js';
+//DOM UPDATES
 import domUpdates from './domUpdates.js';
-
+//IMAGES
 import './images/apple-logo-outline.png';
 import './images/apple-logo.png';
 import './images/cookbook.png';
 import './images/seasoning.png';
 import './images/search.png';
-
-
+//CLASSES
 import User from './user';
 import Recipe from './recipe';
-
+//QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 // let menuOpen = false;
 // let pantryBtn = document.querySelector(".my-pantry-btn");
-let pantryInfo = [];
-let recipes = [];
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 // let tagList = document.querySelector(".tag-list");
+//GLOBAL VARIABLES
 let user;
+let usersData;
+let recipeData;
+let ingredientsData;
+let pantryInfo = [];
+let recipes = [];
 
-
+//EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
 // window.addEventListener("load", findTags);
 // window.addEventListener("load", generateUserAPI);
@@ -94,6 +59,19 @@ function generateUser(usersData) {
   domUpdates.greetUserOnLoad(firstName);
   findPantryInfo();
 }
+//Generate API Data on Load
+function fetchAllData() {
+  Promise.all([fetchedData.usersAPIData(), fetchedData.recipesAPIData(), fetchedData.ingredientsAPIData()])
+    .then(data => {
+      usersData = data[0];
+      recipeData = data[1];
+      ingredientsData = data[2];
+      generateUser(usersData);
+      createCards(recipeData);
+      findTags(recipeData);
+    })
+}
+
 
 // CREATE RECIPE CARDS
 function createCards(recipeData) {
