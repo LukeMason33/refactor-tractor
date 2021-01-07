@@ -22,7 +22,7 @@ let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
-let tagList = document.querySelector(".tag-list");
+// let tagList = document.querySelector(".tag-list");
 let user;
 
 
@@ -71,16 +71,14 @@ function findTags() {
     });
   });
   tags.sort();
-  listTags(tags);
+  domUpdates.listRecipeTagsOnDom(tags);
 }
 
-function listTags(allTags) {
-  allTags.forEach(tag => {
-    // let capitalizedTag = capitalize(tag);
-    let tagHtml = domUpdates.listRecipeTagsOnDom(tag);
-    tagList.insertAdjacentHTML("beforeend", tagHtml);
-  });
-}
+// function listTags(allTags) {
+//   allTags.forEach(tag => {
+//     domUpdates.listRecipeTagsOnDom(tag);
+//   });
+// }
 
 // function capitalize(words) {
 //   return words.split(" ").map(word => {
