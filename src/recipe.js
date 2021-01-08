@@ -14,7 +14,6 @@ class Recipe {
   }
 
   generateIngredientsNameById(dataSet) {
-    // let ingredientsByName = [];
     this.ingredients.forEach(ingredient => {
       dataSet.forEach(data => {
         if (ingredient.id === data.id) {
@@ -22,7 +21,6 @@ class Recipe {
         }
       })
     })
-    // return ingredientsByName;
   }
 }
 

@@ -68,6 +68,7 @@ function fetchAllData() {
       ingredientsData = data[2];
       generateUser(usersData);
       createCards(recipeData);
+      getIngredientNamesForRecipe();
       findTags(recipeData);
     })
 }
@@ -84,6 +85,13 @@ function createCards(recipeData) {
     }
     domUpdates.addCardsToDom(recipeInfo, shortRecipeName)
   });
+}
+
+function getIngredientNamesForRecipe () {
+  recipes.forEach(recipe => {
+    recipe.generateIngredientsNameById(ingredientsData);
+    return recipe;
+  })
 }
 
 
@@ -265,7 +273,6 @@ function searchRecipes() {
   showAllRecipes();
   let searchedItems = [];
   recipes.filter(recipe => {
-    recipe.generateIngredientsNameById(ingredientsData);
     recipe.ingredients.filter(ing => {
       if (ing.name.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
         searchedItems.push(recipe);
