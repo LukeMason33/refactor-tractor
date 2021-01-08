@@ -31,6 +31,7 @@ let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 // let tagList = document.querySelector(".tag-list");
+
 //GLOBAL VARIABLES
 let user;
 let usersData;
@@ -282,7 +283,7 @@ function searchRecipes() {
       searchedItems.push(recipe)
     };
   });
-  filterNonSearched(createRecipeObject(searchedItems));
+  filterNonSearched(searchedItems);
 }
 
 function filterNonSearched(filtered) {
@@ -292,11 +293,6 @@ function filterNonSearched(filtered) {
 
   })
   domUpdates.hideUnselectedRecipes(found);
-}
-/////////DO WE NEED THIS FUNCTION??////////
-function createRecipeObject(recipes) {
-  recipes = recipes.map(recipe => new Recipe(recipe));
-  return recipes
 }
 
 // function toggleMenu() {
