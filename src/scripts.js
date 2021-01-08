@@ -21,11 +21,11 @@ import Recipe from './recipe';
 //QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
+let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 // let menuOpen = false;
 // let pantryBtn = document.querySelector(".my-pantry-btn");
-let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
@@ -39,10 +39,11 @@ let recipeData;
 let ingredientsData;
 let pantryInfo = [];
 let recipes = [];
+let favoriteRecipes;
 
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
-allRecipesBtn.addEventListener("click", showAllRecipes);
+allRecipesBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 // pantryBtn.addEventListener("click", toggleMenu);
@@ -192,7 +193,7 @@ function isDescendant(parent, child) {
 }
 
 function showSavedRecipes() {
-  favoriteRecipes = recipes.filter(recipe => {
+    favoriteRecipes = recipes.filter(recipe => {
     return user.favoriteRecipes.includes(recipe.id);
   });
   let unsavedRecipes = recipes.filter(recipe => {
@@ -270,14 +271,15 @@ function exitRecipe() {
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     searchRecipes(favoriteRecipes);
+    //REFACTOR THIS MAKE CLASS METHOD
   } else {
-    searchRecipes(recipeData);
+    searchRecipes(recipes);
   }
 }
 
 function searchRecipes(input) {
   let searchedItems = [];
-  recipes.filter(recipe => {
+  input.filter(recipe => {
     recipe.ingredients.filter(ing => {
       if (ing.name.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
         searchedItems.push(recipe);
@@ -288,6 +290,7 @@ function searchRecipes(input) {
     };
   });
   filterNonSearched(searchedItems);
+  showAllRecipes(searchedItems);
 }
 
 function filterNonSearched(filtered) {
