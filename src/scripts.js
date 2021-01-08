@@ -142,7 +142,7 @@ function findTaggedRecipes(selected) {
       }
     })
   });
-  showAllRecipes();
+  showAllRecipes(recipes);
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   }
@@ -312,7 +312,7 @@ function filterNonSearched(filtered) {
 // }
 
 function displayAllRecipes() {
-  showAllRecipes(recipeData);
+  showAllRecipes(recipes);
   domUpdates.showWelcomeBanner();
 }
 
@@ -358,7 +358,7 @@ function findCheckedPantryBoxes() {
   let selectedIngredients = pantryCheckboxInfo.filter(box => {
     return box.checked;
   })
-  showAllRecipes();
+  showAllRecipes(recipes);
   if (selectedIngredients.length > 0) {
     findRecipesWithCheckedIngredients(selectedIngredients);
   }
