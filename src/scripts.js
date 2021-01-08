@@ -263,20 +263,21 @@ function liveSearch(event) {
 
 function searchRecipes() {
   showAllRecipes();
-  debugger;
-  console.log(recipeData);
   let searchedItems = [];
-  recipeData.filter(recipe => {
-    recipe.ingredients.filter(ing => {
-      console.log(ing);
-      if (ing.name.includes(searchInput.value)) {
-        searchedItems.push(recipe)
+  recipes.filter(recipe => {
+    console.log(recipe);
+    let recipesIngredients = recipe.generateIngredientsNameById(ingredientsData);
+    // recipe.ingredients.filter(ing => {
+    recipesIngredients.filter(ing => {
+      if (ing.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
+        searchedItems.push(recipe);
+        recipesIngredients = [];
       }
     })
     if (recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
       searchedItems.push(recipe)
     };
-  })
+  });
   filterNonSearched(createRecipeObject(searchedItems));
 }
 
