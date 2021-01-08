@@ -89,12 +89,12 @@ let domUpdates = {
       if (found !== undefined) {
         let difference = found.amount - ingredient.quantity.amount;
         if (difference < 0) {
-          comparison += `<li>You are short ${difference} ${ingredient.quantity.unit} of ingredient.name!</li>`;
+          comparison += `<li>You are short <b>${Math.abs(difference)} ${ingredient.quantity.unit}</b> of <i>${ingredient.name}</i>!</li>`;
         } else if (difference >= 0) {
-          comparison += `<li>You have enough ingredient.name to make this!</li>`;
+          comparison += `<li>You have enough <i>${ingredient.name}</i> to make this!</li>`;
         }
       } else {
-        comparison += `<li>You dont have any ____ </li>`
+        comparison += `<li>You dont have any <i>${ingredient.name}</i></li>`
       }
     })
     fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Pantry Comparison</h4>");
