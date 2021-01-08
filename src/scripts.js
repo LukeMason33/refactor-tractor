@@ -246,13 +246,10 @@ function exitRecipe() {
 // }
 
 // SEARCH RECIPES
-function liveSearch(event) {
-  event.preventDefault();
+function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     searchRecipes(favoriteRecipes);
-    console.log('favorites')
   } else {
-    console.log('reg')
     searchRecipes(recipeData);
   }
 }
@@ -301,7 +298,7 @@ function displayAllRecipes() {
   domUpdates.showWelcomeBanner();
 }
 
-function showAllRecipes() {
+function showAllRecipes(recipes) {
   recipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "block";
