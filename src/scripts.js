@@ -1,7 +1,3 @@
-// import users from './data/users-data';
-// import recipeData from  './data/recipe-data';
-// import ingredientsData from './data/ingredient-data';
-
 //CSS FILES
 import './css/base.scss';
 import './css/styles.scss';
@@ -24,8 +20,6 @@ let filterBtn = document.querySelector(".filter-btn");
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
-// let menuOpen = false;
-// let pantryBtn = document.querySelector(".my-pantry-btn");
 let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
@@ -46,19 +40,11 @@ window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
-// pantryBtn.addEventListener("click", toggleMenu);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchBtn.addEventListener("click", liveSearch);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("keyup", liveSearch);
 
-// GENERATE A USER ON LOAD
-function generateUser(usersData) {
-  user = new User(usersData[Math.floor(Math.random() * usersData.length)]);
-  let firstName = user.name.split(" ")[0];
-  domUpdates.greetUserOnLoad(firstName);
-  findPantryInfo();
-}
 //Generate API Data on Load
 function fetchAllData() {
   Promise.all([fetchedData.usersAPIData(), fetchedData.recipesAPIData(), fetchedData.ingredientsAPIData()])
@@ -71,6 +57,14 @@ function fetchAllData() {
       getIngredientNamesForRecipe();
       findTags(recipeData);
     })
+}
+
+// GENERATE A USER ON LOAD
+function generateUser(usersData) {
+  user = new User(usersData[Math.floor(Math.random() * usersData.length)]);
+  let firstName = user.name.split(" ")[0];
+  domUpdates.greetUserOnLoad(firstName);
+  findPantryInfo();
 }
 
 
@@ -215,6 +209,7 @@ function openRecipeInfo(event) {
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);
+  domUpdates.compareRecipeIngredientsToPantry(recipe, user);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
 }
 

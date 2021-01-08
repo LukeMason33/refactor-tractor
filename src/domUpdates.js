@@ -80,6 +80,22 @@ let domUpdates = {
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
   },
 
+  compareRecipeIngredientsToPantry(recipe, user) {
+    let comparison = "";
+    recipe.ingredients.forEach(ingredient => {
+      user.pantry.map(supply => {
+          let difference = supply.amount - ingredient.quantity.amount;
+            if (ingredient.id === supply.ingredient && difference < 0) {
+              comparison += `<li>You are short ${difference} ${ingredient.quantity.unit} of ingredient.name!</li>`;
+            } else if (ingredient.id === supply.ingredient && difference >= 0) {
+              comparison += `<li>You have enough ingredient.name to make this!</li>`;
+            }
+          });
+    });
+    fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Pantry Comparison</h4>");
+    fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${comparison}</ol>`);
+  },
+
   insertRecipeInfo(fullRecipeInfo) {
     fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
   },
