@@ -14,15 +14,15 @@ class Recipe {
   }
 
   generateIngredientsNameById(dataSet) {
-    let ingredientsByName = [];
+    // let ingredientsByName = [];
     this.ingredients.forEach(ingredient => {
       dataSet.forEach(data => {
         if (ingredient.id === data.id) {
-          ingredientsByName.push(data.name);
+          return ingredient.name = data.name;
         }
       })
     })
-    return ingredientsByName;
+    // return ingredientsByName;
   }
 }
 

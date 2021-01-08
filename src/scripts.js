@@ -265,13 +265,10 @@ function searchRecipes() {
   showAllRecipes();
   let searchedItems = [];
   recipes.filter(recipe => {
-    console.log(recipe);
-    let recipesIngredients = recipe.generateIngredientsNameById(ingredientsData);
-    // recipe.ingredients.filter(ing => {
-    recipesIngredients.filter(ing => {
-      if (ing.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
+    recipe.generateIngredientsNameById(ingredientsData);
+    recipe.ingredients.filter(ing => {
+      if (ing.name.includes(searchInput.value) && !searchedItems.includes(recipe.name)) {
         searchedItems.push(recipe);
-        recipesIngredients = [];
       }
     })
     if (recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
