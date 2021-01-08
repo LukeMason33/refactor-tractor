@@ -90,6 +90,8 @@ let domUpdates = {
     welcomeMsg.style.display = "none";
     let myRecipesBanner = document.querySelector(".my-recipes-banner")
     myRecipesBanner.style.display = "block";
+    myRecipesBanner.classList.add("hidden");
+
   },
 
   showWelcomeBanner() {
@@ -97,6 +99,7 @@ let domUpdates = {
     welcomeMsg.style.display = "flex";
     let myRecipesBanner = document.querySelector(".my-recipes-banner")
     myRecipesBanner.style.display = "none";
+    myRecipesBanner.classList.remove("hidden");
   },
   // Ask Travis about updating css in scripts, should this be a dom thing?
 
