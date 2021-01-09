@@ -153,7 +153,7 @@ function filterRecipes(filtered) {
 function addToMyRecipes(showSavedRecipes) {
   if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     domUpdates.favoriteRecipe(user, event);
-    removeUnfavoritedInstantly();
+    filterFavorites();
   } else if (event.target.className === "card-apple-icon") {
     domUpdates.favoriteRecipe(user, event);
   } else if (event.target.id === "exit-recipe-btn") {
@@ -175,7 +175,7 @@ function isDescendant(parent, child) {
   return false;
 }
 
-function removeUnfavoritedInstantly() {
+function filterFavorites() {
   favoriteRecipes = recipes.filter(recipe => {
     return user.favoriteRecipes.includes(recipe.id);
   });
@@ -189,16 +189,7 @@ function removeUnfavoritedInstantly() {
 }
 
 function showSavedRecipes() {
-  favoriteRecipes = recipes.filter(recipe => {
-    return user.favoriteRecipes.includes(recipe.id);
-  });
-  let unsavedRecipes = recipes.filter(recipe => {
-    return !user.favoriteRecipes.includes(recipe.id);
-  });
-  unsavedRecipes.forEach(recipe => {
-    let domRecipe = document.getElementById(`${recipe.id}`);
-    domRecipe.style.display = "none";
-  });
+  filterFavorites()
   domUpdates.showMyRecipesBanner();
   liveSearch();
 }
