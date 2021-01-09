@@ -103,18 +103,6 @@ function findTags(recipeData) {
   domUpdates.listRecipeTagsOnDom(tags);
 }
 
-// function listTags(allTags) {
-//   allTags.forEach(tag => {
-//     domUpdates.listRecipeTagsOnDom(tag);
-//   });
-// }
-
-// function capitalize(words) {
-//   return words.split(" ").map(word => {
-//     return word.charAt(0).toUpperCase() + word.slice(1);
-//   }).join(" ");
-// }
-
 function findCheckedBoxes() {
   let tagCheckboxes = document.querySelectorAll(".checked-tag");
   let checkboxInfo = Array.from(tagCheckboxes)
@@ -202,40 +190,10 @@ function openRecipeInfo(event) {
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.addRecipeImage(recipe);
   domUpdates.generateInstructions(recipe);
+  domUpdates.generateTypeForRecipe(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
 }
-
-// function generateRecipeTitle(recipe, ingredients) {
-//   let recipeTitle = `
-//     <button id="exit-recipe-btn">X</button>
-//     <h3 id="recipe-title">${recipe.name}</h3>
-//     <h4>Ingredients</h4>
-//     <p>${ingredients}</p>`
-//   fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
-// }
-
-// function addRecipeImage(recipe) {
-//   document.getElementById("recipe-title").style.backgroundImage = `url(${recipe.image})`;
-// }
-
-// function generateIngredients(recipe) {
-//   return recipe && recipe.ingredients.map(i => {
-//     return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
-//   }).join(", ");
-// }
-
-// function generateInstructions(recipe) {
-//   let instructionsList = "";
-//   let instructions = recipe.instructions.map(i => {
-//     return i.instruction
-//   });
-//   instructions.forEach(i => {
-//     instructionsList += `<li>${i}</li>`
-//   });
-//   fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
-//   fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
-// }
 
 function exitRecipe() {
   while (fullRecipeInfo.firstChild &&
@@ -243,17 +201,6 @@ function exitRecipe() {
   fullRecipeInfo.style.display = "none";
   document.getElementById("overlay").remove();
 }
-
-// // TOGGLE DISPLAYS
-// function showMyRecipesBanner() {
-//   document.querySelector(".welcome-msg").style.display = "none";
-//   document.querySelector(".my-recipes-banner").style.display = "block";
-// }
-//
-// function showWelcomeBanner() {
-//   document.querySelector(".welcome-msg").style.display = "flex";
-//   document.querySelector(".my-recipes-banner").style.display = "none";
-// }
 
 // SEARCH RECIPES
 function liveSearch() {
@@ -289,16 +236,6 @@ function filterNonSearched(filtered) {
   domUpdates.hideUnselectedRecipes(found);
 }
 
-// function toggleMenu() {
-//   var menuDropdown = document.querySelector(".drop-menu");
-//   menuOpen = !menuOpen;
-//   if (menuOpen) {
-//     menuDropdown.style.display = "block";
-//   } else {
-//     menuDropdown.style.display = "none";
-//   }
-// }
-
 function displayAllRecipes() {
   showAllRecipes(recipes);
   domUpdates.showWelcomeBanner();
@@ -333,15 +270,6 @@ function findPantryInfo() {
   });
   domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
 }
-
-// function displayPantryInfo(pantry) {
-//   pantry.forEach(ingredient => {
-//     let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-//       <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
-//     document.querySelector(".pantry-list").insertAdjacentHTML("beforeend",
-//       ingredientHtml);
-//   });
-// }
 
 function findCheckedPantryBoxes() {
   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
