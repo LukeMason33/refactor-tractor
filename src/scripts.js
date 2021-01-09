@@ -175,6 +175,8 @@ function addToMyRecipes() {
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
+  user.generateRecipeInfoByID(recipeData);
+  console.log(user);
 }
 
 // function addToFavorites() {
@@ -204,7 +206,7 @@ function showSavedRecipes() {
     domRecipe.style.display = "none";
   });
   domUpdates.showMyRecipesBanner();
-  liveSearch();
+  // liveSearch();
 }
 
 // CREATE RECIPE INSTRUCTIONS

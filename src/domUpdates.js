@@ -116,7 +116,7 @@ let domUpdates = {
 
   // FAVORITE RECIPE FUNCTIONALITY
   favoriteRecipe(user, event) {
-    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);

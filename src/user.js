@@ -18,12 +18,25 @@ class User {
   decideToCook(recipe) {
     this.recipesToCook.push(recipe);
   }
+
   filterRecipes(type) {
     return this.favoriteRecipes.filter(recipe => recipe.type.includes(type));
   }
+
   searchForRecipe(keyword) {
     return this.favoriteRecipes.filter(recipe => recipe.name.includes(keyword) || recipe.ingredients.includes(keyword));
   }
-}
 
+  generateRecipeInfoByID(dataSet) {
+    let recipeInfo = [];
+    this.favoriteRecipes.forEach(recipe => {
+      dataSet.forEach(data => {
+        if (recipe === data.id) {
+          recipeInfo.push(data);
+          this.favoriteRecipes = recipeInfo;
+        }
+      })
+    })
+  }
+}
 module.exports = User;
