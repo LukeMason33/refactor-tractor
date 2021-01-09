@@ -54,7 +54,7 @@ h3 {
 
 h4 {
   color: $dark-green;
-  background-color: $bright-green;
+  border: 2pt $bright-green solid;
   border-radius: 3px;
   margin: 10px 0px 0px 0px;
   padding: 1px 4px 1px 4px;
@@ -191,23 +191,19 @@ span {
 .welcome-msg {
   text-align: center;
   width: 95%;
-}
+  margin-top: 50px;
 
-.my-recipes-banner h1,
-.welcome-msg h1 {
+
+  h1 {
   color: $white;
   width: 100%;
+  }
 }
 
 .my-recipes-banner {
   display: none;
   margin-top: 25px;
 }
-
-.welcome-msg {
-  margin-top: 50px;
-}
-
 
 /* FILTER SIDEBAR */
 aside {
@@ -317,7 +313,7 @@ main {
   background-color: $dark-green;
   border: 0;
   border-radius: 3px;
-  color: $white;
+  color: compliment($dark-green);
   cursor: pointer;
   font-family: $primary-font;
   font-size: 12pt;
