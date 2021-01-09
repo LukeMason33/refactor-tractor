@@ -14,6 +14,11 @@ $white: #fff;
   justify-content: center;
 }
 
+@mixin dimensions($height, $width) {
+  height: $height;
+  width: $width;
+}
+
 body {
   background-color: $blue;
   display: grid;
@@ -57,7 +62,7 @@ h4 {
   border: 2pt $bright-green solid;
   border-radius: 3px;
   margin: 10px 0px 0px 0px;
-  padding: 1px 4px 1px 4px;
+  padding: 1px 4px;
   width: max-content;
 }
 
@@ -66,7 +71,6 @@ h4 {
 header {
   @include flex(row);
   grid-area: header;
-  padding: 0% 0%;
   width: 100%;
 }
 
@@ -76,9 +80,8 @@ span {
 }
 
 .header-apple-icon {
-  height: 40px;
+  @include dimensions(40px, 35px);
   margin-left: 5px;
-  width: 35px;
 }
 
 #search {
@@ -91,6 +94,7 @@ span {
   width: 100%;
   
   #search-input {
+    @include dimensions(100%, 100%);
     background-color: #b6dcca;
     background: -webkit-gradient( linear,left top, left bottom, color-stop(0, rgb(255, 255, 255)), color-stop(1, rgb(225,225,225)));
     border-radius: 10px 0px 0px 10px;
@@ -99,12 +103,10 @@ span {
     color: $blue;
     font-family: $primary-font;
     font-size: 42px;
-    height: 100%;
     outline: none;
-    padding: 0% 2% 0% 0%;
+    padding: 0%;
     text-align: right;
     transition: .8s ease;
-    width: 100%;
     
     &:hover {
       box-shadow: inset 0px 0px 0px 0px $white;
@@ -134,12 +136,6 @@ span {
   display: none;
 }
 
-.search-btn {
-  border-left: 3px outset $bright-green;
-  border-radius: 0px 15px 15px 0px;
-  padding: 1%;
-}
-
 .nav-btn {
   @include flex(column);
   align-items: center;
@@ -149,7 +145,6 @@ span {
   font-size: 0px;
   font-weight: 700;
   margin: 1% 0%;
-  padding: 1px 6px 5px 0px;
   outline: none;
   overflow: hidden;
   text-align: center;
@@ -214,22 +209,22 @@ aside {
 }
 
 .wrap {
+  @include dimensions(100vh, 200px);
   background-color: $white;
-  height: 100vh;
   padding: 10px;
   position: relative;
-  width: 200px;
 }
 
 ul {
   list-style-type: none;
   text-align: left;
   padding-left: 35px;
+  
+  li {
+    margin: 2px;
+  }
 }
 
-li {
-  margin: 2px;
-}
 
 
 /* RECIPE CARD SECTION */
@@ -241,14 +236,13 @@ main {
 }
 
 .recipe-card {
+  @include dimensions(270px, 250px);
   background-color: $white;
   border: 2px solid $bright-green;
   border-radius: 7px;
   cursor: pointer;
-  height: 270px;
   margin: 20px;
   padding: 15px;
-  width: 250px;
 }
 
 .recipe-card:hover .card-photo-preview {
@@ -269,22 +263,20 @@ main {
 }
 
 .card-apple-icon {
+  @include dimensions(50px, 45px);
   cursor: pointer;
   float: right;
-  height: 50px;
   padding-bottom: 10px;
-  width: 45px;
 }
 
 .card-photo-preview {
+  @include dimensions(130px, 100%);
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 7px;
   cursor: pointer;
-  height: 130px;
   transition: .8s ease;
-  width: 100%;
 }
 
 .card-photo-container {
@@ -300,7 +292,6 @@ main {
   font-weight: 700;
   font-size: 0px;
   opacity: 0%;
-  padding: 0%;
   position: absolute;
   text-align: center;
   width: 0%;
@@ -310,6 +301,7 @@ main {
 
 /* BUTTONS */
 .square-btns {
+  @include dimensions(40px, 200px);
   background-color: $dark-green;
   border: 0;
   border-radius: 3px;
@@ -318,11 +310,8 @@ main {
   font-family: $primary-font;
   font-size: 12pt;
   font-weight: bold;
-  padding: 5px 10px 5px 10px;
-  height: 40px;
+  padding: 5px 10px;
   margin-top: 20px;
-  width: 200px;
-
 
   &:hover {
     background-color: $bright-green;
@@ -332,17 +321,16 @@ main {
 
 /* PANTRY LIST */
 .drop-menu {
+  @include dimensions(600px, 250px);
   align-items: center;
   background-color: $white;
   display: none;
-  height: 600px;
   margin-left: 81%;
   margin-top: 92px;
   overflow: scroll;
-  padding: 12px;
+  padding: 12px ;
   position: absolute;
   text-align: center;
-  width: 250px;
   z-index: 3;
   
   h2 {
@@ -359,19 +347,18 @@ main {
 
 /* RECIPE INSTRUCTIONS */
 .recipe-instructions {
+  @include dimensions(70%, 70%);
   background: $white;
   border: 3px solid $bright-green;
   border-radius: 10px;
   box-shadow: 1px 1px 115px black;
   display: none;
-  height: 70%;
   margin: 0;
   overflow-x: scroll;
-  padding: 1% 1% 1% 1%;
+  padding: 1%;
   position: fixed;
   right: 15%;
   top: 15%;
-  width: 70%;
   z-index: 1000;
 
   h4 {
@@ -419,13 +406,12 @@ main {
 }
 
 #overlay {
+  @include dimensions(100%, 100%);
   filter:alpha(opacity=50);
   background-color: $blue;
-  height:100%;
   left:0;
   opacity:0.5;
   position:fixed;
   top:0;
-  width:100%;
   z-index:100;
 }
