@@ -82,10 +82,14 @@ let domUpdates = {
 
   generateTypeForRecipe(recipe) {
     fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Recipe Types</h4>");
-    let typesList = "";
-    let types = recipe.tags.map(type => {
-      return `<b>${capitalize(type)}</b>`
-    }).join(", ");
+    let types;
+    if (recipe.tags[0] === undefined) {
+      types = `<b>Sorry the type was not defined yet :( Check back later!</b>`
+    } else {
+      types = recipe.tags.map(type => {
+        return `<b>${capitalize(type)}</b>`
+      }).join(", ");
+    }
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<p>${types}</p>`);
   },
 
