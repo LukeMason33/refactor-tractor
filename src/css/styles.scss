@@ -8,6 +8,11 @@ $bright-green: #C4EB67;
 $dark-green: #359567;
 $white: #fff;
 
+@mixin flex($dir) {
+  display: flex;
+  flex-direction: $dir;
+   justify-content: center;
+}
 
 body {
   background-color: $blue;
@@ -59,8 +64,7 @@ h4 {
 
 /* HEADER */
 header {
-  display: flex;
-  flex-direction: row;
+  @include flex(row);
   grid-area: header;
   padding: 0% 0%;
   width: 100%;
@@ -78,13 +82,11 @@ span {
 }
 
 #search {
+  @include flex(row);
   border-radius: 15px 15px 15px 15px;
   border: 3px outset $bright-green;
   box-shadow: 0px 0px 7px 0px $blue;
-  display: flex;
-  flex-direction: row;
   font-family: $primary-font;
-  justify-content: center;
   margin: 1.2% 0.5% 1.2% 0%;
   width: 100%;
   
@@ -139,16 +141,13 @@ span {
 }
 
 .nav-btn {
+  @include flex(column);
   align-items: center;
   background: $blue no-repeat;
   border: none;
   cursor: pointer;
-  display: flex;
-  flex-direction: column;
   font-size: 0px;
   font-weight: 700;
-  justify-content: center;
-  // margin: 0%;
   margin: 1% 0%;
   padding: 1px 6px 5px 0px;
   outline: none;
@@ -213,8 +212,7 @@ span {
 /* FILTER SIDEBAR */
 aside {
   background-color: $white;
-  display: flex;
-  justify-content: center;
+  @include flex(row);
   height: auto;
   text-align: center;
 }
@@ -241,10 +239,8 @@ li {
 /* RECIPE CARD SECTION */
 main {
   grid-area: main;
-  display: flex;
-  justify-content: center;
+  @include flex(row);
   align-content: flex-start;
-  flex-direction: row;
   flex-wrap: wrap;
 }
 
@@ -296,10 +292,9 @@ main {
 }
 
 .card-photo-container {
+  @include flex(row)
   align-items: center;
-  display: flex;
   height: 130px;
-  justify-content: center;
   position: relative;
 }
 
