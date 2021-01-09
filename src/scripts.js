@@ -81,7 +81,7 @@ function createCards(recipeData) {
   });
 }
 
-function getIngredientNamesForRecipe () {
+function getIngredientNamesForRecipe() {
   recipes.forEach(recipe => {
     recipe.generateIngredientsNameById(ingredientsData);
     return recipe;
@@ -150,30 +150,19 @@ function filterRecipes(filtered) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
-function addToMyRecipes() {
-  if (event.target.className === "card-apple-icon") {
+function addToMyRecipes(showSavedRecipes) {
+  if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     domUpdates.favoriteRecipe(user, event);
-  }
-  // if (event.target.className === "card-apple-icon") {
-  //   let cardId = parseInt(event.target.closest(".recipe-card").id)
-  //   if (!user.favoriteRecipes.includes(cardId)) {
-  //     event.target.src = "../images/apple-logo.png";
-  //     user.saveRecipe(cardId);
-  //   } else {
-  //     event.target.src = "../images/apple-logo-outline.png";
-  //     user.removeRecipe(cardId);
-  //   }
-  // }
-  else if (event.target.id === "exit-recipe-btn") {
+    removeUnfavoritedInstantly();
+  } else if (event.target.className === "card-apple-icon") {
+    domUpdates.favoriteRecipe(user, event);
+  } else if (event.target.id === "exit-recipe-btn") {
     exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
 }
 
-// function addToFavorites() {
-//   domUpdates.favoriteRecipe(user, event);
-// }
 
 function isDescendant(parent, child) {
   let node = child;
@@ -186,8 +175,21 @@ function isDescendant(parent, child) {
   return false;
 }
 
+function removeUnfavoritedInstantly() {
+  favoriteRecipes = recipes.filter(recipe => {
+    return user.favoriteRecipes.includes(recipe.id);
+  });
+  let unsavedRecipes = recipes.filter(recipe => {
+    return !user.favoriteRecipes.includes(recipe.id);
+  });
+  unsavedRecipes.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "none";
+  });
+}
+
 function showSavedRecipes() {
-    favoriteRecipes = recipes.filter(recipe => {
+  favoriteRecipes = recipes.filter(recipe => {
     return user.favoriteRecipes.includes(recipe.id);
   });
   let unsavedRecipes = recipes.filter(recipe => {
@@ -332,7 +334,10 @@ function findPantryInfo() {
     if (itemInfo && originalIngredient) {
       originalIngredient.count += item.amount;
     } else if (itemInfo) {
-      pantryInfo.push({name: itemInfo.name, count: item.amount});
+      pantryInfo.push({
+        name: itemInfo.name,
+        count: item.amount
+      });
     }
   });
   domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
