@@ -11,7 +11,7 @@ $white: #fff;
 @mixin flex($dir) {
   display: flex;
   flex-direction: $dir;
-   justify-content: center;
+  justify-content: center;
 }
 
 body {
@@ -292,7 +292,7 @@ main {
 }
 
 .card-photo-container {
-  @include flex(row)
+  @include flex(row);
   align-items: center;
   height: 130px;
   position: relative;
