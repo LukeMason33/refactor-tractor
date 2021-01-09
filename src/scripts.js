@@ -39,7 +39,7 @@ let recipeData;
 let ingredientsData;
 let pantryInfo = [];
 let recipes = [];
-let favoriteRecipes;
+// let favoriteRecipes;
 
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
@@ -175,8 +175,6 @@ function addToMyRecipes() {
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
-  user.generateRecipeInfoByID(recipeData);
-  console.log(user);
 }
 
 // function addToFavorites() {
@@ -195,9 +193,9 @@ function isDescendant(parent, child) {
 }
 
 function showSavedRecipes() {
-    favoriteRecipes = recipes.filter(recipe => {
-    return user.favoriteRecipes.includes(recipe.id);
-  });
+  //   favoriteRecipes = recipes.filter(recipe => {
+  //   return user.favoriteRecipes.includes(recipe.id);
+  // });
   let unsavedRecipes = recipes.filter(recipe => {
     return !user.favoriteRecipes.includes(recipe.id);
   });
@@ -206,7 +204,6 @@ function showSavedRecipes() {
     domRecipe.style.display = "none";
   });
   domUpdates.showMyRecipesBanner();
-  // liveSearch();
 }
 
 // CREATE RECIPE INSTRUCTIONS
@@ -272,7 +269,7 @@ function exitRecipe() {
 // SEARCH RECIPES
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
-    searchRecipes(favoriteRecipes);
+    searchRecipes(user.generateRecipeInfoByID(recipeData));
     //REFACTOR THIS MAKE CLASS METHOD
   } else {
     searchRecipes(recipes);

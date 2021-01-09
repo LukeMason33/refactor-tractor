@@ -19,13 +19,13 @@ class User {
     this.recipesToCook.push(recipe);
   }
 
-  filterRecipes(type) {
-    return this.favoriteRecipes.filter(recipe => recipe.type.includes(type));
-  }
-
-  searchForRecipe(keyword) {
-    return this.favoriteRecipes.filter(recipe => recipe.name.includes(keyword) || recipe.ingredients.includes(keyword));
-  }
+  // filterRecipes(type) {
+  //   return this.favoriteRecipes.filter(recipe => recipe.type.includes(type));
+  // }
+  //
+  // searchForRecipe(keyword) {
+  //   return this.favoriteRecipes.filter(recipe => recipe.name.includes(keyword) || recipe.ingredients.includes(keyword));
+  // }
 
   generateRecipeInfoByID(dataSet) {
     let recipeInfo = [];
@@ -33,10 +33,10 @@ class User {
       dataSet.forEach(data => {
         if (recipe === data.id) {
           recipeInfo.push(data);
-          this.favoriteRecipes = recipeInfo;
         }
       })
     })
+    return recipeInfo;
   }
 }
 module.exports = User;
