@@ -209,7 +209,7 @@ function filterRecipesToCook() {
 function showMealsToCook() {
   filterRecipesToCook();
   domUpdates.showCorrectBanner(event);
-  // liveSearch();
+  liveSearch();
 }
 
 // CREATE RECIPE INSTRUCTIONS
@@ -237,6 +237,8 @@ function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     searchRecipes(favoriteRecipes);
     //REFACTOR THIS MAKE CLASS METHOD
+  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")){
+    searchRecipes(recipesToCook);
   } else {
     searchRecipes(recipes);
   }

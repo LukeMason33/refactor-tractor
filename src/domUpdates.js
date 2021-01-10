@@ -131,10 +131,12 @@ let domUpdates = {
       myRecipesBanner.style.display = "block";
       myRecipesBanner.classList.add("hidden");
       myMealsToCookBanner.style.display = "none";
+      myMealsToCookBanner.classList.remove("hidden");
     } else if (event.target.className.includes("connect")) {
       myMealsToCookBanner.style.display = "block";
       myMealsToCookBanner.classList.add("hidden");
       myRecipesBanner.style.display = "none";
+      myRecipesBanner.classList.remove("hidden");
     }
   },
 
