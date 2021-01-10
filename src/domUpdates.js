@@ -29,7 +29,7 @@ let domUpdates = {
         <img tabindex="${tabCount + 2}" src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
         </div>
       </div>`
-      tabCount += 3;
+    tabCount += 3;
     main.insertAdjacentHTML("beforeend", cardHtml);
   },
 
@@ -123,16 +123,18 @@ let domUpdates = {
 
   // TOGGLE DISPLAYS
   showCorrectBanner(event) {
-    let welcomeMsg = document.querySelector(".welcome-msg")
+    let welcomeMsg = document.querySelector(".welcome-msg");
+    let myRecipesBanner = document.querySelector(".my-recipes-banner");
+    let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
     welcomeMsg.style.display = "none";
-    if (event.target.className.includes("saved-recipes-btn")) {
-      let myRecipesBanner = document.querySelector(".my-recipes-banner");
+    if (event.target.className.includes("together")) {
       myRecipesBanner.style.display = "block";
       myRecipesBanner.classList.add("hidden");
-    } else if (event.target.className.includes("meals-to-cook-btn")) {
-      let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
+      myMealsToCookBanner.style.display = "none";
+    } else if (event.target.className.includes("connect")) {
       myMealsToCookBanner.style.display = "block";
       myMealsToCookBanner.classList.add("hidden");
+      myRecipesBanner.style.display = "none";
     }
   },
 
@@ -143,8 +145,7 @@ let domUpdates = {
     myRecipesBanner.style.display = "none";
     myRecipesBanner.classList.remove("hidden");
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
-
-    myMealsToCookBanner.style.display ="none";
+    myMealsToCookBanner.style.display = "none";
     myMealsToCookBanner.classList.remove("hidden");
   },
   // Ask Travis about updating css in scripts, should this be a dom thing?

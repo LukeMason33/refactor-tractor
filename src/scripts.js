@@ -18,6 +18,7 @@ import User from './user';
 import Recipe from './recipe';
 //QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
+let backToMainBtn = document.querySelector(".back-to-main-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
@@ -39,6 +40,7 @@ let recipesToCook;
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
+backToMainBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
