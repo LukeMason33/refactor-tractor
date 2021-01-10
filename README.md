@@ -1,105 +1,66 @@
-# Webpack Starter Kit
+# Refactor Tractor - freshPicks
+In this project, we were provided a semi-functional codebase for a website of recipes that a user can browse to find meals to cook. The challenge of the project was refactoring the code to be more functional, more accessible, and to implement the use of Sass, network requests, and WebPack.
 
-## Clone This Repo
+## Usage
+The freshPicks website allows users access to a database of recipes. On the main page, a user can browse all recipes, filter recipes by type, and view what their pantry holds. The search bar can be used to search through the recipe titles and ingredients. A user can also favorite a recipe by clicking the apple icon on the card, or save it to their weekly menu by clicking the pot. To view the recipe's ingredients and instructions the user can click the card to expand it.
+  
+![gif of mainpage]()
 
-That's right, _clone_ not fork. You will use this repo multiple times, but you can only fork a repository once. So here is what you need to do to clone the repo and still be able to push changes to your repo:
+If a user wants to view only their favorite recipes, they can navigate to their saved recipes. From here a user can search the recipes, sort by type, or unfavorite. To return to the mainpage of all recipes, the user can click the 'Show All Recipes' button.
 
-1. Clone down this repo. Since you don't want to name your project "webpack-starter-kit", you can use an optional argument when you run `git clone` (you replace the `[...]` with the terminal command arguments): `git clone [remote-address] [what you want to name the repo]`
-1. Remove the default remote: `git remote rm origin` (notice that `git remote -v` not gives you back nothing)
-1. Create a new repo on GitHub with the name of `[what you want to name the repo]` to be consistent with naming
-1. Copy the address that you would use to clone down this repo - something like `git@github.com:...`
-1. Add this remote to your cloned down repo: `git remote add origin [address you copied in the previous step]` - do not include the brackets
+![gif of favorites]()
 
-Now try to commit something and push it up to your new repo. If everything is setup correctly, you should see the changes on GitHub.
+If a user wants to view the meals they've saved to their weekly menu, they can navigate to the menu page. Here the recipe cards, when opened, will tell the user if they have the necessary ingredients in their pantry to complete the recipe. If they are missing anything it will tell them how much they are missing and how much it will cost to acquire the correct ingredients. 
 
-## Setup
+![gif of menu for week]()
 
-After one person has gone through the steps of cloning down this repo and editing the remote, everyone should clone down the repo. 
 
-Then install the library dependencies. Run:
+## How to Install
+1. `fork` this repository
+2. `git clone` it down to your command line
+3. Navigate into the repository on your machine
+4. Run `npm install`
+5. Run `npm start` to launch local server
 
-```bash
-npm install
-```
+To access data api: 
+1. `git clone` [this]() (add link) repo to your command line
+2. Navigate into the repository on your machine
+3. Run `npm install` 
+4. Run `npm start` to launch API server (*both servers need to be running to access the site)
 
-To verify that it is setup correctly, run `npm start` in your terminal. Go to `http://localhost:8080/` and you should see a page with some `h1` text and a pink background. If that's the case, you're good to go. Enter `control + c` in your terminal to stop the server at any time.
+OR
 
-## Where to Add Your Code
+Visit live site [here]() (we will build this live right?)
 
-### JavaScript
+## Technologies Used
+1. JavaScript (vanilla)
+2. HTML
+3. Sass/SCSS
+3. WebPack
+4. Chai & Mocha
 
-You have to be very intentional with where you add your feature code. This repo uses a tool called [webpack](https://webpack.js.org/) to combine many JavaScript files into one big file. Webpack enables you to have many, separate JavaScript files to keep your code organized and readable. Webpack expects all of your code files to be in a specific place, or else it doesn't know how to combine them all behind the scenes.
+## Planning
+We utilized github projects for project management, that board can be found [here](https://github.com/LukeMason33/refactor-tractor/projects/1) <br>
+The detailed spec for this project can be found [here](https://frontend.turing.io/projects/module-2/refactor-tractor-wc.html) <br>
+The original project spec for the codebase we were provided can be found [here](https://frontend.turing.io/projects/whats-cookin.html).
 
-**Create all of your feature code files in the `src` directory.**
+### Testing development
+We expanded upon the testing built into the original code base to check functionality. We adjusted the original tests to utilize new data formatting to match the data from the server. 
 
-Since code is separated into multiple files, you need to use the `import` and `export` syntax to share code across file.
+### Challenges
+* This was our first experience receiving a large codebase we were unfamiliar with and needing to work on it. It was certainly a challenge to familiarize ourselves with what the code was doing and it was quite an undertaking to reorganize existing code to improve organization and functionality. Initially we struggled to find a good place to jump in and start refactoring, but eventually decided we should start by determining what within the codebase was already functioning well in terms of JavaScript functionality and User Experience/Interaction. After that, we were better able to plan out how to most efficiently move forward and use our time by dividing and conquering small tasks and communicating openly and frequently about new issues we found, or changes we would like to implement. We ended up having to separate our desired changes into `required` to dos and `desired` to dos (things that would be nice to implement but not our minimum viable product).
+* We ran into some resistance when trying to access all info from our network requests simultaneously. After some research we found `Promise.all()` which solved our issues, as it returns all the input network requests together. 
+* Utilizing Sass/SCSS for the first time was interesting. It took some additional research on syntax and functionality of mixins vs built in color functions. The biggest challenge here was taking messy provided CSS and converting it into SCSS while refactoring and adjusting styling to improve UX.
+* Understanding WebPack - It was our first experience with WebPack so we had to do some research and fiddling to get it to work as we expected/wanted it to. 
 
-Here is a video that walks through some information about [import and export](https://www.youtube.com/watch?v=_3oSWwapPKQ). There are a lot of resources out there about `import` and `export`, and resources will sometimes call them `ES6 modules`. It's something you will see in React and beyond.
+### Wins
+* Developing a strong understanding of a foreign codebase and being able to refactor significantly. While this was also one of our major challenges during the project, we were all very proud of our ability to quickly familiarize ourselves with the functionality and therefore refactor effectively. 
+* Teamwork and dividing up work successfully without any major merge conflicts. We chose to implement a divide and conquer workflow, and because of our clear and frequent communication, we were extremely successful in getting tasks done more quickly. We also took the time to walk through all the changes together to be sure we fully understood all the changes. 
 
-### HTML
+## Future Iterations
+* Adding Recipes: A user would be able to submit a recipe to the site, and after admin review, it could be approved and added to the recipe database. 
+* Admin view: Developing an Admin view for the site that could show some User trends and any submitted recipes waiting for review. 
+* Rating Recipes: After a user has made a recipe they should be prompted to rate the recipe on a few different qualities (maybe difficulty level and approval). These ratings could then be visible to other users.
 
-Add the HTML you need in the `index.html` file in the `./src` directory. There is some boilerplate HTML that exists from the start that you can modify.
-
-### CSS (SCSS/SASS)
-
-This project is setup to use SCSS/SASS files by default instead of your regular CSS files. Add your SCSS files in the `src/css` directory. There is a `base.scss` file already there, but you can change this file and add multiple SCSS files in this directory.
-
-This might sound weird, but you need to `import` your SCSS files in the JavaScript entry file (`index.js`) for the styles to be applied to your HTML. The example `base.scss` file has already been imported in the JavaScript entry file as an example.
-
-### Images
-
-Add your image files in the `src/images` directory. Similar to CSS files, you need to `import` image files in the JavaScript entry file (`index.js`). Then go into the HTML and add an `img` element with the `src` attribute pointing to the `images` directory. There is an example in the `index.html` file for you to see.
-
-## How to View Your Code in Action
-
-In the terminal, run:
-
-```bash
-npm start
-```
-
-You will see a bunch of lines output to your terminal. One of those lines will be something like:
-
-```bash
-Project is running at http://localhost:8080/
-```
-
-Go to `http://localhost:8080/` in your browser to view your code running in the browser.
-
----
-
-## Test Files Organization
-
-Similar to feature code, your test code needs to be put in a specific place for it to run successfully.
-
-**Put all of your test files in the `test` directory.** As a convention, all test filenames should end with `-test.js`. For instance: `box-test.js`.
-
-## Running Your Tests
-
-Run your test suite using the command:
-
-```bash
-npm test
-```
-
-The test results will output to the terminal.
-
----
-
-## Linting Your Code
-
-Run the command in your terminal `npm run lint` to run the linter on your JavaScript code. There will be errors and warnings right from the start in this starter kit - the linter is still running successfully.
-
-Your linter will look at the JavaScript files you have within the `src` directory and the `test` directory. 
-
-## Webpack?
-
-If you look in the `package.json` file, you'll see one of the library dependencies called `webpack`. If you're interested in learning more about what Webpack is and how it works behind the scenes, take a look through the [Webpack configuration documentation](https://webpack.js.org/concepts/).
-
-## Deploying to GitHub Pages
-
-_If you are finished with the functionality and testing of your project_, then you can consider deploying your project to the web! This way anyone can play it without cloning down your repo.
-
-[GitHub Pages](https://pages.github.com/) is a great way to deploy your project to the web. Don't worry about this until your project is free of bugs and well tested!
-
-If you _are_ done, you can follow [this procedure](./gh-pages-procedure.md) to get your project live on GitHub Pages.
+## Project Members
+This project was designed and implemented by [Luke Mason](https://github.com/LukeMason33), [Lucas Merchant](https://github.com/lbmerchant93), and [Kristen Bair](https://github.com/kristenmb)
