@@ -56,7 +56,7 @@ function fetchAllData() {
       createCards(recipeData);
       getIngredientNamesForRecipe();
       findTags(recipeData);
-      console.log(user);
+      // console.log(recipes[0].calculateIngredientsCost(ingredientsData));
     })
 }
 
@@ -165,9 +165,6 @@ function isDescendant(parent, child) {
 }
 
 function filterFavorites() {
-  // favoriteRecipes = recipes.filter(recipe => {
-  //   return user.favoriteRecipes.includes(recipe.id);
-  // });
   let unsavedRecipes = recipes.filter(recipe => {
     return !user.favoriteRecipes.includes(recipe.id);
   });
@@ -193,6 +190,10 @@ function openRecipeInfo(event) {
   domUpdates.generateTypeForRecipe(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
+  recipe = new Recipe(recipe);
+  console.log(recipe);
+  console.log(ingredientsData);
+  console.log(recipe.calculateIngredientsCost(ingredientsData));
 }
 
 function exitRecipe() {
