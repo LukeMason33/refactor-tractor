@@ -20,11 +20,9 @@ let filterBtn = document.querySelector(".filter-btn");
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
-let searchBtn = document.querySelector(".search-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
-// let tagList = document.querySelector(".tag-list");
 
 //GLOBAL VARIABLES
 let user;
@@ -41,7 +39,6 @@ allRecipesBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
-searchBtn.addEventListener("click", liveSearch);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("keyup", liveSearch);
 
