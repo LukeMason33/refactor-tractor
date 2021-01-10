@@ -326,6 +326,7 @@ function showAllRecipes(recipes) {
 // CREATE AND USE PANTRY
 function findPantryInfo() {
   user.generatePantryInfoById(ingredientsData);
+  domUpdates.displayPantryInfo(user.pantry);
   // user.pantry.forEach(item => {
   //   let itemInfo = ingredientsData.find(ingredient => {
   //     return ingredient.id === item.ingredient;
@@ -341,7 +342,6 @@ function findPantryInfo() {
   //     pantryInfo.push({name: itemInfo.name, count: item.amount});
   //   }
   // });
-  domUpdates.displayPantryInfo(user.pantry);
 }
 
 // function displayPantryInfo(pantry) {
