@@ -271,7 +271,6 @@ function exitRecipe() {
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     searchRecipes(user.generateRecipeInfoByID(recipeData));
-    //REFACTOR THIS MAKE CLASS METHOD
   } else {
     searchRecipes(recipes);
   }
@@ -327,21 +326,6 @@ function showAllRecipes(recipes) {
 function findPantryInfo() {
   user.generatePantryInfoById(ingredientsData);
   domUpdates.displayPantryInfo(user.pantry);
-  // user.pantry.forEach(item => {
-  //   let itemInfo = ingredientsData.find(ingredient => {
-  //     return ingredient.id === item.ingredient;
-  //   });
-  //   let originalIngredient = pantryInfo.find(ingredient => {
-  //     if (itemInfo) {
-  //       return ingredient.name === itemInfo.name;
-  //     }
-  //   });
-  //   if (itemInfo && originalIngredient) {
-  //     originalIngredient.count += item.amount;
-  //   } else if (itemInfo) {
-  //     pantryInfo.push({name: itemInfo.name, count: item.amount});
-  //   }
-  // });
 }
 
 // function displayPantryInfo(pantry) {
