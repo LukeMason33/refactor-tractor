@@ -33,11 +33,17 @@ main {
   transition: .8s ease;
 }
 
+.card-icons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card-pot-icon,
 .card-apple-icon {
-  @include dimensions(50px, 45px);
+  @include dimensions(66px, 61px);
   cursor: pointer;
   float: right;
-  padding-bottom: 10px;
+  padding-top: 15px;
 }
 
 .card-photo-preview {

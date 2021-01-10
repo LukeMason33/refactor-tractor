@@ -2,7 +2,7 @@ let main = document.querySelector("main");
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let menuOpen = false;
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
-let tabCount = 5;
+let tabCount = 6;
 
 let domUpdates = {
 
@@ -25,10 +25,12 @@ let domUpdates = {
             <div>Click for Instructions</div>
           </div>
         </div>
-        <h4>${recipeInfo.tags[0]}</h4>
-        <img tabindex="${tabCount + 1}" src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+        <div class="card-icons">
+        <img tabindex="${tabCount + 1}" src="../images/pot-outline.png" alt="unfilled pot icon" class="card-pot-icon">
+        <img tabindex="${tabCount + 2}" src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+        </div>
       </div>`
-      tabCount += 2;
+      tabCount += 3;
     main.insertAdjacentHTML("beforeend", cardHtml);
   },
 

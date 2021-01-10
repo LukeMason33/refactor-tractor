@@ -9,6 +9,8 @@ import domUpdates from './domUpdates.js';
 import './images/apple-logo-outline.png';
 import './images/apple-logo.png';
 import './images/cookbook.png';
+import './images/full-pot.png';
+import './images/pot-outline.png';
 import './images/seasoning.png';
 import './images/search.png';
 //CLASSES
@@ -38,11 +40,7 @@ window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
-main.addEventListener("keyup", function(event){
-  if (event.keyCode === 13) {
-    addToMyRecipes();
-  }
-})
+main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("keyup", liveSearch);
@@ -140,6 +138,12 @@ function filterRecipes(filtered) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
+function pressEnterToViewInfoOrFavorite(event){
+  if (event.keyCode === 13) {
+    addToMyRecipes();
+  }
+}
+
 function addToMyRecipes(showSavedRecipes) {
   if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     domUpdates.favoriteRecipe(user, event);
