@@ -57,15 +57,15 @@ let domUpdates = {
     fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
   },
 
-  addRecipeImage(recipe) {
-    let recipeTitle = document.getElementById("recipe-title")
-    recipeTitle.style.backgroundImage = `url(${recipe.image})`;
-  },
-
   generateIngredients(recipe) {
     return recipe && recipe.ingredients.map(i => {
       return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
     }).join(", ");
+  },
+
+  addRecipeImage(recipe) {
+    let recipeTitle = document.getElementById("recipe-title")
+    recipeTitle.style.backgroundImage = `url(${recipe.image})`;
   },
 
   generateInstructions(recipe) {
@@ -78,6 +78,19 @@ let domUpdates = {
     });
     fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Instructions</h4>");
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${instructionsList}</ol>`);
+  },
+
+  generateTypeForRecipe(recipe) {
+    fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Recipe Types</h4>");
+    let types;
+    if (recipe.tags[0] === undefined) {
+      types = `<b>Sorry the type was not defined yet :( Check back later!</b>`
+    } else {
+      types = recipe.tags.map(type => {
+        return `<b>${capitalize(type)}</b>`
+      }).join(", ");
+    }
+    fullRecipeInfo.insertAdjacentHTML("beforeend", `<p>${types}</p>`);
   },
 
   compareRecipeIngredientsToPantry(recipe, user) {
