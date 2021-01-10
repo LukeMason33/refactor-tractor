@@ -22,9 +22,9 @@ let filterBtn = document.querySelector(".filter-btn");
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
+let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
-let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
 
 //GLOBAL VARIABLES
 let user;
@@ -34,6 +34,7 @@ let ingredientsData;
 let pantryInfo = [];
 let recipes = [];
 let favoriteRecipes;
+let recipesToCook;
 
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
@@ -41,8 +42,8 @@ allRecipesBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
+mealsToCookBtn.addEventListener("click", showMealsToCook);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
-showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("keyup", liveSearch);
 
 //Generate API Data on Load
@@ -159,7 +160,6 @@ function addToMyRecipes(showSavedRecipes) {
   }
 }
 
-
 function isDescendant(parent, child) {
   let node = child;
   while (node !== null) {
@@ -185,9 +185,29 @@ function filterFavorites() {
 }
 
 function showSavedRecipes() {
-  filterFavorites()
+  filterFavorites();
   domUpdates.showMyRecipesBanner();
   liveSearch();
+}
+
+// RECIPES TO COOK FUNCTIONALITY
+function filterRecipesToCook() {
+  recipesToCook = recipes.filter(recipe => {
+    return user.recipesToCook.includes(recipe.id);
+  });
+  let notToCook = recipes.filter(recipe => {
+    return !user.recipesToCook.includes(recipe.id);
+  });
+  notToCook.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "none";
+  });
+}
+
+function showMealsToCook() {
+  filterRecipesToCook();
+
+  // liveSearch();
 }
 
 // CREATE RECIPE INSTRUCTIONS

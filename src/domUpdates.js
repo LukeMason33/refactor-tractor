@@ -1,6 +1,5 @@
 let main = document.querySelector("main");
-let pantryBtn = document.querySelector(".my-pantry-btn");
-let menuOpen = false;
+// let menuOpen = false;
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let tabCount = 6;
 
@@ -129,7 +128,6 @@ let domUpdates = {
     let myRecipesBanner = document.querySelector(".my-recipes-banner")
     myRecipesBanner.style.display = "block";
     myRecipesBanner.classList.add("hidden");
-
   },
 
   showWelcomeBanner() {
@@ -142,15 +140,15 @@ let domUpdates = {
   // Ask Travis about updating css in scripts, should this be a dom thing?
 
   // SEARCH RECIPES
-  toggleMenu() {
-    let menuDropdown = document.querySelector(".drop-menu");
-    menuOpen = !menuOpen;
-    if (menuOpen) {
-      menuDropdown.style.display = "block";
-    } else {
-      menuDropdown.style.display = "none";
-    }
-  },
+  // toggleMenu() {
+  //   let menuDropdown = document.querySelector(".drop-menu");
+  //   menuOpen = !menuOpen;
+  //   if (menuOpen) {
+  //     menuDropdown.style.display = "block";
+  //   } else {
+  //     menuDropdown.style.display = "none";
+  //   }
+  // },
 
   // FAVORITE RECIPE FUNCTIONALITY
   favoriteRecipe(user, event) {
@@ -164,7 +162,7 @@ let domUpdates = {
     }
   },
 
-  // MY MEALS FUNCTIONALITY
+  // RECIPES TO COOK FUNCTIONALITY
   addOrRemoveFromRecipesToCook(user, event) {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
     if (!user.recipesToCook.includes(cardId)) {
@@ -194,6 +192,5 @@ function capitalize(words) {
   }).join(" ");
 }
 
-pantryBtn.addEventListener("click", domUpdates.toggleMenu);
 
 export default domUpdates;
