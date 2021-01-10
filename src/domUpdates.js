@@ -2,6 +2,7 @@ let main = document.querySelector("main");
 let pantryBtn = document.querySelector(".my-pantry-btn");
 let menuOpen = false;
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
+let tabCount = 5;
 
 let domUpdates = {
 
@@ -18,15 +19,16 @@ let domUpdates = {
   addCardsToDom(recipeInfo, shortRecipeName) {
     let cardHtml = `<div class="recipe-card" id=${recipeInfo.id}>
         <h3 maxlength="40">${shortRecipeName}</h3>
-        <div class="card-photo-container">
+        <div tabindex="${tabCount}" class="card-photo-container">
           <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
           <div class="text">
             <div>Click for Instructions</div>
           </div>
         </div>
         <h4>${recipeInfo.tags[0]}</h4>
-        <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+        <img tabindex="${tabCount + 1}" src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
       </div>`
+      tabCount += 2;
     main.insertAdjacentHTML("beforeend", cardHtml);
   },
 
