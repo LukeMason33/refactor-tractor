@@ -150,7 +150,7 @@ let domUpdates = {
 
   // FAVORITE RECIPE FUNCTIONALITY
   favoriteRecipe(user, event) {
-    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       user.saveRecipe(cardId);
@@ -164,7 +164,7 @@ let domUpdates = {
   displayPantryInfo(pantry) {
     pantry.forEach(ingredient => {
       let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-        <label for="${ingredient.name}">${ingredient.name}, ${ingredient.count}</label></li>`;
+        <label for="${ingredient.name}">${ingredient.name}, ${ingredient.amount}</label></li>`;
       let pantryList = document.querySelector(".pantry-list")
       pantryList.insertAdjacentHTML("beforeend", ingredientHtml);
     });

@@ -33,7 +33,7 @@ let recipeData;
 let ingredientsData;
 let pantryInfo = [];
 let recipes = [];
-let favoriteRecipes;
+// let favoriteRecipes;
 
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
@@ -56,6 +56,7 @@ function fetchAllData() {
       createCards(recipeData);
       getIngredientNamesForRecipe();
       findTags(recipeData);
+      console.log(user);
     })
 }
 
@@ -164,9 +165,9 @@ function isDescendant(parent, child) {
 }
 
 function filterFavorites() {
-  favoriteRecipes = recipes.filter(recipe => {
-    return user.favoriteRecipes.includes(recipe.id);
-  });
+  // favoriteRecipes = recipes.filter(recipe => {
+  //   return user.favoriteRecipes.includes(recipe.id);
+  // });
   let unsavedRecipes = recipes.filter(recipe => {
     return !user.favoriteRecipes.includes(recipe.id);
   });
@@ -179,7 +180,6 @@ function filterFavorites() {
 function showSavedRecipes() {
   filterFavorites()
   domUpdates.showMyRecipesBanner();
-  liveSearch();
 }
 
 // CREATE RECIPE INSTRUCTIONS
@@ -205,8 +205,7 @@ function exitRecipe() {
 // SEARCH RECIPES
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
-    searchRecipes(favoriteRecipes);
-    //REFACTOR THIS MAKE CLASS METHOD
+    searchRecipes(user.generateRecipeInfoByID(recipeData));
   } else {
     searchRecipes(recipes);
   }
@@ -250,25 +249,8 @@ function showAllRecipes(recipes) {
 
 // CREATE AND USE PANTRY
 function findPantryInfo() {
-  user.pantry.forEach(item => {
-    let itemInfo = ingredientsData.find(ingredient => {
-      return ingredient.id === item.ingredient;
-    });
-    let originalIngredient = pantryInfo.find(ingredient => {
-      if (itemInfo) {
-        return ingredient.name === itemInfo.name;
-      }
-    });
-    if (itemInfo && originalIngredient) {
-      originalIngredient.count += item.amount;
-    } else if (itemInfo) {
-      pantryInfo.push({
-        name: itemInfo.name,
-        count: item.amount
-      });
-    }
-  });
-  domUpdates.displayPantryInfo(pantryInfo.sort((a, b) => a.name.localeCompare(b.name)));
+  user.generatePantryInfoById(ingredientsData);
+  domUpdates.displayPantryInfo(user.pantry);
 }
 
 function findCheckedPantryBoxes() {
