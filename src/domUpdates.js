@@ -164,6 +164,18 @@ let domUpdates = {
     }
   },
 
+  // MY MEALS FUNCTIONALITY
+  addOrRemoveFromRecipesToCook(user, event) {
+    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    if (!user.recipesToCook.includes(cardId)) {
+      event.target.src = "../images/full-pot.png";
+      user.decideToCook(cardId);
+    } else {
+      event.target.src = "../images/pot-outline.png";
+      user.decideNotToCook(cardId);
+    }
+  },
+
   // CREATE AND USE PANTRY
   displayPantryInfo(pantry) {
     pantry.forEach(ingredient => {

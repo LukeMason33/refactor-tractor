@@ -150,6 +150,8 @@ function addToMyRecipes(showSavedRecipes) {
     filterFavorites();
   } else if (event.target.className === "card-apple-icon") {
     domUpdates.favoriteRecipe(user, event);
+  } else if (event.target.className === "card-pot-icon") {
+    domUpdates.addOrRemoveFromRecipesToCook(user, event)
   } else if (event.target.id === "exit-recipe-btn") {
     exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
