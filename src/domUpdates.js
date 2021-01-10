@@ -122,20 +122,30 @@ let domUpdates = {
   },
 
   // TOGGLE DISPLAYS
-  showMyRecipesBanner() {
+  showCorrectBanner(event) {
     let welcomeMsg = document.querySelector(".welcome-msg")
     welcomeMsg.style.display = "none";
-    let myRecipesBanner = document.querySelector(".my-recipes-banner")
-    myRecipesBanner.style.display = "block";
-    myRecipesBanner.classList.add("hidden");
+    if (event.target.className.includes("saved-recipes-btn")) {
+      let myRecipesBanner = document.querySelector(".my-recipes-banner");
+      myRecipesBanner.style.display = "block";
+      myRecipesBanner.classList.add("hidden");
+    } else if (event.target.className.includes("meals-to-cook-btn")) {
+      let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
+      myMealsToCookBanner.style.display = "block";
+      myMealsToCookBanner.classList.add("hidden");
+    }
   },
 
   showWelcomeBanner() {
-    let welcomeMsg = document.querySelector(".welcome-msg")
+    let welcomeMsg = document.querySelector(".welcome-msg");
     welcomeMsg.style.display = "flex";
-    let myRecipesBanner = document.querySelector(".my-recipes-banner")
+    let myRecipesBanner = document.querySelector(".my-recipes-banner");
     myRecipesBanner.style.display = "none";
     myRecipesBanner.classList.remove("hidden");
+    let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
+
+    myMealsToCookBanner.style.display ="none";
+    myMealsToCookBanner.classList.remove("hidden");
   },
   // Ask Travis about updating css in scripts, should this be a dom thing?
 

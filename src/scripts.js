@@ -19,10 +19,10 @@ import Recipe from './recipe';
 //QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let filterBtn = document.querySelector(".filter-btn");
-let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
+let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 
@@ -186,7 +186,7 @@ function filterFavorites() {
 
 function showSavedRecipes() {
   filterFavorites();
-  domUpdates.showMyRecipesBanner();
+  domUpdates.showCorrectBanner(event);
   liveSearch();
 }
 
@@ -206,7 +206,7 @@ function filterRecipesToCook() {
 
 function showMealsToCook() {
   filterRecipesToCook();
-
+  domUpdates.showCorrectBanner(event);
   // liveSearch();
 }
 
