@@ -1,0 +1,141 @@
+/* RECIPE CARD SECTION */
+main {
+  grid-area: main;
+  @include flex(row);
+  align-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.recipe-card {
+  @include dimensions(270px, 250px);
+  background-color: $white;
+  border: 2px solid $bright-green;
+  border-radius: 7px;
+  cursor: pointer;
+  margin: 20px;
+  padding: 15px;
+}
+
+.recipe-card:hover .card-photo-preview {
+  opacity: 50%;
+  transition: .8s ease;
+}
+
+.recipe-card:hover .text {
+  font-size: 20px;
+  opacity: 100%;
+  transition: .5s ease;
+  width: 100%;
+}
+
+.recipe-card:hover h3 {
+  text-shadow: 0px 0px 4px $bright-green;
+  transition: .8s ease;
+}
+
+.card-apple-icon {
+  @include dimensions(50px, 45px);
+  cursor: pointer;
+  float: right;
+  padding-bottom: 10px;
+}
+
+.card-photo-preview {
+  @include dimensions(130px, 100%);
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: .8s ease;
+}
+
+.card-photo-container {
+  @include flex(row);
+  align-items: center;
+  height: 130px;
+  position: relative;
+}
+
+.text {
+  background: $dark-green;
+  color: $white;
+  font-weight: 700;
+  font-size: 0px;
+  opacity: 0%;
+  position: absolute;
+  text-align: center;
+  width: 0%;
+  transition: .5s ease;
+}
+
+/* RECIPE INSTRUCTIONS */
+.recipe-instructions {
+  @include dimensions(70%, 70%);
+  background: $white;
+  border: 3px solid $bright-green;
+  border-radius: 10px;
+  box-shadow: 1px 1px 115px black;
+  display: none;
+  margin: 0;
+  overflow-x: scroll;
+  padding: 1%;
+  position: fixed;
+  right: 15%;
+  top: 15%;
+  z-index: 1000;
+
+  h4 {
+    background: $white;
+    color: $dark-green;
+
+    p {
+      margin-left: 2%;
+
+      ol {
+        margin-right: 2%;
+      }
+    }
+  }
+}
+
+#exit-recipe-btn {
+  background: $white;
+  border: 2px double $dark-green;
+  border-radius: 5px;
+  color: $dark-green;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 700;
+  margin: -4% -3% 2% -1%;
+  position: fixed;
+  transition: .3s ease;
+
+  &:hover {
+    background: $bright-green;
+    transition: .3s ease;
+  }
+}
+
+#recipe-title {
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 7px 7px 0px 0px;
+  color: $white;
+  font-size: 30px;
+  margin: 0;
+  padding: 5%;
+  text-align: center;
+  text-shadow: 0px 0px 6px black;
+}
+
+#overlay {
+  @include dimensions(100%, 100%);
+  filter: alpha(opacity=50);
+  background-color: $blue;
+  left: 0;
+  opacity: 0.5;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
