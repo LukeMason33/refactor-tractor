@@ -53,13 +53,14 @@ h4 {
 /* FILTER SIDEBAR */
 aside {
   background-color: $white;
-  @include flex(row);
-  height: auto;
-  text-align: center;
+  @include flex(column);
+  justify-content: flex-start;
 }
 
 .wrap {
-  @include dimensions(100vh, 200px);
+  @include flex(column);
+  text-align: center;
+  @include dimensions(auto, 200px);
   background-color: $white;
   padding: 10px;
   position: relative;
@@ -69,7 +70,7 @@ ul {
   list-style-type: none;
   text-align: left;
   padding-left: 35px;
-  
+
   li {
     margin: 2px;
   }
@@ -108,11 +109,11 @@ ul {
   position: absolute;
   text-align: center;
   z-index: 3;
-  
+
   h2 {
     color: $dark-green;
     margin: 0px;
-  
+
   .pantry-list {
     padding-left: 15px;
     text-align: left;
