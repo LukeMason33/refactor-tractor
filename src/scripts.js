@@ -31,7 +31,7 @@ let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
 let tagList = document.querySelector(".tag-list");
-let typeDropDown = document.querySelector(".type-drop-down");
+let tagDropDown = document.querySelector(".tag-drop-down");
 
 //GLOBAL VARIABLES
 let user;
@@ -52,7 +52,7 @@ mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchForm.addEventListener("keyup", liveSearch);
-typeDropDown.addEventListener("click", toggleDropDown);
+tagDropDown.addEventListener("click", toggleDropDown);
 
 //Generate API Data on Load
 function fetchAllData() {
@@ -323,16 +323,17 @@ function findRecipesWithCheckedIngredients(selected) {
 // TOGGLE DROP DOWN MENU
 function toggleDropDown() {
   if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
-    pantryList.classList.remove("hidden");
-    pantryDropDown.src ="../images/down-arrow.png";
+    toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "remove", "down")
   } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")){
-    pantryList.classList.add("hidden");
-    pantryDropDown.src="../images/right-arrow.png";
-  } else if (event.target.className.includes("type-drop-down") && tagList.className.includes("hidden")) {
-    tagList.classList.remove("hidden");
-    typeDropDown.src="../images/down-arrow.png";
-  } else if (event.target.className.includes("type-drop-down") && !tagList.className.includes("hidden")){
-    tagList.classList.add("hidden");
-    typeDropDown.src="../images/right-arrow.png";
+    toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "add", "right")
+  } else if (event.target.className.includes("tag-drop-down") && tagList.className.includes("hidden")) {
+    toggleHiddenAndArrowDirection(tagList, tagDropDown, "remove", "down")
+  } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")){
+    toggleHiddenAndArrowDirection(tagList, tagDropDown, "add", "right")
   }
+}
+
+function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
+  list.classList[addOrRemove]("hidden");
+  dropDown.src =`../images/${direction}-arrow.png`;
 }

@@ -168,11 +168,11 @@ let domUpdates = {
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
       event.target.alt ="filled apple icon";
-      user.saveRecipe(cardId);
+      user.saveRecipe(cardId, "favoriteRecipes");
     } else {
       event.target.src = "../images/apple-logo-outline.png";
       event.target.alt ="unfilled apple icon";
-      user.removeRecipe(cardId);
+      user.removeRecipe(cardId, "favoriteRecipes");
     }
   },
 
