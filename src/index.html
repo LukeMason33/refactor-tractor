@@ -12,25 +12,35 @@
     <header>
       <h1><span>fresh</span>Picks<img src="../images/apple-logo.png" alt="apple icon" class="header-apple-icon"></h1>
       <form id="search" role="search">
-        <input id="search-input" type="text" autocomplete="off" placeholder="Search Recipes...  "></input>
+        <input tabindex="1" id="search-input" type="text" autocomplete="off" placeholder="Search Recipes...  "></input>
         <label for="search-input" class="search-label">Search</label>
-        <button class="nav-btn search-btn" type="button" name="button"><img src="../images/search.png" alt="search button"></button>
+        <div class="nav-btn search-btn"><img src="../images/search.png" alt="search button"></div>
       </form>
-      <button class="nav-btn saved-recipes-btn" type="button" name="button"><img src="../images/cookbook.png" alt="search button">My Recipes</button>
-      <button class="nav-btn my-pantry-btn" type="button" name="button"><img src="../images/seasoning.png" alt="search button">My Pantry</button>
+      <button tabindex="2" class="nav-btn saved-recipes-btn together" type="button" name="button"><img class="together" src="../images/cookbook.png" alt="my recipes button">My Recipes</button>
+      <button tabindex="3" class="nav-btn meals-to-cook-btn connect" type="button" name="button"><img class="connect" src="../images/seasoning.png" alt="my meals to cook button">Meals To Cook</button>
     </header>
     <section class="banner-image">
       <div class="my-recipes-banner">
         <h1>My Recipes</h1>
+        <button class="back-to-main-btn square-btns">Show All Recipes</button>
+      </div>
+      <div class="my-meals-to-cook-banner">
+        <h1>My Meals To Cook</h1>
         <button class="show-all-btn square-btns">Show All Recipes</button>
       </div>
     </section>
-    <div class="drop-menu">
+    <!-- <div class="drop-menu">
       <h2>My Pantry</h2>
       <button class="show-pantry-recipes-btn square-btns">What Can I Make?</button>
       <ul class="pantry-list"></ul>
-    </div>
+    </div> -->
     <aside>
+      <div class="wrap">
+        <h2>My Pantry</h2>
+        <ul class="pantry-tag-list">
+        </ul>
+        <button class="filter-btn square-btns">Show My Pantry</button>
+      </div>
       <div class="wrap">
         <h2>Recipe Type</h2>
         <ul class="tag-list">

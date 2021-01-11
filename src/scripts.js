@@ -9,6 +9,8 @@ import domUpdates from './domUpdates.js';
 import './images/apple-logo-outline.png';
 import './images/apple-logo.png';
 import './images/cookbook.png';
+import './images/full-pot.png';
+import './images/pot-outline.png';
 import './images/seasoning.png';
 import './images/search.png';
 //CLASSES
@@ -16,15 +18,14 @@ import User from './user';
 import Recipe from './recipe';
 //QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
+let backToMainBtn = document.querySelector(".back-to-main-btn");
 let filterBtn = document.querySelector(".filter-btn");
-let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
-let searchBtn = document.querySelector(".search-btn");
+let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
+let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
-let showPantryRecipes = document.querySelector(".show-pantry-recipes-btn");
-// let tagList = document.querySelector(".tag-list");
 
 //GLOBAL VARIABLES
 let user;
@@ -33,16 +34,17 @@ let recipeData;
 let ingredientsData;
 let pantryInfo = [];
 let recipes = [];
-// let favoriteRecipes;
+let recipesToCook;
 
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
+backToMainBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
+main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
+mealsToCookBtn.addEventListener("click", showMealsToCook);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
-searchBtn.addEventListener("click", liveSearch);
-showPantryRecipes.addEventListener("click", findCheckedPantryBoxes);
 searchForm.addEventListener("keyup", liveSearch);
 
 //Generate API Data on Load
@@ -139,19 +141,29 @@ function filterRecipes(filtered) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
+function pressEnterToViewInfoOrFavorite(event){
+  if (event.keyCode === 13) {
+    addToMyRecipes();
+  }
+}
+
 function addToMyRecipes(showSavedRecipes) {
   if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     domUpdates.favoriteRecipe(user, event);
     filterFavorites();
   } else if (event.target.className === "card-apple-icon") {
     domUpdates.favoriteRecipe(user, event);
+  } else if (event.target.className === "card-pot-icon" && document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+    domUpdates.addOrRemoveFromRecipesToCook(user, event);
+    filterRecipesToCook();
+  } else if (event.target.className === "card-pot-icon") {
+    domUpdates.addOrRemoveFromRecipesToCook(user, event);
   } else if (event.target.id === "exit-recipe-btn") {
     exitRecipe();
   } else if (isDescendant(event.target.closest(".recipe-card"), event.target)) {
     openRecipeInfo(event);
   }
 }
-
 
 function isDescendant(parent, child) {
   let node = child;
@@ -175,8 +187,29 @@ function filterFavorites() {
 }
 
 function showSavedRecipes() {
-  filterFavorites()
-  domUpdates.showMyRecipesBanner();
+  filterFavorites();
+  domUpdates.showCorrectBanner(event);
+  liveSearch();
+}
+
+// RECIPES TO COOK FUNCTIONALITY
+function filterRecipesToCook() {
+  recipesToCook = recipes.filter(recipe => {
+    return user.recipesToCook.includes(recipe.id);
+  });
+  let notToCook = recipes.filter(recipe => {
+    return !user.recipesToCook.includes(recipe.id);
+  });
+  notToCook.forEach(recipe => {
+    let domRecipe = document.getElementById(`${recipe.id}`);
+    domRecipe.style.display = "none";
+  });
+}
+
+function showMealsToCook() {
+  filterRecipesToCook();
+  domUpdates.showCorrectBanner(event);
+  liveSearch();
 }
 
 // CREATE RECIPE INSTRUCTIONS
@@ -207,6 +240,9 @@ function exitRecipe() {
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     searchRecipes(user.generateRecipeInfoByID(recipeData));
+  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")){
+    searchRecipes(recipesToCook);
+
   } else {
     searchRecipes(recipes);
   }
