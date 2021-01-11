@@ -34,8 +34,7 @@ let domUpdates = {
   },
 
   // FILTER BY RECIPE TAGS
-  listRecipeTagsOnDom(allTags) {
-    let tagList = document.querySelector(".tag-list");
+  listRecipeTagsOnDom(allTags, tagList) {
     allTags.forEach(tag => {
       let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
       <label for="${tag}">${capitalize(tag)}</label></li>`;

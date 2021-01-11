@@ -30,6 +30,7 @@ let pantryList = document.querySelector(".pantry-tag-list")
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
+let tagList = document.querySelector(".tag-list");
 let typeDropDown = document.querySelector(".type-drop-down");
 
 //GLOBAL VARIABLES
@@ -51,6 +52,7 @@ mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchForm.addEventListener("keyup", liveSearch);
+typeDropDown.addEventListener("click", toggleDropDown);
 
 //Generate API Data on Load
 function fetchAllData() {
@@ -107,7 +109,7 @@ function findTags(recipeData) {
     });
   });
   tags.sort();
-  domUpdates.listRecipeTagsOnDom(tags);
+  domUpdates.listRecipeTagsOnDom(tags, tagList);
 }
 
 function findCheckedBoxes() {
@@ -325,6 +327,12 @@ function toggleDropDown() {
     pantryDropDown.src ="../images/down-arrow.png";
   } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")){
     pantryList.classList.add("hidden");
-    pantryDropDown.src ="../images/right-arrow.png";
+    pantryDropDown.src="../images/right-arrow.png";
+  } else if (event.target.className.includes("type-drop-down") && tagList.className.includes("hidden")) {
+    tagList.classList.remove("hidden");
+    typeDropDown.src="../images/down-arrow.png";
+  } else if (event.target.className.includes("type-drop-down") && !tagList.className.includes("hidden")){
+    tagList.classList.add("hidden");
+    typeDropDown.src="../images/right-arrow.png";
   }
 }
