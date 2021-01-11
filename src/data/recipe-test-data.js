@@ -4,7 +4,6 @@ const recipeData =   {
     "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
     "ingredients": [
       {
-        "name": "all purpose flour",
         "id": 20081,
         "quantity": {
           "amount": 1.5,
@@ -12,7 +11,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "baking soda",
         "id": 18372,
         "quantity": {
           "amount": 0.5,
@@ -20,7 +18,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "egg",
         "id": 1123,
         "quantity": {
           "amount": 1,
@@ -28,7 +25,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "granulated sugar",
         "id": 19335,
         "quantity": {
           "amount": 0.5,
@@ -36,7 +32,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "instant vanilla pudding mix",
         "id": 19206,
         "quantity": {
           "amount": 3,
@@ -44,7 +39,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "light brown sugar",
         "id": 19334,
         "quantity": {
           "amount": 0.5,
@@ -52,7 +46,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "salt",
         "id": 2047,
         "quantity": {
           "amount": 0.5,
@@ -60,7 +53,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "sea salt",
         "id": 1012047,
         "quantity": {
           "amount": 24,
@@ -68,7 +60,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "semisweet chocolate chips",
         "id": 10019903,
         "quantity": {
           "amount": 2,
@@ -76,7 +67,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "unsalted butter",
         "id": 1145,
         "quantity": {
           "amount": 0.5,
@@ -84,7 +74,6 @@ const recipeData =   {
         }
       },
       {
-        "name": "vanilla extract",
         "id": 2050,
         "quantity": {
           "amount": 0.5,
