@@ -9,8 +9,10 @@ import domUpdates from './domUpdates.js';
 import './images/apple-logo-outline.png';
 import './images/apple-logo.png';
 import './images/cookbook.png';
+import './images/down-arrow.png';
 import './images/full-pot.png';
 import './images/pot-outline.png';
+import './images/right-arrow.png';
 import './images/seasoning.png';
 import './images/search.png';
 //CLASSES

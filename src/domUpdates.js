@@ -187,7 +187,7 @@ let domUpdates = {
     } else {
       event.target.src = "../images/pot-outline.png";
       event.target.alt ="unfilled pot icon";
-      user.removeRecipe(cardId, "");
+      user.removeRecipe(cardId, "recipesToCook");
     }
   },
 

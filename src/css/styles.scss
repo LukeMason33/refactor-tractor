@@ -76,6 +76,11 @@ ul {
   }
 }
 
+.right-arrow {
+  max-height: 0.8em;
+  max-width: 1em;
+}
+
 /* BUTTONS */
 .square-btns {
   @include dimensions(40px, 200px);
@@ -119,4 +124,8 @@ ul {
     text-align: left;
   }
   }
+}
+
+.hidden {
+  display: none;
 }
