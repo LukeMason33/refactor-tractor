@@ -8,7 +8,7 @@ describe('Recipe', function() {
   let recipe;
 
   beforeEach(function() {
-    recipe = new Recipe(recipeData);
+    recipe = new Recipe(recipeData[0]);
   })
 
   it('is a function', function() {

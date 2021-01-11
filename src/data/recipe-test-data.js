@@ -1,4 +1,4 @@
-const recipeData =   {
+const recipeData = [ {
     "name": "Loaded Chocolate Chip Pudding Cookie Cups",
     "id": 595736,
     "image": "https://spoonacular.com/recipeImages/595736-556x370.jpg",
@@ -116,5 +116,6 @@ const recipeData =   {
       "hor d'oeuvre"
     ]
   }
+];
 
   export default recipeData;

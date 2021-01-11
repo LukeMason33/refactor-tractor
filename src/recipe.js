@@ -14,7 +14,6 @@ class Recipe {
       dataSet.forEach(data => {
         if (ingredient.id === data.id) {
           totalPrice += data.estimatedCostInCents * ingredient.quantity.amount;
-          console.log(totalPrice);
         }
       })
     })

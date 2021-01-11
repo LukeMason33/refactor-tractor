@@ -231,9 +231,9 @@ function exitRecipe() {
 // SEARCH RECIPES
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
-    searchRecipes(user.generateRecipeInfoByID(recipeData, "favoriteRecipes"));
+    searchRecipes(user.generateRecipeInfoById(recipeData, "favoriteRecipes"));
   } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")){
-    searchRecipes(user.generateRecipeInfoByID(recipeData, "recipesToCook"));
+    searchRecipes(user.generateRecipeInfoById(recipeData, "recipesToCook"));
 
   } else {
     searchRecipes(recipes);
