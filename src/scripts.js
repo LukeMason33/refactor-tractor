@@ -221,9 +221,8 @@ function openRecipeInfo(event) {
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
-  domUpdates.addRecipeImage(recipe);
-  domUpdates.generateInstructions(recipe);
   domUpdates.generateTypeForRecipe(recipe);
+  domUpdates.generateInstructions(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
 }
