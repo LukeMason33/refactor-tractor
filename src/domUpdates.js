@@ -52,23 +52,28 @@ let domUpdates = {
 
   // CREATE RECIPE INSTRUCTIONS
   generateRecipeTitle(recipe, ingredients) {
+    let ingredientsList = '';
+    let recipeIngredients = ingredients.split(',')
+    recipeIngredients.forEach(ing => {
+      ingredientsList += `<li>${ing}</li>`
+    })
     let recipeTitle = `
       <button id="exit-recipe-btn">X</button>
       <h3 id="recipe-title">${recipe.name}</h3>
-      <h4>Ingredients</h4>
-      <p>${ingredients}</p>`
-    fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
+      <div class="recipe-display">
+        <img class="recipe-img" src=${recipe.image} alt=${recipe.name}>
+        <div class="ing-list">
+          <h4>Ingredients</h4>
+          <ul>${ingredientsList}</ul>
+        </div>
+      </div>`
+    fullRecipeInfo.insertAdjacentHTML("afterbegin", recipeTitle);
   },
 
   generateIngredients(recipe) {
-    return recipe && recipe.ingredients.map(i => {
+    return recipe.ingredients.map(i => {
       return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
     }).join(", ");
-  },
-
-  addRecipeImage(recipe) {
-    let recipeTitle = document.getElementById("recipe-title")
-    recipeTitle.style.backgroundImage = `url(${recipe.image})`;
   },
 
   generateInstructions(recipe) {
@@ -84,16 +89,21 @@ let domUpdates = {
   },
 
   generateTypeForRecipe(recipe) {
-    fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Recipe Types</h4>");
-    let types;
+    // fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Recipe Types</h4>");
+    let types = '';
+    
     if (recipe.tags[0] === undefined) {
-      types = `<b>Sorry the type was not defined yet :( Check back later!</b>`
+      types = `<p><b>Sorry the type was not defined yet :( Check back later!</b></p>`
     } else {
-      types = recipe.tags.map(type => {
-        return `<b>${capitalize(type)}</b>`
-      }).join(", ");
+      // types = recipe.tags.map(type => {
+      //   return `<b>${capitalize(type)}</b>`
+      // }).join(", ");
+      // let typeList = ''
+      recipe.tags.forEach(type => {
+        types += `<h4 class="type-pad">${type}</h4>`
+      })
     }
-    fullRecipeInfo.insertAdjacentHTML("beforeend", `<p>${types}</p>`);
+    fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="card-tag-list">${types}</div>`);
   },
 
   compareRecipeIngredientsToPantry(recipe, user) {
