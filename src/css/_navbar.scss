@@ -100,7 +100,7 @@ span {
   }
 }
 
-.my-pantry-btn {
+.meals-to-cook-btn {
   border-left: 3px solid $bright-green;
 }
 
@@ -113,6 +113,7 @@ span {
   width: 100%;
 }
 
+.my-meals-to-cook-banner,
 .my-recipes-banner,
 .welcome-msg {
   text-align: center;
@@ -126,8 +127,8 @@ span {
   }
 }
 
+.my-meals-to-cook-banner,
 .my-recipes-banner {
   display: none;
   margin-top: 25px;
 }
-

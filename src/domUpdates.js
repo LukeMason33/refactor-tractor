@@ -1,7 +1,7 @@
 let main = document.querySelector("main");
-let pantryBtn = document.querySelector(".my-pantry-btn");
-let menuOpen = false;
+// let menuOpen = false;
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
+let tabCount = 6;
 
 let domUpdates = {
 
@@ -18,15 +18,18 @@ let domUpdates = {
   addCardsToDom(recipeInfo, shortRecipeName) {
     let cardHtml = `<div class="recipe-card" id=${recipeInfo.id}>
         <h3 maxlength="40">${shortRecipeName}</h3>
-        <div class="card-photo-container">
+        <div tabindex="${tabCount}" class="card-photo-container">
           <img src=${recipeInfo.image} class="card-photo-preview" alt="${recipeInfo.name} recipe" title="${recipeInfo.name} recipe">
           <div class="text">
             <div>Click for Instructions</div>
           </div>
         </div>
-        <h4>${recipeInfo.tags[0]}</h4>
-        <img src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+        <div class="card-icons">
+        <img tabindex="${tabCount + 1}" src="../images/pot-outline.png" alt="unfilled pot icon" class="card-pot-icon">
+        <img tabindex="${tabCount + 2}" src="../images/apple-logo-outline.png" alt="unfilled apple icon" class="card-apple-icon">
+        </div>
       </div>`
+    tabCount += 3;
     main.insertAdjacentHTML("beforeend", cardHtml);
   },
 
@@ -119,34 +122,46 @@ let domUpdates = {
   },
 
   // TOGGLE DISPLAYS
-  showMyRecipesBanner() {
-    let welcomeMsg = document.querySelector(".welcome-msg")
+  showCorrectBanner(event) {
+    let welcomeMsg = document.querySelector(".welcome-msg");
+    let myRecipesBanner = document.querySelector(".my-recipes-banner");
+    let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
     welcomeMsg.style.display = "none";
-    let myRecipesBanner = document.querySelector(".my-recipes-banner")
-    myRecipesBanner.style.display = "block";
-    myRecipesBanner.classList.add("hidden");
-
+    if (event.target.className.includes("together")) {
+      myRecipesBanner.style.display = "block";
+      myRecipesBanner.classList.add("hidden");
+      myMealsToCookBanner.style.display = "none";
+      myMealsToCookBanner.classList.remove("hidden");
+    } else if (event.target.className.includes("connect")) {
+      myMealsToCookBanner.style.display = "block";
+      myMealsToCookBanner.classList.add("hidden");
+      myRecipesBanner.style.display = "none";
+      myRecipesBanner.classList.remove("hidden");
+    }
   },
 
   showWelcomeBanner() {
-    let welcomeMsg = document.querySelector(".welcome-msg")
+    let welcomeMsg = document.querySelector(".welcome-msg");
     welcomeMsg.style.display = "flex";
-    let myRecipesBanner = document.querySelector(".my-recipes-banner")
+    let myRecipesBanner = document.querySelector(".my-recipes-banner");
     myRecipesBanner.style.display = "none";
     myRecipesBanner.classList.remove("hidden");
+    let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
+    myMealsToCookBanner.style.display = "none";
+    myMealsToCookBanner.classList.remove("hidden");
   },
   // Ask Travis about updating css in scripts, should this be a dom thing?
 
   // SEARCH RECIPES
-  toggleMenu() {
-    let menuDropdown = document.querySelector(".drop-menu");
-    menuOpen = !menuOpen;
-    if (menuOpen) {
-      menuDropdown.style.display = "block";
-    } else {
-      menuDropdown.style.display = "none";
-    }
-  },
+  // toggleMenu() {
+  //   let menuDropdown = document.querySelector(".drop-menu");
+  //   menuOpen = !menuOpen;
+  //   if (menuOpen) {
+  //     menuDropdown.style.display = "block";
+  //   } else {
+  //     menuDropdown.style.display = "none";
+  //   }
+  // },
 
   // FAVORITE RECIPE FUNCTIONALITY
   favoriteRecipe(user, event) {
@@ -160,12 +175,24 @@ let domUpdates = {
     }
   },
 
+  // RECIPES TO COOK FUNCTIONALITY
+  addOrRemoveFromRecipesToCook(user, event) {
+    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    if (!user.recipesToCook.includes(cardId)) {
+      event.target.src = "../images/full-pot.png";
+      user.decideToCook(cardId);
+    } else {
+      event.target.src = "../images/pot-outline.png";
+      user.decideNotToCook(cardId);
+    }
+  },
+
   // CREATE AND USE PANTRY
   displayPantryInfo(pantry) {
     pantry.forEach(ingredient => {
       let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-        <label for="${ingredient.name}">${ingredient.name}, ${ingredient.amount}</label></li>`;
-      let pantryList = document.querySelector(".pantry-list")
+        <label for="${ingredient.name}">${capitalize(ingredient.name)}, ${ingredient.amount}</label></li>`;
+      let pantryList = document.querySelector(".pantry-tag-list")
       pantryList.insertAdjacentHTML("beforeend", ingredientHtml);
     });
   },
@@ -178,6 +205,5 @@ function capitalize(words) {
   }).join(" ");
 }
 
-pantryBtn.addEventListener("click", domUpdates.toggleMenu);
 
 export default domUpdates;
