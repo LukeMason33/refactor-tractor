@@ -168,10 +168,10 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
-      user.saveRecipe(cardId);
+      user.saveRecipe(cardId, "favoriteRecipes");
     } else {
       event.target.src = "../images/apple-logo-outline.png";
-      user.removeRecipe(cardId);
+      user.removeRecipe(cardId, "favoriteRecipes");
     }
   },
 
@@ -180,10 +180,10 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
     if (!user.recipesToCook.includes(cardId)) {
       event.target.src = "../images/full-pot.png";
-      user.decideToCook(cardId);
+      user.saveRecipe(cardId, "recipesToCook");
     } else {
       event.target.src = "../images/pot-outline.png";
-      user.decideNotToCook(cardId);
+      user.removeRecipe(cardId, "recipesToCook");
     }
   },
 

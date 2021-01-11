@@ -34,7 +34,6 @@ let recipeData;
 let ingredientsData;
 let pantryInfo = [];
 let recipes = [];
-let recipesToCook;
 
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
@@ -58,7 +57,6 @@ function fetchAllData() {
       createCards(recipeData);
       getIngredientNamesForRecipe();
       findTags(recipeData);
-      console.log(user);
     })
 }
 
@@ -177,9 +175,6 @@ function isDescendant(parent, child) {
 }
 
 function filterFavorites() {
-  // favoriteRecipes = recipes.filter(recipe => {
-  //   return user.favoriteRecipes.includes(recipe.id);
-  // });
   let unsavedRecipes = recipes.filter(recipe => {
     return !user.favoriteRecipes.includes(recipe.id);
   });
@@ -197,9 +192,6 @@ function showSavedRecipes() {
 
 // RECIPES TO COOK FUNCTIONALITY
 function filterRecipesToCook() {
-  recipesToCook = recipes.filter(recipe => {
-    return user.recipesToCook.includes(recipe.id);
-  });
   let notToCook = recipes.filter(recipe => {
     return !user.recipesToCook.includes(recipe.id);
   });
@@ -226,6 +218,7 @@ function openRecipeInfo(event) {
   domUpdates.generateTypeForRecipe(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
+  recipe = new Recipe(recipe);
 }
 
 function exitRecipe() {
@@ -238,9 +231,9 @@ function exitRecipe() {
 // SEARCH RECIPES
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
-    searchRecipes(user.generateRecipeInfoByID(recipeData));
+    searchRecipes(user.generateRecipeInfoByID(recipeData, "favoriteRecipes"));
   } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")){
-    searchRecipes(recipesToCook);
+    searchRecipes(user.generateRecipeInfoByID(recipeData, "recipesToCook"));
 
   } else {
     searchRecipes(recipes);

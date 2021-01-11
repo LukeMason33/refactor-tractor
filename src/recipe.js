@@ -7,11 +7,19 @@ class Recipe {
     this.ingredients = recipe.ingredients;
   }
 
-  calculateIngredientsCost() {
-    // return this.ingredients.map(i => {
-    //   ingredientData.find(ingredient => ingredient === i);
-    // });
+  calculateIngredientsCost(dataSet) {
+    let totalPrice = 0
+    this.ingredients.forEach(ingredient => {
+      dataSet.forEach(data => {
+        if (ingredient.id === data.id) {
+          totalPrice += data.estimatedCostInCents * ingredient.quantity.amount;
+          console.log(totalPrice);
+        }
+      })
+    })
+    return Number((totalPrice / 100).toFixed(2));
   }
+
 
   generateIngredientsNameById(dataSet) {
     this.ingredients.forEach(ingredient => {
