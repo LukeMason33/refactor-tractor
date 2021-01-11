@@ -35,9 +35,9 @@ class User {
   }
 
 
-  generateRecipeInfoByID(dataSet) {
+  generateRecipeInfoByID(dataSet, recipeSection) {
     let recipeInfo = [];
-    this.favoriteRecipes.forEach(recipe => {
+    this[recipeSection].forEach(recipe => {
       dataSet.forEach(data => {
         if (recipe === data.id) {
           recipeInfo.push(data);
