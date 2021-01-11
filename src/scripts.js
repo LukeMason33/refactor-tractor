@@ -25,9 +25,12 @@ let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
+let pantryDropDown = document.querySelector(".pantry-drop-down");
+let pantryList = document.querySelector(".pantry-tag-list")
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
+let typeDropDown = document.querySelector(".type-drop-down");
 
 //GLOBAL VARIABLES
 let user;
@@ -45,6 +48,7 @@ filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
 mealsToCookBtn.addEventListener("click", showMealsToCook);
+pantryDropDown.addEventListener("click", toggleDropDown);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchForm.addEventListener("keyup", liveSearch);
 
@@ -141,7 +145,7 @@ function filterRecipes(filtered) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
-function pressEnterToViewInfoOrFavorite(event){
+function pressEnterToViewInfoOrFavorite(event) {
   if (event.keyCode === 13) {
     addToMyRecipes();
   }
@@ -234,7 +238,7 @@ function exitRecipe() {
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     searchRecipes(user.generateRecipeInfoByID(recipeData, "favoriteRecipes"));
-  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")){
+  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
     searchRecipes(user.generateRecipeInfoByID(recipeData, "recipesToCook"));
 
   } else {
@@ -311,4 +315,16 @@ function findRecipesWithCheckedIngredients(selected) {
       domRecipe.style.display = "none";
     }
   })
+}
+
+
+// TOGGLE DROP DOWN MENU
+function toggleDropDown() {
+  if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
+    pantryList.classList.remove("hidden");
+    pantryDropDown.src ="../images/down-arrow.png";
+  } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")){
+    pantryList.classList.add("hidden");
+    pantryDropDown.src ="../images/right-arrow.png";
+  }
 }
