@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 
 import User from '../src/user';
-import users from '../src/data/users-data';
+import usersData from '../src/data/users-test-data';
 
 describe('User', function() {
   let user;
@@ -9,8 +9,7 @@ describe('User', function() {
   let recipe;
 
   beforeEach(function() {
-    userInfo = users[0];
-    user = new User(userInfo)
+    user = new User(usersData)
 
     recipe = {name: 'Chicken Parm', type: ['italian', 'dinner']};
   });

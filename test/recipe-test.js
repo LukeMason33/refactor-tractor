@@ -1,15 +1,15 @@
 import { expect } from 'chai';
 
 import Recipe from '../src/recipe';
-import recipeData from '../src/data/recipe-data';
+import recipeData from '../src/data/recipe-test-data';
+import ingredientsData from '../src/data/ingredient-test-data';
 
 describe('Recipe', function() {
   let recipe;
   let recipeInfo;
 
   beforeEach(function() {
-    recipeInfo = recipeData[0];
-    recipe = new Recipe(recipeInfo);
+    recipe = new Recipe(recipeData);
   })
 
   it('is a function', function() {
@@ -44,7 +44,7 @@ describe('Recipe', function() {
     expect(recipe.ingredients[0]).to.deep.eq(ingredient);
   });
 
-  it('should calculate the total cost of all of the ingredients', function() {
-    expect(recipe.calculateIngredientsCost()).to.eq();
+  it('should calculate the total cost of all of the ingredients in US dollars', function() {
+    expect(recipe.calculateIngredientsCost(ingredientsData)).to.eq(177.76);
   });
 });
