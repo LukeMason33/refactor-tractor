@@ -146,6 +146,7 @@ ul {
       "header"
       "image"
       "aside"
+      "aside"
       "main";
     height: 100vh;
     margin: 0;
@@ -156,19 +157,23 @@ ul {
   aside {
     background-color: $white;
     @include flex(column);
+    @include dimensions(auto, auto);
     align-items: center;
-    // min-height: 50%;
     width: 100vw;
     min-height: 25vh;
-
+    // position: static;
+    // overflow-y: scroll;
+    // overflow-x: hidden;
+    display: table;
   }
 
   .wrap {
+    display: table-row;
     @include flex(column);
-    @include dimensions(auto, 200px);
+    // @include dimensions(auto, auto);
     background-color: $white;
     padding: 0;
-    position: relative;
+    position: sticky;
     width: 100vw;
   }
 
@@ -191,14 +196,6 @@ ul {
     list-style-type: none;
     padding: 1%
   }
-
-  // li {
-  
-  //   }
-
-  // li::marker {
-  //   padding: 0%;
-  // }
 }
 
 @media screen and (max-width: 750px) {
@@ -216,28 +213,26 @@ ul {
     width: 85%;
   }
 
-.nav-btn {
-  @include flex(column);
-  align-items: center;
-  border: 2pt pink solid;
-  background: $blue no-repeat;
-  // border: none;
-  cursor: pointer;
-  font-size: 0px;
-  font-weight: 700;
-  margin: 1% 0%;
-  outline: none;
-  overflow: hidden;
-  text-align: center;
-  transition: .4s ease;
-  width: 15%;
+// /* RECIPE INSTRUCTIONS */
 
-  &:hover {
-    color: $bright-green;
-    font-size: 14px;
-    text-shadow: 0px 2px 4px black;
-    transition: .4s ease;
+.recipe-display {
+  @include flex(column);
+  justify-content: space-evenly;
+  align-items: center;
+  padding-bottom: 5%;
+
+  h4 {
+    align-self: center;
+  }
 }
+
+.ing-list {
+  @include flex(column);
+  align-items: flex-start;
+}
+
+#exit-recipe-btn {
+  margin: -6% -3% 2% -5%;
 }
 }
 
