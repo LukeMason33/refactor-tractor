@@ -154,12 +154,12 @@ function pressEnterToViewInfoOrFavorite(event) {
 }
 
 function addToMyRecipes() {
-  if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
+  if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("shown")) {
     domUpdates.favoriteRecipe(user, event);
     filterFavorites();
   } else if (event.target.className === "card-apple-icon") {
     domUpdates.favoriteRecipe(user, event);
-  } else if (event.target.className === "card-pot-icon" && document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+  } else if (event.target.className === "card-pot-icon" && document.querySelector(".my-meals-to-cook-banner").classList.contains("shown")) {
     domUpdates.addOrRemoveFromRecipesToCook(user, event);
     filterRecipesToCook();
   } else if (event.target.className === "card-pot-icon") {
@@ -170,6 +170,7 @@ function addToMyRecipes() {
     openRecipeInfo(event);
   }
 }
+
 
 function isDescendant(parent, child) {
   let node = child;
@@ -238,10 +239,10 @@ function exitRecipe() {
 
 // SEARCH RECIPES
 function liveSearch() {
-  if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
-    searchRecipes(user.generateRecipeInfoByID(recipeData, "favoriteRecipes"));
-  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
-    searchRecipes(user.generateRecipeInfoByID(recipeData, "recipesToCook"));
+  if (document.querySelector(".my-recipes-banner").classList.contains("shown")) {
+    searchRecipes(user.generateRecipeInfoById(recipeData, "favoriteRecipes"));
+  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("shown")) {
+    searchRecipes(user.generateRecipeInfoById(recipeData, "recipesToCook"));
   } else {
     searchRecipes(recipes);
   }

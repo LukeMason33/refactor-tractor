@@ -124,7 +124,7 @@ let domUpdates = {
       <div class="pantry-list-right">
         <h4>Cost to make this recipe: ${cost}</h4>
         <button class="square-btns">I made this!</button>
-        <p class="warning">*Note: By pressing this button, your pantry will be 
+        <p class="warning">*Note: By pressing this button, your pantry will be
         <br> updated to reflect ingredients used!</p>
       </div>
       </div>`);
@@ -142,14 +142,14 @@ let domUpdates = {
     welcomeMsg.style.display = "none";
     if (event.target.className.includes("together")) {
       myRecipesBanner.style.display = "block";
-      myRecipesBanner.classList.add("hidden");
+      myRecipesBanner.classList.add("shown");
       myMealsToCookBanner.style.display = "none";
-      myMealsToCookBanner.classList.remove("hidden");
+      myMealsToCookBanner.classList.remove("shown");
     } else if (event.target.className.includes("connect")) {
       myMealsToCookBanner.style.display = "block";
-      myMealsToCookBanner.classList.add("hidden");
+      myMealsToCookBanner.classList.add("shown");
       myRecipesBanner.style.display = "none";
-      myRecipesBanner.classList.remove("hidden");
+      myRecipesBanner.classList.remove("shown");
     }
   },
 
@@ -158,10 +158,10 @@ let domUpdates = {
     welcomeMsg.style.display = "flex";
     let myRecipesBanner = document.querySelector(".my-recipes-banner");
     myRecipesBanner.style.display = "none";
-    myRecipesBanner.classList.remove("hidden");
+    myRecipesBanner.classList.remove("shown");
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
     myMealsToCookBanner.style.display = "none";
-    myMealsToCookBanner.classList.remove("hidden");
+    myMealsToCookBanner.classList.remove("shown");
   },
   // Ask Travis about updating css in scripts, should this be a dom thing?
 
@@ -207,8 +207,7 @@ let domUpdates = {
   // CREATE AND USE PANTRY
   displayPantryInfo(pantry) {
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-        <label for="${ingredient.name}">${capitalize(ingredient.name)}, ${ingredient.amount}</label></li>`;
+      let ingredientHtml = `<li>${capitalize(ingredient.name)}, ${ingredient.amount}</li>`;
       let pantryList = document.querySelector(".pantry-tag-list")
       pantryList.insertAdjacentHTML("beforeend", ingredientHtml);
     });
