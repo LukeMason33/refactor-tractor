@@ -34,8 +34,7 @@ let domUpdates = {
   },
 
   // FILTER BY RECIPE TAGS
-  listRecipeTagsOnDom(allTags) {
-    let tagList = document.querySelector(".tag-list");
+  listRecipeTagsOnDom(allTags, tagList) {
     allTags.forEach(tag => {
       let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
       <label for="${tag}">${capitalize(tag)}</label></li>`;
@@ -182,10 +181,12 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
-      user.saveRecipe(cardId);
+      event.target.alt ="filled apple icon";
+      user.saveRecipe(cardId, "favoriteRecipes");
     } else {
       event.target.src = "../images/apple-logo-outline.png";
-      user.removeRecipe(cardId);
+      event.target.alt ="unfilled apple icon";
+      user.removeRecipe(cardId, "favoriteRecipes");
     }
   },
 
@@ -194,10 +195,12 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
     if (!user.recipesToCook.includes(cardId)) {
       event.target.src = "../images/full-pot.png";
-      user.decideToCook(cardId);
+      event.target.alt ="filled pot icon";
+      user.saveRecipe(cardId, "recipesToCook");
     } else {
       event.target.src = "../images/pot-outline.png";
-      user.decideNotToCook(cardId);
+      event.target.alt ="unfilled pot icon";
+      user.removeRecipe(cardId, "recipesToCook");
     }
   },
 
