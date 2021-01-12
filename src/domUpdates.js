@@ -125,6 +125,8 @@ let domUpdates = {
       <div class="pantry-list-right">
         <h4>Cost to make this recipe: ${cost}</h4>
         <button class="square-btns">I made this!</button>
+        <p class="warning">*Note: By pressing this button, your pantry will be 
+        <br> updated to reflect ingredients used!</p>
       </div>
       </div>`);
   },
