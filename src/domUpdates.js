@@ -139,42 +139,30 @@ let domUpdates = {
     let welcomeMsg = document.querySelector(".welcome-msg");
     let myRecipesBanner = document.querySelector(".my-recipes-banner");
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
-    welcomeMsg.style.display = "none";
+    welcomeMsg.classList.add("hidden");
     if (event.target.className.includes("together")) {
-      myRecipesBanner.style.display = "block";
+      myRecipesBanner.classList.remove("hidden");
       myRecipesBanner.classList.add("shown");
-      myMealsToCookBanner.style.display = "none";
+      myMealsToCookBanner.classList.add("hidden");
       myMealsToCookBanner.classList.remove("shown");
     } else if (event.target.className.includes("connect")) {
-      myMealsToCookBanner.style.display = "block";
+      myMealsToCookBanner.classList.remove("hidden");
       myMealsToCookBanner.classList.add("shown");
-      myRecipesBanner.style.display = "none";
+      myRecipesBanner.classList.add("hidden");
       myRecipesBanner.classList.remove("shown");
     }
   },
 
   showWelcomeBanner() {
     let welcomeMsg = document.querySelector(".welcome-msg");
-    welcomeMsg.style.display = "flex";
+    welcomeMsg.classList.remove("hidden");
     let myRecipesBanner = document.querySelector(".my-recipes-banner");
-    myRecipesBanner.style.display = "none";
+    myRecipesBanner.classList.add("hidden");
     myRecipesBanner.classList.remove("shown");
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
-    myMealsToCookBanner.style.display = "none";
+    myMealsToCookBanner.classList.add("hidden");
     myMealsToCookBanner.classList.remove("shown");
   },
-  // Ask Travis about updating css in scripts, should this be a dom thing?
-
-  // SEARCH RECIPES
-  // toggleMenu() {
-  //   let menuDropdown = document.querySelector(".drop-menu");
-  //   menuOpen = !menuOpen;
-  //   if (menuOpen) {
-  //     menuDropdown.style.display = "block";
-  //   } else {
-  //     menuDropdown.style.display = "none";
-  //   }
-  // },
 
   // FAVORITE RECIPE FUNCTIONALITY
   favoriteRecipe(user, event) {
