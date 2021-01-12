@@ -2,6 +2,7 @@
 @import "mixins";
 @import "navbar";
 @import "cards";
+@import "mediaQueries";
 
 body {
   background-color: $blue;
@@ -68,13 +69,18 @@ aside {
 }
 
 ul {
+  justify-content: center;
   list-style-type: none;
-  text-align: left;
+  text-align: center;
   padding-left: 27px;
 
   li {
     margin: 2px;
   }
+}
+
+.pantry-tag-list {
+  list-style-type: disc;
 }
 
 .pantry-drop-down,
@@ -128,6 +134,113 @@ ul {
 //   }
 // }
 
+
+
+@media screen and (max-width: 900px) {
+  body {
+    background-color: $blue;
+    display: grid;
+    font-family: $primary-font;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "image"
+      "aside"
+      "main";
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: auto;
+  }
+
+  aside {
+    background-color: $white;
+    @include flex(column);
+    align-items: center;
+    // min-height: 50%;
+    width: 100vw;
+    min-height: 25vh;
+
+  }
+
+  .wrap {
+    @include flex(column);
+    @include dimensions(auto, 200px);
+    background-color: $white;
+    padding: 0;
+    position: relative;
+    width: 100vw;
+  }
+
+  .filter-btn {
+    margin: 5%;
+    align-self: center;
+  }
+
+  .pantry-tag-list,
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    width: 100vw;
+    // padding: 5%
+    
+  }
+  .pantry-tag-list li {
+    border: 2pt $dark-green solid;
+    list-style-type: none;
+    padding: 1%
+  }
+
+  // li {
+  
+  //   }
+
+  // li::marker {
+  //   padding: 0%;
+  // }
+}
+
+@media screen and (max-width: 750px) {
+  header {
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .title {
+    width: auto;
+    justify-content: center;
+  }
+
+  #search {
+    width: 85%;
+  }
+
+.nav-btn {
+  @include flex(column);
+  align-items: center;
+  border: 2pt pink solid;
+  background: $blue no-repeat;
+  // border: none;
+  cursor: pointer;
+  font-size: 0px;
+  font-weight: 700;
+  margin: 1% 0%;
+  outline: none;
+  overflow: hidden;
+  text-align: center;
+  transition: .4s ease;
+  width: 15%;
+
+  &:hover {
+    color: $bright-green;
+    font-size: 14px;
+    text-shadow: 0px 2px 4px black;
+    transition: .4s ease;
+}
+}
+}
+
 .hidden {
-  display: none;
+  display: none!important;
 }

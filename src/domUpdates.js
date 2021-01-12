@@ -207,8 +207,7 @@ let domUpdates = {
   // CREATE AND USE PANTRY
   displayPantryInfo(pantry) {
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-        <label for="${ingredient.name}">${capitalize(ingredient.name)}, ${ingredient.amount}</label></li>`;
+      let ingredientHtml = `<li>${capitalize(ingredient.name)}, ${ingredient.amount}</li>`;
       let pantryList = document.querySelector(".pantry-tag-list")
       pantryList.insertAdjacentHTML("beforeend", ingredientHtml);
     });
