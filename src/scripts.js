@@ -227,6 +227,8 @@ function openRecipeInfo(event) {
   domUpdates.generateInstructions(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user, cost);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
+  removeIngredientsfromPantry();
+  console.log(user);
 }
 
 function exitRecipe() {
@@ -239,9 +241,9 @@ function exitRecipe() {
 // SEARCH RECIPES
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
-    searchRecipes(user.generateRecipeInfoByID(recipeData, "favoriteRecipes"));
+    searchRecipes(user.generateRecipeInfoById(recipeData, "favoriteRecipes"));
   } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
-    searchRecipes(user.generateRecipeInfoByID(recipeData, "recipesToCook"));
+    searchRecipes(user.generateRecipeInfoById(recipeData, "recipesToCook"));
   } else {
     searchRecipes(recipes);
   }
@@ -304,4 +306,14 @@ function toggleDropDown() {
 function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
   list.classList[addOrRemove]("hidden");
   dropDown.src =`../images/${direction}-arrow.png`;
+}
+
+//MODIFY USERS PANTRY USING FETCH/POST API
+function removeIngredientsfromPantry() {
+  let recipeId = event.path.find(e => e.id).id;
+  let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
+  recipe.ingredients.forEach(ingredient => {
+    fetchedData.modifyUsersPantry(user.id, ingredient.id, ingredient.quantity.amount)
+  })
+  
 }
