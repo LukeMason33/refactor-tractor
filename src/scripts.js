@@ -124,26 +124,65 @@ function findCheckedBoxes() {
 function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
-    let allRecipes = recipes.filter(recipe => {
-      return recipe.tags.includes(tag.id);
-    });
+    let allRecipes = filterByBannerType(tag);
+    // recipes.filter(recipe => {
+    //   return recipe.tags.includes(tag.id);
+    // });
     allRecipes.forEach(recipe => {
       if (!filteredResults.includes(recipe)) {
         filteredResults.push(recipe);
       }
     })
   });
-  showAllRecipes(recipes);
+  // showAllRecipes(recipes);
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
+  } else {
+    liveSearch();
   }
 }
 
+function filterByBannerType(tag) {
+  let welcomeMsg = document.querySelector(".welcome-msg");
+  let myRecipesBanner = document.querySelector(".my-recipes-banner");
+  let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
+  let filtered;
+  if (!welcomeMsg.className.includes("hidden")) {
+    filtered = recipes.filter(recipe => {
+      return recipe.tags.includes(tag.id);
+    });
+  } else if (myRecipesBanner.className.includes("shown")) {
+    let totalRecipeInfo = user.generateRecipeInfoById(recipeData, "favoriteRecipes");
+    filtered = totalRecipeInfo.filter(recipe => {
+      return recipe.tags.includes(tag.id);
+    });
+  } else if (myMealsToCookBanner.className.includes("shown")) {
+    filtered = user.recipesToCook.filter(recipe => {
+      return recipe.tags.includes(tag.id);
+    });
+  }
+  return filtered;
+}
+// function filterSpecificArray(array, tag) {
+//   array.filter(recipe => {
+//     return recipe.tags.includes(tag.id);
+//   });
+// }
+
+
 function filterRecipes(filtered) {
-  let foundRecipes = recipes.filter(recipe => {
-    return !filtered.includes(recipe);
+  let filterTypeFound = [];
+  recipes.forEach(recipe => {
+    filtered.forEach(filteredRecipe => {
+      if (filteredRecipe.id === recipe.id) {
+        filterTypeFound.push(recipe);
+      }
+    });
   });
-  domUpdates.hideUnselectedRecipes(foundRecipes)
+  let toHide = recipes.filter(recipe => {
+    return !filterTypeFound.includes(recipe);
+  })
+  domUpdates.hideUnselectedRecipes(toHide)
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
@@ -294,16 +333,16 @@ function findPantryInfo() {
 function toggleDropDown() {
   if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "remove", "down")
-  } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")){
+  } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "add", "right")
   } else if (event.target.className.includes("tag-drop-down") && tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "remove", "down")
-  } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")){
+  } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "add", "right")
   }
 }
 
-function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
+function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction) {
   list.classList[addOrRemove]("hidden");
-  dropDown.src =`../images/${direction}-arrow.png`;
+  dropDown.src = `../images/${direction}-arrow.png`;
 }
