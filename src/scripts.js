@@ -73,7 +73,7 @@ function generateUser(usersData) {
   user = new User(usersData[Math.floor(Math.random() * usersData.length)]);
   let firstName = user.name.split(" ")[0];
   domUpdates.greetUserOnLoad(firstName);
-  findPantryInfo();
+  findPantryInfo(user);
 }
 
 
@@ -227,7 +227,7 @@ function openRecipeInfo(event) {
   domUpdates.generateInstructions(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user, cost);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
-  removeIngredientsfromPantry();
+  removeIngredientsfromPantry(recipe);
 }
 
 function exitRecipe() {
@@ -285,7 +285,7 @@ function showAllRecipes(recipes) {
 }
 
 // CREATE AND USE PANTRY
-function findPantryInfo() {
+function findPantryInfo(user) {
   user.generatePantryInfoById(ingredientsData);
   domUpdates.displayPantryInfo(user.pantry);
 }
@@ -308,9 +308,26 @@ function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
 }
 
 //MODIFY USERS PANTRY USING FETCH/POST API
-function removeIngredientsfromPantry(event) {
+function removeIngredientsfromPantry(recipe) {
   let madeThisBtn = document.querySelector('.made-this-btn');
   madeThisBtn.addEventListener('click', function () {
-    console.log('here');
+    recipe.ingredients.forEach(ing => {
+      user.pantry.forEach(ingr => {
+        if (ing.id === ingr.ingredient && ingr.amount >= ing.quantity.amount) {
+        fetchedData.modifyUsersPantry(user.id, ing.id, ing.quantity.amount)
+      }
+    })
+    })
+    updateUserPantryWithAPI();
   })
+}
+
+function updateUserPantryWithAPI () {
+  let updatedUser;
+  fetchedData.usersAPIData()
+    .then(people => {
+      updatedUser = new User(people.find(person => person.name === user.name));
+      pantryList.innerHTML = "";
+      findPantryInfo(updatedUser);
+    })
 }
