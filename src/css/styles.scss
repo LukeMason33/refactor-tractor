@@ -55,6 +55,7 @@ aside {
   background-color: $white;
   @include flex(column);
   justify-content: flex-start;
+  min-height: 100vh;
 }
 
 .wrap {
@@ -69,11 +70,17 @@ aside {
 ul {
   list-style-type: none;
   text-align: left;
-  padding-left: 35px;
+  padding-left: 27px;
 
   li {
     margin: 2px;
   }
+}
+
+.pantry-drop-down,
+.tag-drop-down {
+  max-height: 0.8em;
+  max-width: 1em;
 }
 
 /* BUTTONS */
@@ -97,26 +104,30 @@ ul {
 }
 
 /* PANTRY LIST */
-.drop-menu {
-  @include dimensions(600px, 250px);
-  align-items: center;
-  background-color: $white;
+// .drop-menu {
+//   @include dimensions(600px, 250px);
+//   align-items: center;
+//   background-color: $white;
+//   display: none;
+//   margin-left: 81%;
+//   margin-top: 92px;
+//   overflow: scroll;
+//   padding: 12px ;
+//   position: absolute;
+//   text-align: center;
+//   z-index: 3;
+//
+//   h2 {
+//     color: $dark-green;
+//     margin: 0px;
+//
+//   .pantry-list {
+//     padding-left: 15px;
+//     text-align: left;
+//   }
+//   }
+// }
+
+.hidden {
   display: none;
-  margin-left: 81%;
-  margin-top: 92px;
-  overflow: scroll;
-  padding: 12px ;
-  position: absolute;
-  text-align: center;
-  z-index: 3;
-
-  h2 {
-    color: $dark-green;
-    margin: 0px;
-
-  .pantry-list {
-    padding-left: 15px;
-    text-align: left;
-  }
-  }
 }

@@ -9,8 +9,10 @@ import domUpdates from './domUpdates.js';
 import './images/apple-logo-outline.png';
 import './images/apple-logo.png';
 import './images/cookbook.png';
+import './images/down-arrow.png';
 import './images/full-pot.png';
 import './images/pot-outline.png';
+import './images/right-arrow.png';
 import './images/seasoning.png';
 import './images/search.png';
 //CLASSES
@@ -23,9 +25,13 @@ let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
+let pantryDropDown = document.querySelector(".pantry-drop-down");
+let pantryList = document.querySelector(".pantry-tag-list")
 let savedRecipesBtn = document.querySelector(".saved-recipes-btn");
 let searchForm = document.querySelector("#search");
 let searchInput = document.querySelector("#search-input");
+let tagList = document.querySelector(".tag-list");
+let tagDropDown = document.querySelector(".tag-drop-down");
 
 //GLOBAL VARIABLES
 let user;
@@ -43,8 +49,10 @@ filterBtn.addEventListener("click", findCheckedBoxes);
 main.addEventListener("click", addToMyRecipes);
 main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
 mealsToCookBtn.addEventListener("click", showMealsToCook);
+pantryDropDown.addEventListener("click", toggleDropDown);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchForm.addEventListener("keyup", liveSearch);
+tagDropDown.addEventListener("click", toggleDropDown);
 
 //Generate API Data on Load
 function fetchAllData() {
@@ -101,7 +109,7 @@ function findTags(recipeData) {
     });
   });
   tags.sort();
-  domUpdates.listRecipeTagsOnDom(tags);
+  domUpdates.listRecipeTagsOnDom(tags, tagList);
 }
 
 function findCheckedBoxes() {
@@ -139,13 +147,13 @@ function filterRecipes(filtered) {
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
-function pressEnterToViewInfoOrFavorite(event){
+function pressEnterToViewInfoOrFavorite(event) {
   if (event.keyCode === 13) {
     addToMyRecipes();
   }
 }
 
-function addToMyRecipes(showSavedRecipes) {
+function addToMyRecipes() {
   if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     domUpdates.favoriteRecipe(user, event);
     filterFavorites();
@@ -212,11 +220,12 @@ function openRecipeInfo(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
+  // let cost = recipe.calculateIngredientsCost(recipes);
+  let cost = "$666"
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
-  domUpdates.addRecipeImage(recipe);
-  domUpdates.generateInstructions(recipe);
   domUpdates.generateTypeForRecipe(recipe);
-  domUpdates.compareRecipeIngredientsToPantry(recipe, user);
+  domUpdates.generateInstructions(recipe);
+  domUpdates.compareRecipeIngredientsToPantry(recipe, user, cost);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
   recipe = new Recipe(recipe);
 }
@@ -231,10 +240,9 @@ function exitRecipe() {
 // SEARCH RECIPES
 function liveSearch() {
   if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
-    searchRecipes(user.generateRecipeInfoById(recipeData, "favoriteRecipes"));
-  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")){
-    searchRecipes(user.generateRecipeInfoById(recipeData, "recipesToCook"));
-
+    searchRecipes(user.generateRecipeInfoByID(recipeData, "favoriteRecipes"));
+  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+    searchRecipes(user.generateRecipeInfoByID(recipeData, "recipesToCook"));
   } else {
     searchRecipes(recipes);
   }
@@ -250,7 +258,7 @@ function searchRecipes(input) {
     })
     if (recipe.name.toLowerCase().includes(searchInput.value.toLowerCase())) {
       searchedItems.push(recipe)
-    };
+    }
   });
   filterNonSearched(searchedItems);
   showAllRecipes(searchedItems);
@@ -282,31 +290,47 @@ function findPantryInfo() {
   domUpdates.displayPantryInfo(user.pantry);
 }
 
-function findCheckedPantryBoxes() {
-  let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
-  let pantryCheckboxInfo = Array.from(pantryCheckboxes)
-  let selectedIngredients = pantryCheckboxInfo.filter(box => {
-    return box.checked;
-  })
-  showAllRecipes(recipes);
-  if (selectedIngredients.length > 0) {
-    findRecipesWithCheckedIngredients(selectedIngredients);
+// function findCheckedPantryBoxes() {
+//   let pantryCheckboxes = document.querySelectorAll(".pantry-checkbox");
+//   let pantryCheckboxInfo = Array.from(pantryCheckboxes)
+//   let selectedIngredients = pantryCheckboxInfo.filter(box => {
+//     return box.checked;
+//   })
+//   showAllRecipes(recipes);
+//   if (selectedIngredients.length > 0) {
+//     findRecipesWithCheckedIngredients(selectedIngredients);
+//   }
+// }
+// function findRecipesWithCheckedIngredients(selected) {
+//   let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
+//   let ingredientNames = selected.map(item => {
+//     return item.id;
+//   })
+//   recipes.forEach(recipe => {
+//     let allRecipeIngredients = [];
+//     recipe.ingredients.forEach(ingredient => {
+//       allRecipeIngredients.push(ingredient.name);
+//     });
+//     if (!recipeChecker(allRecipeIngredients, ingredientNames)) {
+//       let domRecipe = document.getElementById(`${recipe.id}`);
+//       domRecipe.style.display = "none";
+//     }
+//   })
+// }
+// TOGGLE DROP DOWN MENU
+function toggleDropDown() {
+  if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
+    toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "remove", "down")
+  } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")){
+    toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "add", "right")
+  } else if (event.target.className.includes("tag-drop-down") && tagList.className.includes("hidden")) {
+    toggleHiddenAndArrowDirection(tagList, tagDropDown, "remove", "down")
+  } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")){
+    toggleHiddenAndArrowDirection(tagList, tagDropDown, "add", "right")
   }
 }
 
-function findRecipesWithCheckedIngredients(selected) {
-  let recipeChecker = (arr, target) => target.every(v => arr.includes(v));
-  let ingredientNames = selected.map(item => {
-    return item.id;
-  })
-  recipes.forEach(recipe => {
-    let allRecipeIngredients = [];
-    recipe.ingredients.forEach(ingredient => {
-      allRecipeIngredients.push(ingredient.name);
-    });
-    if (!recipeChecker(allRecipeIngredients, ingredientNames)) {
-      let domRecipe = document.getElementById(`${recipe.id}`);
-      domRecipe.style.display = "none";
-    }
-  })
+function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
+  list.classList[addOrRemove]("hidden");
+  dropDown.src =`../images/${direction}-arrow.png`;
 }

@@ -124,15 +124,10 @@ main {
 }
 
 #recipe-title {
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 7px 7px 0px 0px;
-  color: $white;
+  color: $dark-green;
   font-size: 30px;
-  margin: 0;
-  padding: 5%;
+  padding-top: 2%;
   text-align: center;
-  text-shadow: 0px 0px 6px black;
 }
 
 #overlay {
@@ -144,4 +139,48 @@ main {
   position: fixed;
   top: 0;
   z-index: 100;
+}
+
+.recipe-img {
+  @include dimensions(50%, 50%);
+  border-radius: 4%;
+}
+
+.recipe-display {
+  @include flex(row);
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.pantry-display {
+  @extend .recipe-display;
+  justify-content: space-between;
+}
+
+.ing-list {
+  @include flex(column);
+}
+
+.card-tag-list {
+  @include flex(row);
+  // justify-content: start;
+  flex-wrap: wrap;
+  padding: 2%;
+  border-bottom: 2pt $dark-green solid;
+  border-top: 2pt $dark-green solid;
+}
+
+.type-pad {
+  margin: 0.5%;
+}
+
+.pantry-list-right {
+  @include flex(column);
+  align-items: center;
+  padding-right: 8%;
+
+}
+
+.warning {
+  font-size: x-small;
 }

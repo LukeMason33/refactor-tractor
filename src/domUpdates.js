@@ -34,8 +34,7 @@ let domUpdates = {
   },
 
   // FILTER BY RECIPE TAGS
-  listRecipeTagsOnDom(allTags) {
-    let tagList = document.querySelector(".tag-list");
+  listRecipeTagsOnDom(allTags, tagList) {
     allTags.forEach(tag => {
       let tagHtml = `<li><input type="checkbox" class="checked-tag" id="${tag}">
       <label for="${tag}">${capitalize(tag)}</label></li>`;
@@ -52,23 +51,28 @@ let domUpdates = {
 
   // CREATE RECIPE INSTRUCTIONS
   generateRecipeTitle(recipe, ingredients) {
+    let ingredientsList = '';
+    // let recipeIngredients = ingredients.split(',')
+    ingredients.forEach(ing => {
+      ingredientsList += `<li>${ing}</li>`
+    })
     let recipeTitle = `
       <button id="exit-recipe-btn">X</button>
       <h3 id="recipe-title">${recipe.name}</h3>
-      <h4>Ingredients</h4>
-      <p>${ingredients}</p>`
-    fullRecipeInfo.insertAdjacentHTML("beforeend", recipeTitle);
+      <div class="recipe-display">
+        <img class="recipe-img" src=${recipe.image} alt=${recipe.name}>
+        <div class="ing-list">
+          <h4>Ingredients</h4>
+          <ul>${ingredientsList}</ul>
+        </div>
+      </div>`
+    fullRecipeInfo.insertAdjacentHTML("afterbegin", recipeTitle);
   },
 
   generateIngredients(recipe) {
-    return recipe && recipe.ingredients.map(i => {
+    return recipe.ingredients.map(i => {
       return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
-    }).join(", ");
-  },
-
-  addRecipeImage(recipe) {
-    let recipeTitle = document.getElementById("recipe-title")
-    recipeTitle.style.backgroundImage = `url(${recipe.image})`;
+    });
   },
 
   generateInstructions(recipe) {
@@ -84,19 +88,18 @@ let domUpdates = {
   },
 
   generateTypeForRecipe(recipe) {
-    fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Recipe Types</h4>");
-    let types;
+    let types = "";
     if (recipe.tags[0] === undefined) {
-      types = `<b>Sorry the type was not defined yet :( Check back later!</b>`
+      types = `<p><b>Sorry the type was not defined yet :( Check back later!</b></p>`
     } else {
-      types = recipe.tags.map(type => {
-        return `<b>${capitalize(type)}</b>`
-      }).join(", ");
+      recipe.tags.forEach(type => {
+        types += `<h4 class="type-pad">${type}</h4>`
+      })
     }
-    fullRecipeInfo.insertAdjacentHTML("beforeend", `<p>${types}</p>`);
+    fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="card-tag-list">${types}</div>`);
   },
 
-  compareRecipeIngredientsToPantry(recipe, user) {
+  compareRecipeIngredientsToPantry(recipe, user, cost) {
     let comparison = "";
     recipe.ingredients.map(ingredient => {
       let found = user.pantry.find(supply => {
@@ -113,8 +116,18 @@ let domUpdates = {
         comparison += `<li>You dont have any <i>${ingredient.name}</i></li>`
       }
     })
-    fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Pantry Comparison</h4>");
-    fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${comparison}</ol>`);
+    fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="pantry-display">
+      <div>
+        <h4>Pantry Comparison</h4>
+        <ol>${comparison}</ol>
+      </div>
+      <div class="pantry-list-right">
+        <h4>Cost to make this recipe: ${cost}</h4>
+        <button class="square-btns">I made this!</button>
+        <p class="warning">*Note: By pressing this button, your pantry will be 
+        <br> updated to reflect ingredients used!</p>
+      </div>
+      </div>`);
   },
 
   insertRecipeInfo(fullRecipeInfo) {
@@ -168,9 +181,11 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
+      event.target.alt ="filled apple icon";
       user.saveRecipe(cardId, "favoriteRecipes");
     } else {
       event.target.src = "../images/apple-logo-outline.png";
+      event.target.alt ="unfilled apple icon";
       user.removeRecipe(cardId, "favoriteRecipes");
     }
   },
@@ -180,9 +195,11 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id)
     if (!user.recipesToCook.includes(cardId)) {
       event.target.src = "../images/full-pot.png";
+      event.target.alt ="filled pot icon";
       user.saveRecipe(cardId, "recipesToCook");
     } else {
       event.target.src = "../images/pot-outline.png";
+      event.target.alt ="unfilled pot icon";
       user.removeRecipe(cardId, "recipesToCook");
     }
   },
