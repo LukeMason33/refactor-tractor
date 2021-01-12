@@ -14,10 +14,9 @@ let fetchedData = {
   modifyUsersPantry: (userID, ingredientID, ingredientAmount) => {return fetch("http://localhost:3001/api/v1/users", {
                               method: 'POST',
                               headers: {'Content-Type': 'application/json'},
-                              body: JSON.stringify({'userID': userID, 'ingredientID': ingredientID, 'ingredientModification': ingredientAmount})
+                              body: JSON.stringify({'userID': userID, 'ingredientID': ingredientID, 'ingredientModification': (ingredientAmount * -1)})
                             })
                             .then(response => response.json());
-
                   }
 };
 

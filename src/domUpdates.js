@@ -52,7 +52,6 @@ let domUpdates = {
   // CREATE RECIPE INSTRUCTIONS
   generateRecipeTitle(recipe, ingredients) {
     let ingredientsList = '';
-    // let recipeIngredients = ingredients.split(',')
     ingredients.forEach(ing => {
       ingredientsList += `<li>${ing}</li>`
     })
@@ -123,8 +122,8 @@ let domUpdates = {
       </div>
       <div class="pantry-list-right">
         <h4>Cost to make this recipe: ${cost}</h4>
-        <button class="square-btns">I made this!</button>
-        <p class="warning">*Note: By pressing this button, your pantry will be 
+        <button class="made-this-btn square-btns">I made this!</button>
+        <p class="warning">*Note: By pressing this button, your pantry will be
         <br> updated to reflect ingredients used!</p>
       </div>
       </div>`);

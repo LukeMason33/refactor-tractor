@@ -228,7 +228,6 @@ function openRecipeInfo(event) {
   domUpdates.compareRecipeIngredientsToPantry(recipe, user, cost);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
   removeIngredientsfromPantry();
-  console.log(user);
 }
 
 function exitRecipe() {
@@ -309,11 +308,9 @@ function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
 }
 
 //MODIFY USERS PANTRY USING FETCH/POST API
-function removeIngredientsfromPantry() {
-  let recipeId = event.path.find(e => e.id).id;
-  let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-  recipe.ingredients.forEach(ingredient => {
-    fetchedData.modifyUsersPantry(user.id, ingredient.id, ingredient.quantity.amount)
+function removeIngredientsfromPantry(event) {
+  let madeThisBtn = document.querySelector('.made-this-btn');
+  madeThisBtn.addEventListener('click', function () {
+    console.log('here');
   })
-  
 }
