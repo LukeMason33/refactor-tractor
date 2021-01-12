@@ -53,8 +53,8 @@ let domUpdates = {
   // CREATE RECIPE INSTRUCTIONS
   generateRecipeTitle(recipe, ingredients) {
     let ingredientsList = '';
-    let recipeIngredients = ingredients.split(',')
-    recipeIngredients.forEach(ing => {
+    // let recipeIngredients = ingredients.split(',')
+    ingredients.forEach(ing => {
       ingredientsList += `<li>${ing}</li>`
     })
     let recipeTitle = `
@@ -73,7 +73,7 @@ let domUpdates = {
   generateIngredients(recipe) {
     return recipe.ingredients.map(i => {
       return `${capitalize(i.name)} (${i.quantity.amount} ${i.quantity.unit})`
-    }).join(", ");
+    });
   },
 
   generateInstructions(recipe) {
@@ -89,16 +89,10 @@ let domUpdates = {
   },
 
   generateTypeForRecipe(recipe) {
-    // fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Recipe Types</h4>");
-    let types = '';
-    
+    let types = "";
     if (recipe.tags[0] === undefined) {
       types = `<p><b>Sorry the type was not defined yet :( Check back later!</b></p>`
     } else {
-      // types = recipe.tags.map(type => {
-      //   return `<b>${capitalize(type)}</b>`
-      // }).join(", ");
-      // let typeList = ''
       recipe.tags.forEach(type => {
         types += `<h4 class="type-pad">${type}</h4>`
       })
@@ -106,7 +100,7 @@ let domUpdates = {
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="card-tag-list">${types}</div>`);
   },
 
-  compareRecipeIngredientsToPantry(recipe, user) {
+  compareRecipeIngredientsToPantry(recipe, user, cost) {
     let comparison = "";
     recipe.ingredients.map(ingredient => {
       let found = user.pantry.find(supply => {
@@ -123,8 +117,16 @@ let domUpdates = {
         comparison += `<li>You dont have any <i>${ingredient.name}</i></li>`
       }
     })
-    fullRecipeInfo.insertAdjacentHTML("beforeend", "<h4>Pantry Comparison</h4>");
-    fullRecipeInfo.insertAdjacentHTML("beforeend", `<ol>${comparison}</ol>`);
+    fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="pantry-display">
+      <div>
+        <h4>Pantry Comparison</h4>
+        <ol>${comparison}</ol>
+      </div>
+      <div class="pantry-list-right">
+        <h4>Cost to make this recipe: ${cost}</h4>
+        <button class="square-btns">I made this!</button>
+      </div>
+      </div>`);
   },
 
   insertRecipeInfo(fullRecipeInfo) {

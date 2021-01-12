@@ -152,6 +152,11 @@ main {
   align-items: center;
 }
 
+.pantry-display {
+  @extend .recipe-display;
+  justify-content: space-between;
+}
+
 .ing-list {
   @include flex(column);
 }
@@ -167,4 +172,11 @@ main {
 
 .type-pad {
   margin: 0.5%;
+}
+
+.pantry-list-right {
+  @include flex(column);
+  align-items: center;
+  padding-right: 8%;
+
 }
