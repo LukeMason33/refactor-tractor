@@ -1,18 +1,18 @@
 import { expect } from 'chai';
 
 import User from '../src/user';
-import users from '../src/data/users-data';
+import Recipe from '../src/recipe';
+import usersData from '../src/data/users-test-data';
+import recipeData from '../src/data/recipe-test-data';
+import ingredientsData from '../src/data/ingredient-test-data';
 
 describe('User', function() {
   let user;
-  let userInfo;
   let recipe;
 
   beforeEach(function() {
-    userInfo = users[0];
-    user = new User(userInfo)
-
-    recipe = {name: 'Chicken Parm', type: ['italian', 'dinner']};
+    user = new User(usersData);
+    recipe = new Recipe(recipeData[0]);
   });
 
   it('should be a function', function() {
@@ -32,30 +32,47 @@ describe('User', function() {
   });
 
   it('should initialize with an empty favoriteRecipes array', function() {
-    expect(user.favoriteRecipes).to.deep.equal([]);
+    expect(user.favoriteRecipes).to.deep.eq([]);
   });
 
   it('should initialize with an empty recipesToCook array', function() {
-    expect(user.recipesToCook).to.deep.equal([]);
+    expect(user.recipesToCook).to.deep.eq([]);
   });
 
   it('should be able to save a recipe to favoriteRecipes', function() {
-    user.saveRecipe(recipe);
-    expect(user.favoriteRecipes[0].name).to.equal('Chicken Parm');
+    user.saveRecipe(recipe, 'favoriteRecipes');
+    expect(user.favoriteRecipes[0]).to.deep.eq(recipe);
   });
 
   it('should be able to decide to cook a recipe', function() {
-    user.decideToCook(recipe);
-    expect(user.recipesToCook[0].name).to.equal('Chicken Parm');
+    user.saveRecipe(recipe, 'recipesToCook');
+    expect(user.recipesToCook[0]).to.deep.eq(recipe);
   });
 
-  it('should be able to filter recipes by type', function() {
-    user.saveRecipe(recipe);
-    expect(user.filterRecipes('italian')).to.deep.equal([recipe]);
+  it('should be able remove recipes from favoriteRecipes after they are addede in', function() {
+    user.saveRecipe(recipe, 'favoriteRecipes');
+    user.removeRecipe(recipe, 'favoriteRecipes');
+    expect(user.favoriteRecipes).to.deep.eq([]);
   });
 
-  it('should be able to search recipes by name', function() {
-    user.saveRecipe(recipe);
-    expect(user.searchForRecipe('Chicken Parm')).to.deep.equal([recipe]);
+  it('should be able remove recipes from recipesToCook after they are addede in', function() {
+    user.saveRecipe(recipe, 'recipesToCook');
+    user.removeRecipe(recipe, 'recipesToCook');
+    expect(user.recipesToCook).to.deep.eq([]);
+  });
+
+  it('should be able to add the ingredients names to the ingredients in the pantry', function() {
+    user.generatePantryInfoById(ingredientsData);
+    expect(user.pantry[0]).to.deep.eq({ingredient: 11477, amount: 4, name: 'zucchini squash'});
+  });
+
+  it("should be able to return all of the user's favoriteRecipes' info rather than just the recipe's id in the users", function() {
+    user.favoriteRecipes.push(recipe.id);
+    expect(user.generateRecipeInfoById(recipeData, 'favoriteRecipes')[0]).to.deep.eq(recipe);
+  });
+
+  it("should be able to return all of the user's recipesToCooks' info rather than just the recipe's id in the users", function() {
+    user.recipesToCook.push(recipe.id);
+    expect(user.generateRecipeInfoById(recipeData, 'recipesToCook')[0]).to.deep.eq(recipe);
   });
 });

@@ -220,14 +220,13 @@ function openRecipeInfo(event) {
   fullRecipeInfo.style.display = "inline";
   let recipeId = event.path.find(e => e.id).id;
   let recipe = recipeData.find(recipe => recipe.id === Number(recipeId));
-  // let cost = recipe.calculateIngredientsCost(recipes);
-  let cost = "$666"
+  recipe = new Recipe(recipe);
+  let cost = `$${recipe.calculateIngredientsCost(ingredientsData)}`;
   domUpdates.generateRecipeTitle(recipe, domUpdates.generateIngredients(recipe));
   domUpdates.generateTypeForRecipe(recipe);
   domUpdates.generateInstructions(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user, cost);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
-  recipe = new Recipe(recipe);
 }
 
 function exitRecipe() {

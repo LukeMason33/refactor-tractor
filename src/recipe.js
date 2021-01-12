@@ -5,6 +5,7 @@ class Recipe {
     this.image = recipe.image;
     this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
+    this.instructions = recipe.instructions
   }
 
   calculateIngredientsCost(dataSet) {
@@ -13,7 +14,6 @@ class Recipe {
       dataSet.forEach(data => {
         if (ingredient.id === data.id) {
           totalPrice += data.estimatedCostInCents * ingredient.quantity.amount;
-          console.log(totalPrice);
         }
       })
     })

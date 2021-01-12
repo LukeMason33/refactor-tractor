@@ -25,7 +25,7 @@ class User {
     })
   }
 
-  generateRecipeInfoByID(dataSet, recipeSection) {
+  generateRecipeInfoById(dataSet, recipeSection) {
     let recipeInfo = [];
     this[recipeSection].forEach(recipe => {
       dataSet.forEach(data => {
@@ -37,4 +37,5 @@ class User {
     return recipeInfo;
   }
 }
+
 module.exports = User;
