@@ -141,15 +141,11 @@ let domUpdates = {
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
     welcomeMsg.classList.add("hidden");
     if (event.target.className.includes("together")) {
-      myRecipesBanner.classList.remove("hidden");
-      myRecipesBanner.classList.add("shown");
-      myMealsToCookBanner.classList.add("hidden");
-      myMealsToCookBanner.classList.remove("shown");
+      toggleHidden(myRecipesBanner, "shown", "hidden");
+      toggleHidden(myMealsToCookBanner, "hidden", "shown");
     } else if (event.target.className.includes("connect")) {
-      myMealsToCookBanner.classList.remove("hidden");
-      myMealsToCookBanner.classList.add("shown");
-      myRecipesBanner.classList.add("hidden");
-      myRecipesBanner.classList.remove("shown");
+      toggleHidden(myMealsToCookBanner, "shown", "hidden");
+      toggleHidden(myRecipesBanner, "hidden", "shown");
     }
   },
 
@@ -157,11 +153,9 @@ let domUpdates = {
     let welcomeMsg = document.querySelector(".welcome-msg");
     welcomeMsg.classList.remove("hidden");
     let myRecipesBanner = document.querySelector(".my-recipes-banner");
-    myRecipesBanner.classList.add("hidden");
-    myRecipesBanner.classList.remove("shown");
+    toggleHidden(myRecipesBanner, "hidden", "shown");
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
-    myMealsToCookBanner.classList.add("hidden");
-    myMealsToCookBanner.classList.remove("shown");
+    toggleHidden(myMealsToCookBanner, "hidden", "shown");
   },
 
   // FAVORITE RECIPE FUNCTIONALITY
@@ -207,6 +201,11 @@ function capitalize(words) {
   return words.split(" ").map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }).join(" ");
+}
+
+function toggleHidden(querySelector, add, remove) {
+  querySelector.classList.add(add);
+  querySelector.classList.remove(remove);
 }
 
 
