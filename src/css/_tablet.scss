@@ -1,65 +1,65 @@
 @media screen and (max-width: 900px) {
-body {
-  background-color: $blue;
-  font-family: $primary-font;
-  grid-template-columns: 1fr;
-  grid-template-areas:
-    "header"
-    "image"
-    "aside"
-    "cards";
-  height: 100vh;
-  -webkit-font-smoothing: auto;
-  float: inline-start;
-}
+  body {
+    background-color: $blue;
+    font-family: $primary-font;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "image"
+      "aside"
+      "cards";
+    height: 100vh;
+    -webkit-font-smoothing: auto;
+    float: inline-start;
+  }
 
-section {
-  @include flex(column);
-}
+  .pantry-and-cards {
+    @include flex(column);
+  }
 
-aside {
-  background-color: $white;
-  @include flex(column);
-  @include dimensions(auto, auto);
-  align-items: center;
-  width: 100vw;
-  min-height: 25vh;
-  position: static;
-  position: relative;
-}
+  aside {
+    background-color: $white;
+    @include flex(column);
+    @include dimensions(auto, auto);
+    align-items: center;
+    width: 100vw;
+    min-height: 25vh;
+    position: static;
+    position: relative;
+  }
 
-.card-container {
-  grid-area: cards;
-  @include flex(row);
-  width: 100vw;
-}
+  .card-container {
+    grid-area: cards;
+    @include flex(row);
+    width: 100vw;
+  }
 
-.wrap {
-  @include flex(column);
-  background-color: transparent;
-  padding: 0;
-  width: 100vw;
-}
+  .wrap {
+    @include flex(column);
+    background-color: transparent;
+    padding: 0;
+    width: 100vw;
+  }
 
-.filter-btn {
-  margin: 3%;
-  align-self: center;
-}
+  .filter-btn {
+    margin: 3%;
+    align-self: center;
+  }
 
-.pantry-tag-list,
-.tag-list {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  align-items: center;
-  padding: 2%;
-}
+  .pantry-tag-list,
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    align-items: center;
+    padding: 2%;
+  }
 
-.pantry-tag-list li {
-  border: 2pt $dark-green solid;
-  list-style-type: none;
-  padding: 1%
-}
+  .pantry-tag-list li {
+    border: 2pt $dark-green solid;
+    list-style-type: none;
+    padding: 1%
+  }
 }
 
 @media screen and (max-width: 750px) {
