@@ -26,10 +26,9 @@ import Recipe from './recipe';
 //QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let backToMainBtn = document.querySelector(".back-to-main-btn");
+let cardContainer = document.querySelector("#card-container");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
-let main = document.querySelector("main");
-let cardContainer = document.querySelector("#card-container");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
 let pantryDropDown = document.querySelector(".pantry-drop-down");
 let pantryList = document.querySelector(".pantry-tag-list")
@@ -50,16 +49,23 @@ let recipes = [];
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
+allRecipesBtn.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 backToMainBtn.addEventListener("click", displayAllRecipes);
+backToMainBtn.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 filterBtn.addEventListener("click", findCheckedBoxes);
 fullRecipeInfo.addEventListener("click", addToMyRecipes);
 cardContainer.addEventListener("click", addToMyRecipes);
-// cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
+
+fullRecipeInfo.addEventListener("click", addToMyRecipes);
+cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
+
 mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
+pantryDropDown.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchForm.addEventListener("keyup", liveSearch);
 tagDropDown.addEventListener("click", toggleDropDown);
+tagDropDown.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 
 //Generate API Data on Load
 function fetchAllData() {
@@ -155,7 +161,13 @@ function filterRecipes(filtered) {
 
 // FAVORITE RECIPE FUNCTIONALITY
 function pressEnterToViewInfoOrFavorite(event) {
-  if (event.keyCode === 13) {
+  if (event.keyCode === 13 && event.target.className.includes("square-btns")) {
+    displayAllRecipes();
+  } else if (event.keyCode === 13 && event.target.className.includes("pantry-drop-down")) {
+    toggleDropDown(event)
+  } else if (event.keyCode === 13 && event.target.className.includes("tag-drop-down")) {
+    toggleDropDown(event)
+  } else if (event.keyCode === 13) {
     addToMyRecipes();
   }
 }
@@ -300,15 +312,26 @@ function findPantryInfo(user) {
   domUpdates.displayPantryInfo(user.pantry);
 }
 
-function toggleDropDown() {
+
+// TOGGLE DROP DOWN MENU
+function toggleDropDown(event) {
+
   if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "remove", "down")
-  } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")){
+    pantryDropDown.setAttribute("aria-expanded", true);
+    pantryDropDown.setAttribute("aria-label", "Close Pantry");
+  } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "add", "right")
+    pantryDropDown.setAttribute("aria-expanded", false);
+    pantryDropDown.setAttribute("aria-label", "Open Pantry");
   } else if (event.target.className.includes("tag-drop-down") && tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "remove", "down")
-  } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")){
+      tagDropDown.setAttribute("aria-expanded", true);
+      tagDropDown.setAttribute("aria-label", "Close Tag");
+  } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "add", "right")
+    tagDropDown.setAttribute("aria-expanded", false);
+    tagDropDown.setAttribute("aria-label", "Open Tags");
   }
 }
 

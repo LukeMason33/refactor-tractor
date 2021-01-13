@@ -19,7 +19,7 @@ body {
   -webkit-font-smoothing: auto;
 }
 
-.pantry-and-cards { 
+.pantry-and-cards {
   @include flex(row);
 }
 
@@ -75,7 +75,7 @@ aside {
 ul {
   justify-content: center;
   list-style-type: none;
-  text-align: center;
+  text-align: left;
   padding-left: 27px;
 
   li {

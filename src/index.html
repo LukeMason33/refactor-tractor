@@ -1,33 +1,51 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Fresh Picks</title>
-    <link type="text/css" href="../styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Sulphur+Point:400,700&display=swap" rel="stylesheet">
-    <link rel="icon" href="../images/apple-logo.png" />
-  </head>
-  <body>
-    <header>
-      <h1 class="title"><span>fresh</span>Picks<img src="../images/apple-logo.png" alt="apple icon" class="header-apple-icon"></h1>
-      <form id="search" role="search">
-        <input tabindex="1" id="search-input" type="text" autocomplete="off" placeholder="Search Recipes...  "></input>
-        <label for="search-input" class="search-label">Search</label>
-        <div class="nav-btn search-btn"><img src="../images/search.png" alt="search button"></div>
-      </form>
-      <button tabindex="2" class="nav-btn saved-recipes-btn together" type="button" name="button"><img class="together" src="../images/cookbook.png" alt="my recipes button">My Recipes</button>
-      <button tabindex="3" class="nav-btn meals-to-cook-btn connect" type="button" name="button"><img class="connect" src="../images/seasoning.png" alt="my meals to cook button">Meals To Cook</button>
-    </header>
-    <section class="banner-image">
-      <div class="my-recipes-banner hidden">
-        <h1>My Recipes</h1>
-        <button class="back-to-main-btn square-btns">Show All Recipes</button>
+
+<head>
+  <meta name="authors" content="Kristen Bair, Luke Mason, & Lucas Merchant">
+  <meta name="description" content="Mod 2 - Refactor Tracker - What's Cookin">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fresh Picks</title>
+  <link type="text/css" href="../styles.css">
+  <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Sulphur+Point:400,700&display=swap" rel="stylesheet">
+  <link rel="icon" href="../images/apple-logo.png" />
+</head>
+
+<body>
+  <header>
+    <h1 class="title"><span>fresh</span>Picks<img src="../images/apple-logo.png" alt="apple icon" class="header-apple-icon"></h1>
+    <form id="search" role="search">
+      <label for="search-input" class="search-label search">Search</label>
+      <input tabindex="1" id="search-input" class="search" type="text" autocomplete="off" placeholder="Search Recipes...  "></input>
+      <div class="nav-btn search-btn"><img src="../images/search.png" alt="search button"></div>
+    </form>
+    <button tabindex="2" class="nav-btn saved-recipes-btn together" type="button" name="button"><img class="together" src="../images/cookbook.png" alt="my recipes button">My Recipes</button>
+    <button tabindex="3" class="nav-btn meals-to-cook-btn connect" type="button" name="button"><img class="connect" src="../images/seasoning.png" alt="my meals to cook button">Meals To Cook</button>
+  </header>
+  <section class="banner-image">
+    <div class="my-recipes-banner hidden">
+      <h1>My Recipes</h1>
+      <button class="back-to-main-btn square-btns">Show All Recipes</button>
+    </div>
+    <div class="my-meals-to-cook-banner hidden">
+      <h1>My Meals To Cook</h1>
+      <button class="show-all-btn square-btns">Show All Recipes</button>
+    </div>
+  </section>
+  <section class="pantry-and-cards">
+    <aside>
+      <div class="wrap">
+        <h2><img aria-expanded="false" aria-controls="pantry-menu" aria-label="Open Pantry" tabindex="4" class="pantry-drop-down" src="../images/right-arrow.png" alt="menu collapsed" /> My Pantry</h2>
+        <ul class="pantry-tag-list hidden">
+        </ul>
       </div>
-      <div class="my-meals-to-cook-banner hidden">
-        <h1>My Meals To Cook</h1>
-        <button class="show-all-btn square-btns">Show All Recipes</button>
+      <div class="wrap">
+        <h2><img aria-expanded="false" aria-controls="recipe-type-menu" aria-label="Open Recipe Types Menu"  tabindex="5" class="tag-drop-down" src="../images/right-arrow.png" alt="menu collapsed" /> Recipe Type</h2>
+        <ul class="tag-list hidden">
+        </ul>
+        <button class="filter-btn square-btns">Filter Recipes</button>
       </div>
     </section>
     <section class="pantry-and-cards">
