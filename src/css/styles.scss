@@ -76,7 +76,9 @@ ul {
     margin: 2px;
   }
 }
-
+.pantry-tag-list {
+  list-style-type: disc;
+}
 .pantry-drop-down,
 .tag-drop-down {
   max-height: 0.8em;
@@ -129,5 +131,5 @@ ul {
 // }
 
 .hidden {
-  display: none;
+  display: none !important;
 }

@@ -124,7 +124,7 @@ let domUpdates = {
       <div class="pantry-list-right">
         <h4>Cost to make this recipe: ${cost}</h4>
         <button class="square-btns">I made this!</button>
-        <p class="warning">*Note: By pressing this button, your pantry will be 
+        <p class="warning">*Note: By pressing this button, your pantry will be
         <br> updated to reflect ingredients used!</p>
       </div>
       </div>`);
@@ -139,42 +139,24 @@ let domUpdates = {
     let welcomeMsg = document.querySelector(".welcome-msg");
     let myRecipesBanner = document.querySelector(".my-recipes-banner");
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
-    welcomeMsg.style.display = "none";
+    welcomeMsg.classList.add("hidden");
     if (event.target.className.includes("together")) {
-      myRecipesBanner.style.display = "block";
-      myRecipesBanner.classList.add("hidden");
-      myMealsToCookBanner.style.display = "none";
-      myMealsToCookBanner.classList.remove("hidden");
+      toggleHidden(myRecipesBanner, "shown", "hidden");
+      toggleHidden(myMealsToCookBanner, "hidden", "shown");
     } else if (event.target.className.includes("connect")) {
-      myMealsToCookBanner.style.display = "block";
-      myMealsToCookBanner.classList.add("hidden");
-      myRecipesBanner.style.display = "none";
-      myRecipesBanner.classList.remove("hidden");
+      toggleHidden(myMealsToCookBanner, "shown", "hidden");
+      toggleHidden(myRecipesBanner, "hidden", "shown");
     }
   },
 
   showWelcomeBanner() {
     let welcomeMsg = document.querySelector(".welcome-msg");
-    welcomeMsg.style.display = "flex";
+    welcomeMsg.classList.remove("hidden");
     let myRecipesBanner = document.querySelector(".my-recipes-banner");
-    myRecipesBanner.style.display = "none";
-    myRecipesBanner.classList.remove("hidden");
+    toggleHidden(myRecipesBanner, "hidden", "shown");
     let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
-    myMealsToCookBanner.style.display = "none";
-    myMealsToCookBanner.classList.remove("hidden");
+    toggleHidden(myMealsToCookBanner, "hidden", "shown");
   },
-  // Ask Travis about updating css in scripts, should this be a dom thing?
-
-  // SEARCH RECIPES
-  // toggleMenu() {
-  //   let menuDropdown = document.querySelector(".drop-menu");
-  //   menuOpen = !menuOpen;
-  //   if (menuOpen) {
-  //     menuDropdown.style.display = "block";
-  //   } else {
-  //     menuDropdown.style.display = "none";
-  //   }
-  // },
 
   // FAVORITE RECIPE FUNCTIONALITY
   favoriteRecipe(user, event) {
@@ -207,8 +189,7 @@ let domUpdates = {
   // CREATE AND USE PANTRY
   displayPantryInfo(pantry) {
     pantry.forEach(ingredient => {
-      let ingredientHtml = `<li><input type="checkbox" class="pantry-checkbox" id="${ingredient.name}">
-        <label for="${ingredient.name}">${capitalize(ingredient.name)}, ${ingredient.amount}</label></li>`;
+      let ingredientHtml = `<li>${capitalize(ingredient.name)}, ${ingredient.amount}</li>`;
       let pantryList = document.querySelector(".pantry-tag-list")
       pantryList.insertAdjacentHTML("beforeend", ingredientHtml);
     });
@@ -220,6 +201,11 @@ function capitalize(words) {
   return words.split(" ").map(word => {
     return word.charAt(0).toUpperCase() + word.slice(1);
   }).join(" ");
+}
+
+function toggleHidden(querySelector, add, remove) {
+  querySelector.classList.add(add);
+  querySelector.classList.remove(remove);
 }
 
 
