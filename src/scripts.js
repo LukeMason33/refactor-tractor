@@ -281,13 +281,13 @@ function openRecipeInfo(event) {
 
 function exitRecipe() {
   while (fullRecipeInfo.firstChild &&
-    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild)) {
+    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild)) 
     fullRecipeInfo.style.display = "none";
-    document.getElementById("overlay").remove();
-    if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
-      filterRecipesToCook();
-    }
+  document.getElementById("overlay").remove();
+  if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+    filterRecipesToCook();
   }
+  
 }
 
 // SEARCH RECIPES
@@ -338,9 +338,9 @@ function showAllRecipes(recipes) {
 }
 
 // CREATE AND USE PANTRY
-function findPantryInfo(user) {
-  user.generatePantryInfoById(ingredientsData);
-  domUpdates.displayPantryInfo(user.pantry);
+function findPantryInfo(userInput) {
+  userInput.generatePantryInfoById(ingredientsData);
+  domUpdates.displayPantryInfo(userInput.pantry);
 }
 
 // TOGGLE DROP DOWN MENU
