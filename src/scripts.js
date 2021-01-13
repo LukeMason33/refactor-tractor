@@ -22,10 +22,9 @@ import Recipe from './recipe';
 //QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let backToMainBtn = document.querySelector(".back-to-main-btn");
+let cardContainer = document.querySelector("#card-container");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
-let main = document.querySelector("main");
-let cardContainer = document.querySelector("#card-container");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
 let pantryDropDown = document.querySelector(".pantry-drop-down");
 let pantryList = document.querySelector(".pantry-tag-list")
@@ -49,6 +48,7 @@ allRecipesBtn.addEventListener("click", displayAllRecipes);
 backToMainBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
 cardContainer.addEventListener("click", addToMyRecipes);
+fullRecipeInfo.addEventListener("click", addToMyRecipes);
 cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
 mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
