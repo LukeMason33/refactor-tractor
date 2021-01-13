@@ -53,7 +53,6 @@ let domUpdates = {
   // CREATE RECIPE INSTRUCTIONS
   generateRecipeTitle(recipe, ingredients) {
     let ingredientsList = '';
-    // let recipeIngredients = ingredients.split(',')
     ingredients.forEach(ing => {
       ingredientsList += `<li>${ing}</li>`
     })
@@ -110,8 +109,6 @@ let domUpdates = {
         let difference = found.amount - ingredient.quantity.amount;
         if (difference < 0) {
           comparison += `<li>You are short <b>${Math.abs(difference)} ${ingredient.quantity.unit}</b> of <i>${ingredient.name}</i>!</li>`;
-        } else if (difference >= 0) {
-          comparison += `<li>You have enough <i>${ingredient.name}</i> to make this!</li>`;
         }
       } else {
         comparison += `<li>You dont have any <i>${ingredient.name}</i></li>`
@@ -124,11 +121,18 @@ let domUpdates = {
       </div>
       <div class="pantry-list-right">
         <h4>Cost to make this recipe: ${cost}</h4>
-        <button class="square-btns">I made this!</button>
-        <p class="warning">*Note: By pressing this button, your pantry will be
-        <br> updated to reflect ingredients used!</p>
       </div>
       </div>`);
+    if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+      this.insertMadeThisButtonToCard(recipe);
+    }
+  },
+
+  insertMadeThisButtonToCard (recipe) {
+    let recipeInfo = document.querySelector('.pantry-list-right');
+    recipeInfo.insertAdjacentHTML("beforeend", `<button class="made-this-btn square-btns">I made this!</button>
+            <p class="warning">*Note: By pressing this button, your pantry will be
+            <br> updated to reflect ingredients used!</p>`)
   },
 
   insertRecipeInfo(fullRecipeInfo) {
@@ -175,7 +179,7 @@ let domUpdates = {
 
   // RECIPES TO COOK FUNCTIONALITY
   addOrRemoveFromRecipesToCook(user, event) {
-    let cardId = parseInt(event.target.closest(".recipe-card").id)
+    let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.recipesToCook.includes(cardId)) {
       event.target.src = "../images/full-pot.png";
       event.target.alt ="filled pot icon";
