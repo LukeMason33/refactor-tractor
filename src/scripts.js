@@ -45,16 +45,20 @@ let recipes = [];
 //EVENT LISTNERS
 window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
+allRecipesBtn.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 backToMainBtn.addEventListener("click", displayAllRecipes);
+backToMainBtn.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 filterBtn.addEventListener("click", findCheckedBoxes);
 cardContainer.addEventListener("click", addToMyRecipes);
 fullRecipeInfo.addEventListener("click", addToMyRecipes);
 cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
 mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
+pantryDropDown.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
 searchForm.addEventListener("keyup", liveSearch);
 tagDropDown.addEventListener("click", toggleDropDown);
+tagDropDown.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 
 //Generate API Data on Load
 function fetchAllData() {
@@ -183,7 +187,13 @@ function filterRecipes(filtered) {
 
 // FAVORITE RECIPE FUNCTIONALITY
 function pressEnterToViewInfoOrFavorite(event) {
-  if (event.keyCode === 13) {
+  if (event.keyCode === 13 && event.target.className.includes("square-btns")) {
+    displayAllRecipes();
+  } else if (event.keyCode === 13 && event.target.className.includes("pantry-drop-down")) {
+    toggleDropDown(event)
+  } else if (event.keyCode === 13 && event.target.className.includes("tag-drop-down")) {
+    toggleDropDown(event)
+  } else if (event.keyCode === 13) {
     addToMyRecipes();
   }
 }
