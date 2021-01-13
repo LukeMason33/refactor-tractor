@@ -43,10 +43,9 @@ let user;
 let usersData;
 let recipeData;
 let ingredientsData;
-let pantryInfo = [];
 let recipes = [];
 
-//EVENT LISTNERS
+//EVENT LISTENERS
 window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
 allRecipesBtn.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
@@ -55,10 +54,8 @@ backToMainBtn.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 filterBtn.addEventListener("click", findCheckedBoxes);
 fullRecipeInfo.addEventListener("click", addToMyRecipes);
 cardContainer.addEventListener("click", addToMyRecipes);
-
 fullRecipeInfo.addEventListener("click", addToMyRecipes);
 cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
-
 mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
 pantryDropDown.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
@@ -205,7 +202,7 @@ function pressEnterToViewInfoOrFavorite(event) {
   }
 }
 
-function addToMyRecipes() {
+function addToMyRecipes(event) {
   if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("shown")) {
     domUpdates.favoriteRecipe(user, event);
     filterFavorites();
@@ -244,7 +241,7 @@ function filterFavorites() {
   });
 }
 
-function showSavedRecipes() {
+function showSavedRecipes(event) {
   filterFavorites();
   domUpdates.showCorrectBanner(event);
   liveSearch();
@@ -261,7 +258,7 @@ function filterRecipesToCook() {
   });
 }
 
-function showMealsToCook() {
+function showMealsToCook(event) {
   filterRecipesToCook();
   domUpdates.showCorrectBanner(event);
   liveSearch();
@@ -279,16 +276,17 @@ function openRecipeInfo(event) {
   domUpdates.generateInstructions(recipe);
   domUpdates.compareRecipeIngredientsToPantry(recipe, user, cost);
   domUpdates.insertRecipeInfo(fullRecipeInfo);
-  removeIngredientsfromPantry(recipe);
+  removeIngredientsFromPantry(recipe);
 }
 
 function exitRecipe() {
   while (fullRecipeInfo.firstChild &&
-    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
-  fullRecipeInfo.style.display = "none";
-  document.getElementById("overlay").remove();
-  if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
-    filterRecipesToCook();
+    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild)) {
+    fullRecipeInfo.style.display = "none";
+    document.getElementById("overlay").remove();
+    if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+      filterRecipesToCook();
+    }
   }
 }
 
@@ -345,10 +343,8 @@ function findPantryInfo(user) {
   domUpdates.displayPantryInfo(user.pantry);
 }
 
-
 // TOGGLE DROP DOWN MENU
 function toggleDropDown(event) {
-
   if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "remove", "down")
     pantryDropDown.setAttribute("aria-expanded", true);
@@ -359,8 +355,8 @@ function toggleDropDown(event) {
     pantryDropDown.setAttribute("aria-label", "Open Pantry");
   } else if (event.target.className.includes("tag-drop-down") && tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "remove", "down")
-      tagDropDown.setAttribute("aria-expanded", true);
-      tagDropDown.setAttribute("aria-label", "Close Tag");
+    tagDropDown.setAttribute("aria-expanded", true);
+    tagDropDown.setAttribute("aria-label", "Close Tag");
   } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "add", "right")
     tagDropDown.setAttribute("aria-expanded", false);
@@ -370,11 +366,11 @@ function toggleDropDown(event) {
 
 function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction) {
   list.classList[addOrRemove]("hidden");
-  dropDown.src =`../images/${direction}-arrow.png`;
+  dropDown.src = `../images/${direction}-arrow.png`;
 }
 
 //MODIFY USERS PANTRY USING FETCH/POST API
-function removeIngredientsfromPantry(recipe) {
+function removeIngredientsFromPantry(recipe) {
   if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
     let madeThisBtn = document.querySelector('.made-this-btn');
     madeThisBtn.addEventListener('click', function () {
@@ -383,8 +379,8 @@ function removeIngredientsfromPantry(recipe) {
         user.pantry.forEach(ingr => {
           if (ing.id === ingr.ingredient && ingr.amount >= ing.quantity.amount) {
             fetchedData.modifyUsersPantry(user.id, ing.id, ing.quantity.amount);
-        }
-      })
+          }
+        })
       })
       updateUserPantryWithAPI();
     })
