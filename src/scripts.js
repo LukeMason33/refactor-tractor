@@ -309,17 +309,19 @@ function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
 
 //MODIFY USERS PANTRY USING FETCH/POST API
 function removeIngredientsfromPantry(recipe) {
-  let madeThisBtn = document.querySelector('.made-this-btn');
-  madeThisBtn.addEventListener('click', function () {
-    recipe.ingredients.forEach(ing => {
-      user.pantry.forEach(ingr => {
-        if (ing.id === ingr.ingredient && ingr.amount >= ing.quantity.amount) {
-        fetchedData.modifyUsersPantry(user.id, ing.id, ing.quantity.amount)
-      }
+  if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+    let madeThisBtn = document.querySelector('.made-this-btn');
+    madeThisBtn.addEventListener('click', function () {
+      recipe.ingredients.forEach(ing => {
+        user.pantry.forEach(ingr => {
+          if (ing.id === ingr.ingredient && ingr.amount >= ing.quantity.amount) {
+          fetchedData.modifyUsersPantry(user.id, ing.id, ing.quantity.amount)
+        }
+      })
+      })
+      updateUserPantryWithAPI();
     })
-    })
-    updateUserPantryWithAPI();
-  })
+  }
 }
 
 function updateUserPantryWithAPI () {

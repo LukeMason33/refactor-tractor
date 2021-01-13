@@ -108,13 +108,12 @@ let domUpdates = {
         let difference = found.amount - ingredient.quantity.amount;
         if (difference < 0) {
           comparison += `<li>You are short <b>${Math.abs(difference)} ${ingredient.quantity.unit}</b> of <i>${ingredient.name}</i>!</li>`;
-        } else if (difference >= 0) {
-          comparison += `<li>You have enough <i>${ingredient.name}</i> to make this!</li>`;
         }
       } else {
         comparison += `<li>You dont have any <i>${ingredient.name}</i></li>`
       }
     })
+    if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="pantry-display">
       <div>
         <h4>Pantry Comparison</h4>
@@ -127,7 +126,8 @@ let domUpdates = {
         <br> updated to reflect ingredients used!</p>
       </div>
       </div>`);
-  },
+  }
+},
 
   insertRecipeInfo(fullRecipeInfo) {
     fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
