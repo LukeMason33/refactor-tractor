@@ -123,13 +123,13 @@ let domUpdates = {
       </div>
       </div>`);
     if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
-      this.insertMadeThisButtonToCard();
+      this.insertMadeThisButtonToCard(recipe);
     }
   },
 
-  insertMadeThisButtonToCard () {
+  insertMadeThisButtonToCard (recipe) {
     let recipeInfo = document.querySelector('.pantry-list-right');
-    recipeInfo.insertAdjacentHTML("beforeend", `<button class="made-this-btn square-btns">I made this!</button>
+    recipeInfo.insertAdjacentHTML("beforeend", `<button id="${recipe.id}" class="made-this-btn square-btns">I made this!</button>
             <p class="warning">*Note: By pressing this button, your pantry will be
             <br> updated to reflect ingredients used!</p>`)
   },
@@ -195,8 +195,8 @@ let domUpdates = {
   },
 
   // RECIPES TO COOK FUNCTIONALITY
-  addOrRemoveFromRecipesToCook(user, event) {
-    let cardId = parseInt(event.target.closest(".recipe-card").id)
+  addOrRemoveFromRecipesToCook(user, event, recipe) {
+    let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.recipesToCook.includes(cardId)) {
       event.target.src = "../images/full-pot.png";
       event.target.alt ="filled pot icon";

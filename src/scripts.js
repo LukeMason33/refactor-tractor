@@ -240,6 +240,9 @@ function exitRecipe() {
     fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
   fullRecipeInfo.style.display = "none";
   document.getElementById("overlay").remove();
+  if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+    filterRecipesToCook();
+  }
 }
 
 // SEARCH RECIPES
@@ -317,6 +320,7 @@ function removeIngredientsfromPantry(recipe) {
   if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
     let madeThisBtn = document.querySelector('.made-this-btn');
     madeThisBtn.addEventListener('click', function () {
+      user.removeRecipe(recipe, "recipesToCook");
       recipe.ingredients.forEach(ing => {
         user.pantry.forEach(ingr => {
           if (ing.id === ingr.ingredient && ingr.amount >= ing.quantity.amount) {
