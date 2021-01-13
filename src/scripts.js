@@ -137,26 +137,59 @@ function findCheckedBoxes() {
 function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
-    let allRecipes = recipes.filter(recipe => {
-      return recipe.tags.includes(tag.id);
-    });
+    let allRecipes = filterByBannerType(tag);
     allRecipes.forEach(recipe => {
       if (!filteredResults.includes(recipe)) {
         filteredResults.push(recipe);
       }
     })
-  })
-  showAllRecipes(recipes);
+  });
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
+  } else {
+    liveSearch();
   }
 }
 
-function filterRecipes(filtered) {
-  let foundRecipes = recipes.filter(recipe => {
-    return !filtered.includes(recipe);
+function filterByBannerType(tag) {
+  let welcomeMsg = document.querySelector(".welcome-msg");
+  let myRecipesBanner = document.querySelector(".my-recipes-banner");
+  let myMealsToCookBanner = document.querySelector(".my-meals-to-cook-banner");
+  let filtered;
+  if (!welcomeMsg.className.includes("hidden")) {
+    filtered = recipes.filter(recipe => {
+      return recipe.tags.includes(tag.id);
+    });
+  } else if (myRecipesBanner.className.includes("shown")) {
+    let totalRecipeInfoMyRecipes = user.generateRecipeInfoById(recipeData, "favoriteRecipes");
+    filtered = filterSpecificArray(totalRecipeInfoMyRecipes, tag);
+  } else if (myMealsToCookBanner.className.includes("shown")) {
+    let totalRecipeInfoMyMeals = user.generateRecipeInfoById(recipeData, "recipesToCook");
+    filtered = filterSpecificArray(totalRecipeInfoMyMeals, tag);
+  }
+  return filtered;
+}
+
+function filterSpecificArray(array, tag) {
+  return array.filter(recipe => {
+    return recipe.tags.includes(tag.id);
   });
-  domUpdates.hideUnselectedRecipes(foundRecipes)
+}
+
+
+function filterRecipes(filtered) {
+  let filterTypeFound = [];
+  recipes.forEach(recipe => {
+    filtered.forEach(filteredRecipe => {
+      if (filteredRecipe.id === recipe.id) {
+        filterTypeFound.push(recipe);
+      }
+    });
+  });
+  let toHide = recipes.filter(recipe => {
+    return !filterTypeFound.includes(recipe);
+  })
+  domUpdates.hideUnselectedRecipes(toHide)
 }
 
 // FAVORITE RECIPE FUNCTIONALITY
