@@ -2,7 +2,7 @@
 @import "mixins";
 @import "navbar";
 @import "cards";
-@import "tablet";
+@import "tablet.scss";
 
 body {
   background-color: $blue;
@@ -19,7 +19,7 @@ body {
   -webkit-font-smoothing: auto;
 }
 
-section {
+.pantry-and-cards { 
   @include flex(row);
 }
 
@@ -128,7 +128,7 @@ ul {
     float: inline-start;
   }
 
-  section {
+  .pantry-and-cards {
     @include flex(column);
   }
 
