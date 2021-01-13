@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Fresh Picks</title>
     <link type="text/css" href="../styles.css">
     <link href="https://fonts.googleapis.com/css?family=Quicksand:400,600,700&display=swap" rel="stylesheet">
@@ -10,7 +11,7 @@
   </head>
   <body>
     <header>
-      <h1><span>fresh</span>Picks<img src="../images/apple-logo.png" alt="apple icon" class="header-apple-icon"></h1>
+      <h1 class="title"><span>fresh</span>Picks<img src="../images/apple-logo.png" alt="apple icon" class="header-apple-icon"></h1>
       <form id="search" role="search">
         <input tabindex="1" id="search-input" type="text" autocomplete="off" placeholder="Search Recipes...  "></input>
         <label for="search-input" class="search-label">Search</label>
@@ -29,22 +30,22 @@
         <button class="show-all-btn square-btns">Show All Recipes</button>
       </div>
     </section>
-    <aside>
-      <div class="wrap">
-        <h2><img tabindex="4" class="pantry-drop-down" src="../images/right-arrow.png" alt="menu collapsed" /> My Pantry</h2>
-        <ul class="pantry-tag-list hidden">
-        </ul>
-      </div>
-      <div class="wrap">
-        <h2><img tabindex="5" class="tag-drop-down" src="../images/right-arrow.png" alt="menu collapsed" /> Recipe Type</h2>
-        <ul class="tag-list hidden">
-        </ul>
-        <button class="filter-btn square-btns">Filter Recipes</button>
-      </div>
-    </aside>
-    <main>
+    <section class="pantry-and-cards">
+      <aside>
+        <div class="wrap">
+          <h2><img tabindex="4" class="pantry-drop-down" src="../images/right-arrow.png" alt="menu collapsed" /> My Pantry</h2>
+          <ul class="pantry-tag-list hidden">
+          </ul>
+        </div>
+        <div class="wrap">
+         <h2><img tabindex="5" class="tag-drop-down" src="../images/right-arrow.png" alt="menu collapsed" /> Recipe Type</h2>
+         <ul class="tag-list hidden">
+         </ul>
+          <button class="filter-btn square-btns">Filter Recipes</button>
+       </div>
+      </aside>
+      <div id="card-container" class="card-container"></div>
       <div class="recipe-instructions">
       </div>
-    </main>
   </body>
 </html>

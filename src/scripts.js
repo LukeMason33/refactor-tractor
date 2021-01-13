@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 //CSS FILES
 import './css/base.scss';
 import './css/styles.scss';
@@ -24,6 +25,7 @@ let backToMainBtn = document.querySelector(".back-to-main-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
+let cardContainer = document.querySelector("#card-container");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
 let pantryDropDown = document.querySelector(".pantry-drop-down");
 let pantryList = document.querySelector(".pantry-tag-list")
@@ -46,8 +48,8 @@ window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
 backToMainBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", addToMyRecipes);
-main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
+cardContainer.addEventListener("click", addToMyRecipes);
+cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
 mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
@@ -186,6 +188,7 @@ function pressEnterToViewInfoOrFavorite(event) {
   }
 }
 
+
 function addToMyRecipes() {
   if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("shown")) {
     domUpdates.favoriteRecipe(user, event);
@@ -226,7 +229,7 @@ function filterFavorites() {
   });
 }
 
-function showSavedRecipes() {
+function showSavedRecipes(event) {
   filterFavorites();
   domUpdates.showCorrectBanner(event);
   liveSearch();
@@ -265,7 +268,9 @@ function openRecipeInfo(event) {
 
 function exitRecipe() {
   while (fullRecipeInfo.firstChild &&
-    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
+    fullRecipeInfo.removeChild(fullRecipeInfo.firstChild)) {
+
+  }
   fullRecipeInfo.style.display = "none";
   document.getElementById("overlay").remove();
 }
@@ -324,7 +329,7 @@ function findPantryInfo() {
 }
 
 // TOGGLE DROP DOWN MENU
-function toggleDropDown() {
+function toggleDropDown(event) {
   if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "remove", "down")
   } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")) {
