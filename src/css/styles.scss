@@ -12,11 +12,15 @@ body {
   grid-template-areas:
     "header header"
     "image image"
-    "aside main";
+    "aside cards";
   height: 100vh;
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: auto;
+}
+
+section {
+  @include flex(row);
 }
 
 h1 {
@@ -110,20 +114,19 @@ ul {
 }
 
 @media screen and (max-width: 900px) {
+
   body {
     background-color: $blue;
     font-family: $primary-font;
-    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
     grid-template-areas:
       "header"
       "image"
       "aside"
-      "aside"
-      "main";
+      "cards";
     height: 100vh;
-    margin: 0;
-    padding: 0;
     -webkit-font-smoothing: auto;
+    float: inline-start;
   }
 
   aside {
@@ -133,20 +136,19 @@ ul {
     align-items: center;
     width: 100vw;
     min-height: 25vh;
-    // position: static;
-    // overflow-y: scroll;
-    // overflow-x: hidden;
-    display: table;
+    position: static;
     position: relative;
   }
 
+  .card-container {
+  grid-area: cards;
+  @include flex(row);
+  width: 100vw;
+}
   .wrap {
-    display: table-row;
     @include flex(column);
-    // @include dimensions(auto, auto);
     background-color: transparent;
     padding: 0;
-    // position: sticky;
     width: 100vw;
   }
 
@@ -161,18 +163,12 @@ ul {
     flex-wrap: wrap;
     align-content: center;
     width: 100vw;
-    // padding: 5%
-    
   }
+
   .pantry-tag-list li {
     border: 2pt $dark-green solid;
     list-style-type: none;
     padding: 1%
-  }
-
- .card-container {
-    display: table;
-    // position: relative;
   }
 }
 

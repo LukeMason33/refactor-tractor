@@ -25,6 +25,7 @@ let backToMainBtn = document.querySelector(".back-to-main-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
+let cardContainer = document.querySelector("#card-container");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
 let pantryDropDown = document.querySelector(".pantry-drop-down");
 let pantryList = document.querySelector(".pantry-tag-list")
@@ -47,8 +48,8 @@ window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
 backToMainBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", addToMyRecipes);
-main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
+cardContainer.addEventListener("click", addToMyRecipes);
+cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
 mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
@@ -154,7 +155,7 @@ function pressEnterToViewInfoOrFavorite(event) {
   }
 }
 
-function addToMyRecipes() {
+function addToMyRecipes(event) {
   if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
     domUpdates.favoriteRecipe(user, event);
     filterFavorites();
@@ -193,7 +194,7 @@ function filterFavorites() {
   });
 }
 
-function showSavedRecipes() {
+function showSavedRecipes(event) {
   filterFavorites();
   domUpdates.showCorrectBanner(event);
   liveSearch();

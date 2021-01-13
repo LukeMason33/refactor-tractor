@@ -1,13 +1,9 @@
 /* RECIPE CARD SECTION */
-main {
-  grid-area: main;
-  @include flex(row);
-  align-content: flex-start;
-  flex-wrap: wrap;
-}
-
 .card-container {
-  @extend main;
+   grid-area: cards;
+   @include flex(row);
+   align-content: flex-start;
+   flex-wrap: wrap;
 }
 
 .recipe-card {
@@ -64,7 +60,7 @@ main {
   @include flex(row);
   align-items: center;
   height: 130px;
-  // position: relative;
+  position: relative;
 }
 
 .text {
@@ -168,7 +164,6 @@ main {
 
 .card-tag-list {
   @include flex(row);
-  // justify-content: start;
   flex-wrap: wrap;
   padding: 2%;
   border-bottom: 2pt $dark-green solid;
