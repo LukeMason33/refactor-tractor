@@ -1,5 +1,6 @@
 let main = document.querySelector("main");
 // let menuOpen = false;
+let cardContainer = document.querySelector("#card-container");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let tabCount = 6;
 
@@ -30,7 +31,7 @@ let domUpdates = {
         </div>
       </div>`
     tabCount += 3;
-    main.insertAdjacentHTML("beforeend", cardHtml);
+    cardContainer.insertAdjacentHTML("beforeend", cardHtml);
   },
 
   // FILTER BY RECIPE TAGS

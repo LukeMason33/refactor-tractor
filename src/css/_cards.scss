@@ -6,6 +6,10 @@ main {
   flex-wrap: wrap;
 }
 
+.card-container {
+  @extend main;
+}
+
 .recipe-card {
   @include dimensions(270px, 250px);
   background-color: $white;
@@ -60,7 +64,7 @@ main {
   @include flex(row);
   align-items: center;
   height: 130px;
-  position: relative;
+  // position: relative;
 }
 
 .text {

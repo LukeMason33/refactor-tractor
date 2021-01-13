@@ -2,7 +2,7 @@
 @import "mixins";
 @import "navbar";
 @import "cards";
-@import "mediaQueries";
+@import "tablet";
 
 body {
   background-color: $blue;
@@ -109,39 +109,11 @@ ul {
   }
 }
 
-/* PANTRY LIST */
-// .drop-menu {
-//   @include dimensions(600px, 250px);
-//   align-items: center;
-//   background-color: $white;
-//   display: none;
-//   margin-left: 81%;
-//   margin-top: 92px;
-//   overflow: scroll;
-//   padding: 12px ;
-//   position: absolute;
-//   text-align: center;
-//   z-index: 3;
-//
-//   h2 {
-//     color: $dark-green;
-//     margin: 0px;
-//
-//   .pantry-list {
-//     padding-left: 15px;
-//     text-align: left;
-//   }
-//   }
-// }
-
-
-
 @media screen and (max-width: 900px) {
   body {
     background-color: $blue;
-    display: grid;
     font-family: $primary-font;
-    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
     grid-template-areas:
       "header"
       "image"
@@ -165,15 +137,16 @@ ul {
     // overflow-y: scroll;
     // overflow-x: hidden;
     display: table;
+    position: relative;
   }
 
   .wrap {
     display: table-row;
     @include flex(column);
     // @include dimensions(auto, auto);
-    background-color: $white;
+    background-color: transparent;
     padding: 0;
-    position: sticky;
+    // position: sticky;
     width: 100vw;
   }
 
@@ -195,6 +168,11 @@ ul {
     border: 2pt $dark-green solid;
     list-style-type: none;
     padding: 1%
+  }
+
+ .card-container {
+    display: table;
+    // position: relative;
   }
 }
 
