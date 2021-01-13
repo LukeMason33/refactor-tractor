@@ -125,16 +125,12 @@ function findTaggedRecipes(selected) {
   let filteredResults = [];
   selected.forEach(tag => {
     let allRecipes = filterByBannerType(tag);
-    // recipes.filter(recipe => {
-    //   return recipe.tags.includes(tag.id);
-    // });
     allRecipes.forEach(recipe => {
       if (!filteredResults.includes(recipe)) {
         filteredResults.push(recipe);
       }
     })
   });
-  // showAllRecipes(recipes);
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
   } else {
@@ -152,17 +148,19 @@ function filterByBannerType(tag) {
       return recipe.tags.includes(tag.id);
     });
   } else if (myRecipesBanner.className.includes("shown")) {
-    let totalRecipeInfo = user.generateRecipeInfoById(recipeData, "favoriteRecipes");
-    filtered = totalRecipeInfo.filter(recipe => {
+    let totalRecipeInfoMyRecipes = user.generateRecipeInfoById(recipeData, "favoriteRecipes");
+    filtered = totalRecipeInfoMyRecipes.filter(recipe => {
       return recipe.tags.includes(tag.id);
     });
   } else if (myMealsToCookBanner.className.includes("shown")) {
-    filtered = user.recipesToCook.filter(recipe => {
+    let totalRecipeInfoMyMeals = user.generateRecipeInfoById(recipeData, "recipesToCook");
+    filtered = totalRecipeInfoMyMeals.filter(recipe => {
       return recipe.tags.includes(tag.id);
     });
   }
   return filtered;
 }
+
 // function filterSpecificArray(array, tag) {
 //   array.filter(recipe => {
 //     return recipe.tags.includes(tag.id);
