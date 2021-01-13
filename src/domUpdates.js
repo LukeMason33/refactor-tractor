@@ -113,7 +113,6 @@ let domUpdates = {
         comparison += `<li>You dont have any <i>${ingredient.name}</i></li>`
       }
     })
-    if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="pantry-display">
       <div>
         <h4>Pantry Comparison</h4>
@@ -121,13 +120,19 @@ let domUpdates = {
       </div>
       <div class="pantry-list-right">
         <h4>Cost to make this recipe: ${cost}</h4>
-        <button class="made-this-btn square-btns">I made this!</button>
-        <p class="warning">*Note: By pressing this button, your pantry will be
-        <br> updated to reflect ingredients used!</p>
       </div>
       </div>`);
-  }
-},
+    if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+      this.insertMadeThisButtonToCard();
+    }
+  },
+
+  insertMadeThisButtonToCard () {
+    let recipeInfo = document.querySelector('.pantry-list-right');
+    recipeInfo.insertAdjacentHTML("beforeend", `<button class="made-this-btn square-btns">I made this!</button>
+            <p class="warning">*Note: By pressing this button, your pantry will be
+            <br> updated to reflect ingredients used!</p>`)
+  },
 
   insertRecipeInfo(fullRecipeInfo) {
     fullRecipeInfo.insertAdjacentHTML("beforebegin", "<section id='overlay'></div>");
