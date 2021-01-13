@@ -4,6 +4,7 @@
    @include flex(row);
    align-content: flex-start;
    flex-wrap: wrap;
+   width: 80vw;
 }
 
 .recipe-card {

@@ -114,7 +114,6 @@ ul {
 }
 
 @media screen and (max-width: 900px) {
-
   body {
     background-color: $blue;
     font-family: $primary-font;
@@ -127,6 +126,10 @@ ul {
     height: 100vh;
     -webkit-font-smoothing: auto;
     float: inline-start;
+  }
+
+  section {
+    @include flex(column);
   }
 
   aside {
@@ -153,7 +156,7 @@ ul {
   }
 
   .filter-btn {
-    margin: 5%;
+    margin: 3%;
     align-self: center;
   }
 
@@ -162,7 +165,8 @@ ul {
     display: flex;
     flex-wrap: wrap;
     align-content: center;
-    width: 100vw;
+    align-items: center;
+    padding: 2%;
   }
 
   .pantry-tag-list li {
