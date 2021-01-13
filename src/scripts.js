@@ -340,14 +340,24 @@ function findPantryInfo() {
 
 // TOGGLE DROP DOWN MENU
 function toggleDropDown(event) {
+  // let pantryAttr = document.querySelector(".pantry-drop")
+  // let tagAttr = document.querySelector(".tag-drop")
   if (event.target.className.includes("pantry-drop-down") && pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "remove", "down")
+    pantryDropDown.setAttribute("aria-expanded", true);
+    pantryDropDown.setAttribute("aria-label", "Close Pantry");
   } else if (event.target.className.includes("pantry-drop-down") && !pantryList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(pantryList, pantryDropDown, "add", "right")
+    pantryDropDown.setAttribute("aria-expanded", false);
+    pantryDropDown.setAttribute("aria-label", "Open Pantry");
   } else if (event.target.className.includes("tag-drop-down") && tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "remove", "down")
+      tagDropDown.setAttribute("aria-expanded", true);
+      tagDropDown.setAttribute("aria-label", "Close Tag");
   } else if (event.target.className.includes("tag-drop-down") && !tagList.className.includes("hidden")) {
     toggleHiddenAndArrowDirection(tagList, tagDropDown, "add", "right")
+    tagDropDown.setAttribute("aria-expanded", false);
+    tagDropDown.setAttribute("aria-label", "Open Tags");
   }
 }
 
