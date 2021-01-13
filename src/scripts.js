@@ -149,23 +149,19 @@ function filterByBannerType(tag) {
     });
   } else if (myRecipesBanner.className.includes("shown")) {
     let totalRecipeInfoMyRecipes = user.generateRecipeInfoById(recipeData, "favoriteRecipes");
-    filtered = totalRecipeInfoMyRecipes.filter(recipe => {
-      return recipe.tags.includes(tag.id);
-    });
+    filtered = filterSpecificArray(totalRecipeInfoMyRecipes, tag);
   } else if (myMealsToCookBanner.className.includes("shown")) {
     let totalRecipeInfoMyMeals = user.generateRecipeInfoById(recipeData, "recipesToCook");
-    filtered = totalRecipeInfoMyMeals.filter(recipe => {
-      return recipe.tags.includes(tag.id);
-    });
+    filtered = filterSpecificArray(totalRecipeInfoMyMeals, tag);
   }
   return filtered;
 }
 
-// function filterSpecificArray(array, tag) {
-//   array.filter(recipe => {
-//     return recipe.tags.includes(tag.id);
-//   });
-// }
+function filterSpecificArray(array, tag) {
+  return array.filter(recipe => {
+    return recipe.tags.includes(tag.id);
+  });
+}
 
 
 function filterRecipes(filtered) {
