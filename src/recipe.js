@@ -5,11 +5,11 @@ class Recipe {
     this.image = recipe.image;
     this.tags = recipe.tags;
     this.ingredients = recipe.ingredients;
-    this.instructions = recipe.instructions
+    this.instructions = recipe.instructions;
   }
 
   calculateIngredientsCost(dataSet) {
-    let totalPrice = 0
+    let totalPrice = 0;
     this.ingredients.forEach(ingredient => {
       dataSet.forEach(data => {
         if (ingredient.id === data.id) {

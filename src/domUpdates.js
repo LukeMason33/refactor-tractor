@@ -1,5 +1,3 @@
-let main = document.querySelector("main");
-// let menuOpen = false;
 let cardContainer = document.querySelector("#card-container");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let tabCount = 6;
@@ -111,7 +109,7 @@ let domUpdates = {
           comparison += `<li>You are short <b>${Math.abs(difference)} ${ingredient.quantity.unit}</b> of <i>${ingredient.name}</i>!</li>`;
         }
       } else {
-        comparison += `<li>You dont have any <i>${ingredient.name}</i></li>`
+        comparison += `<li>You don't have any <i>${ingredient.name}</i></li>`
       }
     })
     fullRecipeInfo.insertAdjacentHTML("beforeend", `<div class="pantry-display">
@@ -124,11 +122,11 @@ let domUpdates = {
       </div>
       </div>`);
     if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
-      this.insertMadeThisButtonToCard(recipe);
+      this.insertMadeThisButtonToCard();
     }
   },
 
-  insertMadeThisButtonToCard (recipe) {
+  insertMadeThisButtonToCard () {
     let recipeInfo = document.querySelector('.pantry-list-right');
     recipeInfo.insertAdjacentHTML("beforeend", `<button class="made-this-btn square-btns">I made this!</button>
             <p class="warning">*Note: By pressing this button, your pantry will be
@@ -168,11 +166,11 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.favoriteRecipes.includes(cardId)) {
       event.target.src = "../images/apple-logo.png";
-      event.target.alt ="filled apple icon";
+      event.target.alt = "filled apple icon";
       user.saveRecipe(cardId, "favoriteRecipes");
     } else {
       event.target.src = "../images/apple-logo-outline.png";
-      event.target.alt ="unfilled apple icon";
+      event.target.alt = "unfilled apple icon";
       user.removeRecipe(cardId, "favoriteRecipes");
     }
   },
@@ -182,11 +180,11 @@ let domUpdates = {
     let cardId = parseInt(event.target.closest(".recipe-card").id);
     if (!user.recipesToCook.includes(cardId)) {
       event.target.src = "../images/full-pot.png";
-      event.target.alt ="filled pot icon";
+      event.target.alt = "filled pot icon";
       user.saveRecipe(cardId, "recipesToCook");
     } else {
       event.target.src = "../images/pot-outline.png";
-      event.target.alt ="unfilled pot icon";
+      event.target.alt = "unfilled pot icon";
       user.removeRecipe(cardId, "recipesToCook");
     }
   },
