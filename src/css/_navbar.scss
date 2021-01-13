@@ -87,8 +87,6 @@ span {
     font-size: 14px;
     text-shadow: 0px 2px 4px black;
     transition: .4s ease;
-
-
   }
 }
 
@@ -116,6 +114,7 @@ span {
 .my-meals-to-cook-banner,
 .my-recipes-banner,
 .welcome-msg {
+  display: block;
   text-align: center;
   width: 95%;
   margin-top: 50px;
@@ -129,6 +128,9 @@ span {
 
 .my-meals-to-cook-banner,
 .my-recipes-banner {
-  display: none;
   margin-top: 25px;
+}
+
+.hidden {
+  display: none !important;
 }

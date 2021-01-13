@@ -29,6 +29,7 @@ let backToMainBtn = document.querySelector(".back-to-main-btn");
 let filterBtn = document.querySelector(".filter-btn");
 let fullRecipeInfo = document.querySelector(".recipe-instructions");
 let main = document.querySelector("main");
+let cardContainer = document.querySelector("#card-container");
 let mealsToCookBtn = document.querySelector(".meals-to-cook-btn");
 let pantryDropDown = document.querySelector(".pantry-drop-down");
 let pantryList = document.querySelector(".pantry-tag-list")
@@ -51,8 +52,9 @@ window.addEventListener("load", fetchAllData);
 allRecipesBtn.addEventListener("click", displayAllRecipes);
 backToMainBtn.addEventListener("click", displayAllRecipes);
 filterBtn.addEventListener("click", findCheckedBoxes);
-main.addEventListener("click", addToMyRecipes);
-main.addEventListener("keyup", pressEnterToViewInfoOrFavorite)
+fullRecipeInfo.addEventListener("click", addToMyRecipes);
+cardContainer.addEventListener("click", addToMyRecipes);
+// cardContainer.addEventListener("keyup", pressEnterToViewInfoOrFavorite);
 mealsToCookBtn.addEventListener("click", showMealsToCook);
 pantryDropDown.addEventListener("click", toggleDropDown);
 savedRecipesBtn.addEventListener("click", showSavedRecipes);
@@ -137,7 +139,7 @@ function findTaggedRecipes(selected) {
         filteredResults.push(recipe);
       }
     })
-  });
+  })
   showAllRecipes(recipes);
   if (filteredResults.length > 0) {
     filterRecipes(filteredResults);
@@ -159,12 +161,12 @@ function pressEnterToViewInfoOrFavorite(event) {
 }
 
 function addToMyRecipes() {
-  if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
+  if (event.target.className === "card-apple-icon" && document.querySelector(".my-recipes-banner").classList.contains("shown")) {
     domUpdates.favoriteRecipe(user, event);
     filterFavorites();
   } else if (event.target.className === "card-apple-icon") {
     domUpdates.favoriteRecipe(user, event);
-  } else if (event.target.className === "card-pot-icon" && document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+  } else if (event.target.className === "card-pot-icon" && document.querySelector(".my-meals-to-cook-banner").classList.contains("shown")) {
     domUpdates.addOrRemoveFromRecipesToCook(user, event);
     filterRecipesToCook();
   } else if (event.target.className === "card-pot-icon") {
@@ -240,16 +242,16 @@ function exitRecipe() {
     fullRecipeInfo.removeChild(fullRecipeInfo.firstChild));
   fullRecipeInfo.style.display = "none";
   document.getElementById("overlay").remove();
-  if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+  if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
     filterRecipesToCook();
   }
 }
 
 // SEARCH RECIPES
 function liveSearch() {
-  if (document.querySelector(".my-recipes-banner").classList.contains("hidden")) {
+  if (document.querySelector(".my-recipes-banner").classList.contains("shown")) {
     searchRecipes(user.generateRecipeInfoById(recipeData, "favoriteRecipes"));
-  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+  } else if (document.querySelector(".my-meals-to-cook-banner").classList.contains("shown")) {
     searchRecipes(user.generateRecipeInfoById(recipeData, "recipesToCook"));
   } else {
     searchRecipes(recipes);
@@ -275,7 +277,7 @@ function searchRecipes(input) {
 function filterNonSearched(filtered) {
   let found = recipes.filter(recipe => {
     let ids = filtered.map(f => f.id);
-    return !ids.includes(recipe.id)
+    return !ids.includes(recipe.id);
   })
   domUpdates.hideUnselectedRecipes(found);
 }
@@ -289,7 +291,7 @@ function showAllRecipes(recipes) {
   recipes.forEach(recipe => {
     let domRecipe = document.getElementById(`${recipe.id}`);
     domRecipe.style.display = "block";
-  });
+  })
 }
 
 // CREATE AND USE PANTRY
@@ -310,21 +312,21 @@ function toggleDropDown() {
   }
 }
 
-function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction){
+function toggleHiddenAndArrowDirection(list, dropDown, addOrRemove, direction) {
   list.classList[addOrRemove]("hidden");
   dropDown.src =`../images/${direction}-arrow.png`;
 }
 
 //MODIFY USERS PANTRY USING FETCH/POST API
 function removeIngredientsfromPantry(recipe) {
-  if (document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
+  if (!document.querySelector(".my-meals-to-cook-banner").classList.contains("hidden")) {
     let madeThisBtn = document.querySelector('.made-this-btn');
     madeThisBtn.addEventListener('click', function () {
       user.removeRecipe(recipe, "recipesToCook");
       recipe.ingredients.forEach(ing => {
         user.pantry.forEach(ingr => {
           if (ing.id === ingr.ingredient && ingr.amount >= ing.quantity.amount) {
-          fetchedData.modifyUsersPantry(user.id, ing.id, ing.quantity.amount)
+            fetchedData.modifyUsersPantry(user.id, ing.id, ing.quantity.amount);
         }
       })
       })
