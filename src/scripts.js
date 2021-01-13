@@ -1,10 +1,13 @@
 //CSS FILES
 import './css/base.scss';
 import './css/styles.scss';
+
 //API DATA
 import fetchedData from './fetch.js';
+
 //DOM UPDATES
 import domUpdates from './domUpdates.js';
+
 //IMAGES
 import './images/apple-logo-outline.png';
 import './images/apple-logo.png';
@@ -15,9 +18,11 @@ import './images/pot-outline.png';
 import './images/right-arrow.png';
 import './images/seasoning.png';
 import './images/search.png';
+
 //CLASSES
 import User from './user';
 import Recipe from './recipe';
+
 //QUERY SELECTORS
 let allRecipesBtn = document.querySelector(".show-all-btn");
 let backToMainBtn = document.querySelector(".back-to-main-btn");
