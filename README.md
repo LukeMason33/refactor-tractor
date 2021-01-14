@@ -2,7 +2,7 @@
 In this project, we were provided a semi-functional codebase for a website of recipes that a user can browse to find meals to cook. The challenge of the project was refactoring the code to be more functional, more accessible, and to implement the use of Sass, network requests, and WebPack.
 
 ## Usage
-The freshPicks website allows users access to a database of recipes. On the main page, a user can browse all recipes, filter recipes by type, and view what their pantry holds. The search bar can be used to search through the recipe titles and ingredients. A user can also favorite a recipe by clicking the apple icon on the card, or save it to their weekly menu by clicking the pot. To view the recipe's ingredients and instructions the user can click the card to expand it.
+The freshPicks website allows users access to a database of recipes. On the main page, a user can browse all recipes, filter recipes by type, and view what their pantry holds. A user can also favorite a recipe by clicking the apple icon on the card, or save it to their weekly menu by clicking the pot. The search bar can be used to search through all of the recipe titles and ingredients on the main page. To view the recipe's ingredients, instructions, and total cost of ingredients, the user can click the card to expand it. A comparison to the user's pantry is displayed on the expanded card that will tell you how much of each ingredient you are missing if any. 
   
 ![gif of mainpage]()
 
@@ -10,7 +10,7 @@ If a user wants to view only their favorite recipes, they can navigate to their 
 
 ![gif of favorites]()
 
-If a user wants to view the meals they've saved to their weekly menu, they can navigate to the menu page. Here the recipe cards, when opened, will tell the user if they have the necessary ingredients in their pantry to complete the recipe. If they are missing anything it will tell them how much they are missing and how much it will cost to acquire the correct ingredients. 
+If a user wants to view the meals they've saved to their weekly menu, they can navigate to the menu page. Here the recipe cards, when opened, will tell the user if they have the necessary ingredients in their pantry to complete the recipe. If they are missing anything it will tell them how much they are missing. You will also see a button to declare that you made that meal. By clicking this will remove the ingredients used from the user's pantry and once the card is exited that recipe will be removed from the weekly menu screen. 
 
 ![gif of menu for week]()
 
@@ -61,6 +61,8 @@ We expanded upon the testing built into the original code base to check function
 * Adding Recipes: A user would be able to submit a recipe to the site, and after admin review, it could be approved and added to the recipe database. 
 * Admin view: Developing an Admin view for the site that could show some User trends and any submitted recipes waiting for review. 
 * Rating Recipes: After a user has made a recipe they should be prompted to rate the recipe on a few different qualities (maybe difficulty level and approval). These ratings could then be visible to other users.
+* Providing the cost of the missing ingredients in order to make a recipe.
+* The button to remove items from pantry to only work if conditions are met where the user has enough of each ingredient to make the recipe. 
 
 ## Project Members
 This project was designed and implemented by [Luke Mason](https://github.com/LukeMason33), [Lucas Merchant](https://github.com/lbmerchant93), and [Kristen Bair](https://github.com/kristenmb)
