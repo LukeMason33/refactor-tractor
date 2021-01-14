@@ -3,16 +3,27 @@ In this project, we were provided a semi-functional codebase for a website of re
 
 ## Usage
 The freshPicks website allows users access to a database of recipes. On the main page, a user can browse all recipes, filter recipes by type, and view what their pantry holds. A user can also favorite a recipe by clicking the apple icon on the card, or save it to their weekly menu by clicking the pot. The search bar can be used to search through all of the recipe titles and ingredients on the main page. To view the recipe's ingredients, instructions, and total cost of ingredients, the user can click the card to expand it. A comparison to the user's pantry is displayed on the expanded card that will tell you how much of each ingredient you are missing if any. 
+
+Main View:
+
+![gif of mainpage](https://media.giphy.com/media/bTXGLEZJaXRr0vo1zi/giphy.gif)
+
+Filter by type:
   
-![gif of mainpage]()
+![gif of mainpage](https://media.giphy.com/media/waYKl7SW5n6n8wWmmr/giphy.gif)
 
-If a user wants to view only their favorite recipes, they can navigate to their saved recipes. From here a user can search the recipes, sort by type, or unfavorite. To return to the mainpage of all recipes, the user can click the 'Show All Recipes' button.
+If a user wants to view only their favorite recipes, they can navigate to their saved recipes. From here a user can search the recipes, sort by type, or unfavorite. To return to the mainpage of all recipes, the user can click the 'Show All Recipes' button. If a user wants to view the meals they've saved to their weekly menu, they can navigate to the menu page. Here the recipe cards, when opened, will tell the user if they have the necessary ingredients in their pantry to complete the recipe. If they are missing anything it will tell them how much they are missing. You will also see a button to declare that you made that meal. By clicking this will remove the ingredients used from the user's pantry and once the card is exited that recipe will be removed from the weekly menu screen. 
 
-![gif of favorites]()
+![gif of menu for week](https://media.giphy.com/media/e482RwIoS28tL9NyE2/giphy.gif)
 
-If a user wants to view the meals they've saved to their weekly menu, they can navigate to the menu page. Here the recipe cards, when opened, will tell the user if they have the necessary ingredients in their pantry to complete the recipe. If they are missing anything it will tell them how much they are missing. You will also see a button to declare that you made that meal. By clicking this will remove the ingredients used from the user's pantry and once the card is exited that recipe will be removed from the weekly menu screen. 
 
-![gif of menu for week]()
+Tablet View:
+
+![tablet view](https://media.giphy.com/media/1bMIAjpc1rQJTVhS6Y/giphy.gif)
+
+Mobile View:
+
+![mobile view](https://media.giphy.com/media/8Q3lVnIyvyuAGuyrWf/giphy.gif)
 
 
 ## How to Install
